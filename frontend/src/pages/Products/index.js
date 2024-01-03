@@ -30,7 +30,19 @@ function Products() {
     },
   });
 
-  if (status === "loading") return <Box display={"flex"} justifyContent={"center"} alignItems={"center"} fontSize={"3xl"} color={"cyan.400"} > Loading...</Box>;
+  if (status === "loading")
+    return (
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        fontSize={"3xl"}
+        color={"cyan.400"}
+      >
+        {" "}
+        Loading...
+      </Box>
+    );
 
   if (status === "error") return "An error has occurred: " + error.message;
 
@@ -40,9 +52,11 @@ function Products() {
       animate={{ opacity: 1 }}
       className=" items-center justify-center min-h-screen container sm:mx-0  "
       py={5}
-      
     >
-      <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 " m={10}>
+      <Box
+        className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 "
+        m={10}
+      >
         {data.pages.map((group, i) => (
           <React.Fragment key={i}>
             {group.map((item) => {
@@ -56,19 +70,8 @@ function Products() {
         ))}
       </Box>
 
-      <Flex mt="10" justifyContent="center">
-        <Button
-          m={5}
-          onClick={() => fetchNextPage()}
-          isLoading={isFetchingNextPage}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? "Loading more..."
-            : hasNextPage
-            ? "Load More"
-            : "Nothing more to load"}
-        </Button>
+      <Flex  mt="10" justifyContent="center">
+        <Button m={5}>Sipariş ver</Button>
       </Flex>
     </motion.Box>
   );

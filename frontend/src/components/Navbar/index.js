@@ -44,10 +44,10 @@ function Navbar() {
           <NavLink to="/">
             <Image
               borderRadius="full"
-              height={"50px"}
-              minW={"88px"}
-              src="https://www.freepnglogos.com/uploads/logo-corinthians-png/shield-corinthians-paulista-png-logo-25.png"
-              alt="Dan Abramov"
+              height={"40px"}
+              minW={"50px"}
+              src="https://www.mksmarmara.com/images/uploads/F218/ade7cc3f-2533-4a85-bb30-de67904bc530_logo.png"
+              alt="mks-logo"
             />
           </NavLink>
         </Box>
@@ -63,13 +63,13 @@ function Navbar() {
         >
           <NavLink to="/">
             <Text
-              
-              bgGradient='linear(to-l, #2E8A99, #AFD3E2)'
+              ml={5}
+              bgGradient='linear(to-l, #e65c00, #F9D423)'
               bgClip='text'
               fontWeight={"bold"}
               fontSize={{ base: "15px", md: "40px", lg: "xx-large" }}
             >
-              Bizim Shop
+              ÇAY OCAĞI
             </Text>
           </NavLink>
         </Box>
@@ -88,22 +88,10 @@ function Navbar() {
                   }}
                   to="/signin"
                 >
-                  Login
+                 Giriş
                 </NavLink>
               </ListItem>
-              <ListItem>
-                <NavLink
-                  style={({ isActive, isPending }) => {
-                    return {
-                      color: isActive ? "MediumAquamarine" : "white",
-                      borderBottom: isActive ? "solid" : "",
-                    };
-                  }}
-                  to="/signup"
-                >
-                  Register
-                </NavLink>
-              </ListItem>
+              
             </UnorderedList>
           </>
         )}
@@ -137,7 +125,7 @@ function Navbar() {
                     }}
                     to="/profile"
                   >
-                    Profile
+                    Profil
                   </NavLink>
                 </ListItem>
                 {/* Button item length */}
@@ -157,7 +145,7 @@ function Navbar() {
               }}
               to="/basket"
             >
-              Basket{" "}
+              Sepetim{" "}
             </NavLink>
           </Box>
 
@@ -229,19 +217,19 @@ function Navbar() {
               <MenuList minW={0}>
                 <MenuItem as={"b"} color={"black"} mr={10}>
                   <NavLink to={"/profile"}>
-                    <span>Profile</span>
+                    <span>Profil</span>
                   </NavLink>
                 </MenuItem>
                 <MenuItem as={"b"} color={"black"}>
                   <NavLink to={"/basket"}>
-                    <span>Basket</span>
+                    <span>Sepetim</span>
                   </NavLink>
                 </MenuItem>
                 <MenuItem minH="40px">
                   <Box color={"red"}>
                     <NavLink onClick={handleLogout} to="/">
                       <Box display={"flex"} alignItems={"center"} gap={3}>
-                        <Text>Logout</Text>
+                        <Text>Çık</Text>
                         <BiLogOut />
                       </Box>
                     </NavLink>

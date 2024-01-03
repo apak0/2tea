@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import {
   Box,
   Button,
@@ -24,19 +25,21 @@ import {
 import { useRef, useState } from "react";
 
 import { useBasket } from "../../contexts/BasketContext";
+
 import { postOrder } from "../../api";
 
 import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { SlBasket } from "react-icons/sl";
 import { motion } from "framer-motion";
 import "./styles.css";
 
 function Basket() {
-  const [fullName, setFullName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
+  const { user } = useAuth();
+  const [fullName, setFullName] = useState(user.fullname);
+  const [phoneNumber, setPhoneNumber] = useState(123);
+  const [address, setAddress] = useState("test3");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
@@ -84,17 +87,17 @@ function Basket() {
 
   return (
     <motion.Box
-    initial={{opacity:0}}
-    animate={{opacity:1}}
-     className="basketTopDiv">
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="basketTopDiv"
+    >
       <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
         {items.length < 1 && (
-          <Box mt={20} >
+          <Box mt={20}>
             <Box
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
             >
               <SlBasket
                 style={{
@@ -103,8 +106,10 @@ function Basket() {
                 }}
               />
             </Box>
-            <Box >
-              <Text textAlign={"center"} fontSize={{ base: "3xl", md: "6xl" }}>Your Basket is Empty</Text>
+            <Box>
+              <Text textAlign={"center"} fontSize={{ base: "3xl", md: "6xl" }}>
+                Your Basket is Empty
+              </Text>
               <ChakraLink fontSize={"xl"} color="teal.500" href={"/"}>
                 Click to product page{" "}
               </ChakraLink>
@@ -155,27 +160,12 @@ function Basket() {
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
-                <Text mr={5} color={"orange.400"} fontSize="m">
-                  Total Product:
-                </Text>
-                <Text ml={1} color={"Pink 900"} fontSize as={"b"}>
-                  {total}
-                </Text>
-              </Box>
-
-              <Box
-                display={"flex"}
-                justifyContent={"space-between"}
-                alignItems={"center"}
-                mb={2}
-                borderBottom="2px"
-                borderColor="gray.200"
-              >
-                <Text color={"orange.400"} fontSize="m">
-                  Delivery Fee:
-                </Text>
-                <Text color={"Pink 900"} fontSize="m" ml={1} as={"b"}>
-                  0
+                <Text
+                  textDecoration={"underline"}
+                  color={"blue.500"}
+                  fontSize="xl"
+                >
+                  Ücret
                 </Text>
               </Box>
 
@@ -195,11 +185,11 @@ function Basket() {
               color={"gray.100"}
               mx={"auto"}
               onClick={() => {
-                loggedIn ? onOpen() : handleNavigate();
+                loggedIn ? handleSubmitForm() : handleNavigate();
               }}
             >
               {" "}
-              Order Now
+              Sipariş Ver
             </Button>
           </Box>
         </Box>
@@ -207,7 +197,7 @@ function Basket() {
 
       {/* Order Information Form */}
 
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      {/* <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
 
         <ModalContent>
@@ -257,7 +247,7 @@ function Basket() {
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </motion.Box>
   );
 }
