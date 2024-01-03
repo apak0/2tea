@@ -1,0 +1,13 @@
+ .basketTopDiv{
+    font-family: "Chakra Petch", sans-serif;
+ }
+
+ .totalDiv{
+
+ }
+
+ @media screen and (min-width: 480px) {
+    .totalDiv{
+        display: flex;
+    }
+}

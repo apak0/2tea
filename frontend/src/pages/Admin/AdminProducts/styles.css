@@ -1,0 +1,37 @@
+
+.ant-table-content .ant-table-thead .ant-table-cell {
+  background-color: #3182ce;
+  font-weight: bold;
+}
+
+button {
+  color: rgb(246, 40, 40);
+}
+
+:where(.css-dev-only-do-not-override-yp8pcc).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before,
+:where(.css-dev-only-do-not-override-yp8pcc).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > td:not(:last-child):not(.ant-table-selection-column):not(
+    .ant-table-row-expand-icon-cell
+  ):not([colspan])::before {
+  position: relative;
+}
+
+:where(.css-dev-only-do-not-override-yp8pcc).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:first-child {
+  border-start-start-radius: 0px;
+}
+
+:where(.css-dev-only-do-not-override-yp8pcc).ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child {
+  border-start-end-radius: 0px;
+}
