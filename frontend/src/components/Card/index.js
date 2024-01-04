@@ -21,7 +21,7 @@ function Card({ item, inBasket }) {
   //Decrement item quantity in basket
   const decrement = (item_id) => {
     const newCount = items.find((item) => item._id === item_id);
-    if (newCount.quantity !== 1) {
+    if (newCount.quantity !== 0) {
       setItems(
         items.map((item) =>
           item._id === item_id

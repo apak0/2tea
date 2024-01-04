@@ -14,9 +14,9 @@ import {
   Flex,
   Button,
 } from "@chakra-ui/react";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 
-import "./styles.css"
+import "./styles.css";
 
 function AdminOrders() {
   const { isLoading, isError, data, error } = useQuery(
@@ -25,18 +25,26 @@ function AdminOrders() {
   );
 
   if (isLoading) {
-    return <Box display={"flex"} justifyContent={"center"} alignItems={"center"} fontSize={"3xl"} color={"cyan.400"} > Loading...</Box>;
+    return (
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        fontSize={"3xl"}
+        color={"cyan.400"}
+      >
+        {" "}
+        Loading...
+      </Box>
+    );
   }
 
   if (isError) {
     <div>Error {error.message}</div>;
   }
- 
 
   return (
-    <motion.div
-    initial={{opacity:0}}
-    animate={{opacity:1}}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -75,10 +83,11 @@ function AdminOrders() {
 
       <Table variant="simple">
         <Thead bg={"blue.200"}>
-          <Tr >
-            <Th fontSize={"14px"} p={5} color={"black"}>USERNAME</Th>
-            <Th fontSize={"14px"} color={"black"}>E-MAIL</Th>
-            <Th fontSize={"14px"} color={"black"}>ADDRESS</Th>
+          <Tr>
+            <Th fontSize={"14px"} p={5} color={"black"}>
+              USERNAME
+            </Th>
+
             <Th fontSize={"14px"} color={"black"} isNumeric>
               ITEMS
             </Th>
@@ -86,10 +95,9 @@ function AdminOrders() {
         </Thead>
         <Tbody>
           {data.map((item) => (
-            <Tr  key={item._id}>
-              <Td>{item.user.fullname}</Td>
-              <Td>{item.user.email}</Td>
-              <Td>{item.address}</Td>
+            <Tr key={item._id} >
+              <Td className="flex justify-center" >{item.user.fullname}</Td>
+
               <Td isNumeric>{item.items.length}</Td>
             </Tr>
           ))}

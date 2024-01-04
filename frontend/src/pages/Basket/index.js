@@ -65,6 +65,9 @@ function Basket() {
       isClosable: true,
     });
 
+
+    
+
   const handleSubmitForm = async () => {
     const itemIds = items.map((item) => item._id);
 
@@ -76,7 +79,7 @@ function Basket() {
     };
     console.log(input);
     await postOrder(input);
-    emptyBasket();
+   
     toastForOrder();
     onClose();
   };
