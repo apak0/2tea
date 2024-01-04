@@ -4,22 +4,7 @@ import {
   Box,
   Button,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  FormControl,
-  FormLabel,
-  Textarea,
-  GridItem,
-  Grid,
-  Input,
   useToast,
-  defineStyleConfig,
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
@@ -41,10 +26,7 @@ function Basket() {
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = useRef(null);
-
-  const { items, emptyBasket } = useBasket();
+  const { items, setItems } = useBasket();
 
   const { loggedIn } = useAuth();
 
@@ -65,23 +47,23 @@ function Basket() {
       isClosable: true,
     });
 
-
-    
-
   const handleSubmitForm = async () => {
-    const itemIds = items.map((item) => item._id);
+    const selectedItems = items.filter((item) => item.quantity > 0);
+    const itemIds = selectedItems.map((item) =>  item._id);
 
     const input = {
       fullName,
       phoneNumber,
       address,
-      items: JSON.stringify(itemIds),
+      items:  JSON.stringify(itemIds) ,
     };
     console.log(input);
     await postOrder(input);
-   
+    setTimeout(() => {
+      const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
+      setItems(updatedItems);
+    }, 1000);
     toastForOrder();
-    onClose();
   };
 
   const handleNavigate = () => {
@@ -94,34 +76,7 @@ function Basket() {
       animate={{ opacity: 1 }}
       className="basketTopDiv"
     >
-      <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
-        {items.length < 1 && (
-          <Box mt={20}>
-            <Box
-              display={"flex"}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <SlBasket
-                style={{
-                  height: 200,
-                  width: 200,
-                }}
-              />
-            </Box>
-            <Box>
-              <Text textAlign={"center"} fontSize={{ base: "3xl", md: "6xl" }}>
-                Your Basket is Empty
-              </Text>
-              <ChakraLink fontSize={"xl"} color="teal.500" href={"/"}>
-                Click to product page{" "}
-              </ChakraLink>
-            </Box>
-          </Box>
-        )}
-      </Box>
-
-      {items.length > 0 && (
+     
         <Box
           mx={"10%"}
           py={5}
@@ -147,6 +102,7 @@ function Basket() {
             mr={"10%"}
           >
             <Box
+              minW={"100px"}
               border="2px"
               borderColor="gray.300"
               boxShadow="lg"
@@ -160,7 +116,7 @@ function Basket() {
             >
               <Box
                 display={"flex"}
-                justifyContent={"space-between"}
+                justifyContent={"center"}
                 alignItems={"center"}
               >
                 <Text
@@ -168,7 +124,7 @@ function Basket() {
                   color={"blue.500"}
                   fontSize="xl"
                 >
-                  Ücret
+                  Ücret:
                 </Text>
               </Box>
 
@@ -192,65 +148,11 @@ function Basket() {
               }}
             >
               {" "}
-              Sipariş Ver
+              Siparişi Gönder
             </Button>
           </Box>
         </Box>
-      )}
-
-      {/* Order Information Form */}
-
-      {/* <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-
-        <ModalContent>
-          <ModalHeader color={"crimson"}>Order Information</ModalHeader>
-          <ModalCloseButton />
-
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Fullname</FormLabel>
-              <Input
-                ref={initialRef}
-                placeholder="Fullname"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Phone Number</FormLabel>
-              <Input
-                ref={initialRef}
-                placeholder="Phone Number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Address</FormLabel>
-              <Textarea
-                ref={initialRef}
-                placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button onClick={handleSubmitForm} colorScheme="blue" mr={3}>
-              Send
-            </Button>
-
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal> */}
+     
     </motion.Box>
   );
 }

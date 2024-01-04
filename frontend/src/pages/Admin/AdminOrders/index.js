@@ -82,9 +82,9 @@ function AdminOrders() {
       </Flex>
 
       <Table variant="simple">
-        <Thead bg={"blue.200"}>
+        <Thead  bg={"blue.200"}>
           <Tr>
-            <Th fontSize={"14px"} p={5} color={"black"}>
+            <Th  className="flex justify-center" fontSize={"14px"} p={5} color={"black"}>
               USERNAME
             </Th>
 
