@@ -38,6 +38,7 @@ function Products() {
         alignItems={"center"}
         fontSize={"3xl"}
         color={"cyan.400"}
+        
       >
         {" "}
         Loading...
@@ -52,6 +53,7 @@ function Products() {
       animate={{ opacity: 1 }}
       className=" items-center justify-center min-h-screen container sm:mx-0  "
       py={5}
+      
     >
       <Box
         className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 "

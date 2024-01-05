@@ -25,9 +25,15 @@ function Basket() {
   const [fullName, setFullName] = useState(user.fullname);
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
+  const [disable, setDisable] = useState(true)
+  
 
+ 
   const { items, setItems } = useBasket();
-
+   const handleDısable = ()=> {
+     if(items.length < 0) {setDisable(false)} 
+  }
+ 
   const { loggedIn } = useAuth();
 
   const total = items.reduce(
@@ -41,7 +47,7 @@ function Basket() {
     toast({
       title: "Order sended ",
       description:
-        "Thank you for your purchase! You just made our business grow, and for that, we are forever indebted.",
+        "Siparişiniz alındı...",
       status: "success",
       duration: 2000,
       isClosable: true,
@@ -62,7 +68,7 @@ function Basket() {
     setTimeout(() => {
       const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
       setItems(updatedItems);
-    }, 1000);
+    }, 400);
     toastForOrder();
   };
 
@@ -136,6 +142,7 @@ function Basket() {
             </Box>
 
             <Button
+              isDisabled={disable}
               fontSize={"2xl"}
               p={5}
               mt="5"
@@ -144,7 +151,7 @@ function Basket() {
               color={"gray.100"}
               mx={"auto"}
               onClick={() => {
-                loggedIn ? handleSubmitForm() : handleNavigate();
+                loggedIn  ? handleSubmitForm() : handleNavigate();
               }}
             >
               {" "}

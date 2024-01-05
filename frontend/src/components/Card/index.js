@@ -48,6 +48,7 @@ function Card({ item, inBasket }) {
       borderRadius="lg"
       overflow="hidden"
       p="5"
+      bg={"#AAD7D9"}
     >
       <Box flex={1}>
         <Link to={`/product/${item._id}`}>
@@ -89,7 +90,8 @@ function Card({ item, inBasket }) {
             size={"xs"}
             m={1}
             onClick={() => decrement(item._id, foundBasketItem)}
-            bg={"#DBCC95"}
+            bg={"#92C7CF"}
+            _hover={{ bg: "teal.600" }}
           >
             -
           </Button>
@@ -104,7 +106,8 @@ function Card({ item, inBasket }) {
           </Text>
 
           <Button
-            bg={"#DBCC95"}
+            bg={"#92C7CF"}
+            _hover={{ bg: "teal.600" }}
             justifySelf={"flex-end"}
             size={"xs"}
             m={1}
