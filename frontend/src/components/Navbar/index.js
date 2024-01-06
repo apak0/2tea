@@ -125,7 +125,7 @@ function Navbar() {
                     }}
                     to="/profile"
                   >
-                    Profil
+                    Geçmiş
                   </NavLink>
                 </ListItem>
                 {/* Button item length */}
