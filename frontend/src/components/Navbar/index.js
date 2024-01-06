@@ -195,53 +195,7 @@ function Navbar() {
           </Box>
         </Box>
       </Box>
-      {user && (
-        <Box className="hidden md:block">
-          <Box id={styles.profilePhotoBoxOutside}>
-            <Menu>
-              <MenuButton>
-                <Image
-                  alt="not found"
-                  width={"40px"}
-                  height={"40px"}
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg3c17auGFTgUHE9FM8j99aPo-VSVD9q5HOA&usqp=CAU"
-                  objectFit={"cover"}
-                  className={styles.profilePhotoBoxInside}
-                />
-              </MenuButton>
-
-              {/* <Box className={styles.downButton}>
-                <BsChevronDown />
-              </Box> */}
-
-              <MenuList minW={0}>
-                <MenuItem as={"b"} color={"black"} mr={10}>
-                  <NavLink to={"/profile"}>
-                    <span>Profil</span>
-                  </NavLink>
-                </MenuItem>
-                <MenuItem as={"b"} color={"black"}>
-                  <NavLink to={"/basket"}>
-                    <span>Sepetim</span>
-                  </NavLink>
-                </MenuItem>
-                <MenuItem minH="40px">
-                  <Box color={"red"}>
-                    <NavLink onClick={handleLogout} to="/">
-                      <Box display={"flex"} alignItems={"center"} gap={3}>
-                        <Text>Çık</Text>
-                        <BiLogOut />
-                      </Box>
-                    </NavLink>
-                  </Box>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-
-            <NavLink to={"/profile"} className="nav-profile-name"></NavLink>
-          </Box>
-        </Box>
-      )}
+   
     </Box>
   );
 }

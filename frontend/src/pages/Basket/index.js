@@ -17,7 +17,7 @@ import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { SlBasket } from "react-icons/sl";
-import { motion } from "framer-motion";
+import { motion} from "framer-motion";
 import "./styles.css";
 
 function Basket() {
@@ -30,7 +30,7 @@ function Basket() {
 
  
   const { items, setItems } = useBasket();
-   const handleDısable = ()=> {
+   const handleDisable = ()=> {
      if(items.length < 0) {setDisable(false)} 
   }
  
@@ -56,7 +56,7 @@ function Basket() {
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
     const itemIds = selectedItems.map((item) =>  item._id);
-
+    console.log(selectedItems)
     const input = {
       fullName,
       phoneNumber,
@@ -142,7 +142,7 @@ function Basket() {
             </Box>
 
             <Button
-              isDisabled={disable}
+              isDisabled={!disable}
               fontSize={"2xl"}
               p={5}
               mt="5"

@@ -56,7 +56,7 @@ function Products() {
       
     >
       <Box
-        className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 "
+        className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         m={10}
       >
         {data.pages.map((group, i) => (
@@ -64,7 +64,7 @@ function Products() {
             {group.map((item) => {
               return (
                 <Box className="box" w={"100%"} rounded={"lg"} key={item._id}>
-                  <Card item={item} inBasket={false} />
+                  <Card item={item} inBasket={false}  />
                 </Box>
               );
             })}

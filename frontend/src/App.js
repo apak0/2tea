@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./pages/Auth/Signup";
 import Signin from "./pages/Auth/Signin";
 import Products from "./pages/Products";
-import ProductDetail from "./pages/ProductDetail";
+
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Basket from "./pages/Basket";
@@ -31,7 +31,7 @@ function App() {
       <div id="content">
         <Routes>
           <Route path="/" exact element={<Products />} />
-          <Route path="/product/:product_id" element={<ProductDetail />} />
+          
           <Route path="/signin" element={<Signin />} />
           <Route path="/signintoorder" element={<SigninToOrder />} />
           <Route path="/signup" element={<Signup />} />

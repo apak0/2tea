@@ -48,10 +48,11 @@ function Card({ item, inBasket }) {
       borderRadius="lg"
       overflow="hidden"
       p="5"
-      bg={"#AAD7D9"}
+      bg={"red"}
+      h={"100%"}
     >
-      <Box flex={1}>
-        <Link to={`/product/${item._id}`}>
+      <Box h={"full"} >
+       
           <Box className="flex">
             <Image
               src={item.photos[0]}
@@ -62,7 +63,7 @@ function Card({ item, inBasket }) {
               objectFit={"cover"}
             />
           </Box>
-        </Link>
+        
       </Box>
 
       <Box
@@ -72,7 +73,7 @@ function Card({ item, inBasket }) {
         mt={5}
       >
         <Box display={"flex"} justifyContent={"space-between"}>
-          <Box fontSize={"2xl"} fontWeight="bold" as="samp" lineHeight="tight">
+          <Box fontSize={"2xl"} fontWeight="bold" as="samp" lineHeight="tight" noOfLines={1}>
             {item.title}
           </Box>
         </Box>
