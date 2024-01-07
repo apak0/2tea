@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Text, useToast } from "@chakra-ui/react";
+import { AspectRatio, Box, Button, Grid, Text, useToast } from "@chakra-ui/react";
 import Card from "../../components/Card";
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList, postOrder } from "../../api";
@@ -70,16 +70,18 @@ function Products() {
   if (status === "error") return <Box>An error has occurred: {error.message}</Box>;
 
   return (
-    <Box  className=" sm:mx-0 " py={5}>
-      <Box className="grid gap-8" m={10}>
+    <Box  className=" sm:mx-0  " py={5}>
+      <Grid templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }} gap={8} m={10}>
         {items.map((item, i) => (
           <Box key={i}>
-            <Box className="box" w="100%" rounded="lg" key={item._id}>
-              <Card item={item} inBasket={true} />
-            </Box>
+            <AspectRatio ratio={5 / 5} maxW="200px" mx="auto">
+              <Box className="box" rounded="lg" overflow="hidden">
+                <Card item={item} inBasket={true} />
+              </Box>
+            </AspectRatio>
           </Box>
         ))}
-      </Box>
+      </Grid>
 
       {/* Price and send order section */}
       <Box display="flex" flexDirection="column" alignSelf="baseline">

@@ -80,7 +80,7 @@ function Basket() {
       >
         <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-sm  ">
           {items.map((item, i) => (
-            <Box key={i}>
+            <Box   key={i}>
               <Box className="box m-55" rounded={"lg"} w="100%">
                 <Card item={item} inBasket={true} />
               </Box>

@@ -1,4 +1,4 @@
-import { Box, Image, Button,  Text } from "@chakra-ui/react";
+import { Box, Image, Button, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useBasket } from "../../contexts/BasketContext";
@@ -47,33 +47,33 @@ function Card({ item, inBasket }) {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
+      w={"200px"}
       p="2"
       bg={"red"}
       h={"100%"}
+      
     >
-      <Box h={"full"} >
-       
-          <Box className="flex">
-            <Image
-              src={item.photos[0]}
-              alt="product"
-              loading="lazy"
-              w={"100%"}
-              
-              objectFit={"cover"}
-            />
-          </Box>
-        
+      <Box >
+        <Box className="flex justify-center items-center">
+          <Image
+            src={item.photos[0]}
+            alt="product"
+            loading="lazy"
+            objectFit={"cover"}
+            w={"100px"}
+          />
+        </Box>
       </Box>
 
-      <Box
-        display={"flex"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-        mt={5}
-      >
-        <Box display={"flex"} justifyContent={"space-between"}>
-          <Box fontSize={"2xl"} fontWeight="bold" as="samp" lineHeight="tight" noOfLines={1}>
+      <Box display={"flex"} flexDirection={"column"} mt={5}>
+        <Box display={"flex"} justifyContent={"center"}>
+          <Box
+            fontSize={"2xl"}
+            fontWeight="bold"
+            as="samp"
+            lineHeight="tight"
+            noOfLines={1}
+          >
             {item.title}
           </Box>
         </Box>
