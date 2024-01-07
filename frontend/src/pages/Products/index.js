@@ -65,6 +65,8 @@ function Products() {
       </Box>
     );
 
+    const buttonText = items.some((item) => item.quantity > 0) ? "Siparişi Gönder" : "Ürün Seçin";
+
   if (status === "error") return <Box>An error has occurred: {error.message}</Box>;
 
   return (
@@ -120,7 +122,8 @@ function Products() {
             loggedIn ? handleSubmitForm() : handleNavigate();
           }}
         >
-          Siparişi Gönder
+          {buttonText}
+          
         </Button>
       </Box>
     </Box>
