@@ -1,14 +1,18 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 #content{
-  padding: 15px;
-  
-  background-color: #EEF5FF;
+  padding-left: 50px;
+  padding-right: 50px;
+ 
+  background-color: #4d34aa;
+  flex: 1 1 0%;
+  overflow:"auto"
+
 }
 
 
 #app{
   text-align: center;
-  min-height:100vh ;
+  height:100vh ;
   display: flex;
   flex-direction: column;
   

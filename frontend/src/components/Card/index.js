@@ -47,7 +47,7 @@ function Card({ item, inBasket }) {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      p="5"
+      p="2"
       bg={"red"}
       h={"100%"}
     >
@@ -59,7 +59,7 @@ function Card({ item, inBasket }) {
               alt="product"
               loading="lazy"
               w={"100%"}
-              h={"200px"}
+              
               objectFit={"cover"}
             />
           </Box>

@@ -57,15 +57,12 @@ function Navbar() {
           justifyContent={"center"}
           alignItems={"center"}
           ml={[0, 4, 6, 8]}
-          
-          
-         
         >
           <NavLink to="/">
             <Text
               ml={5}
-              bgGradient='linear(to-l, #e65c00, #F9D423)'
-              bgClip='text'
+              bgGradient="linear(to-l, #e65c00, #F9D423)"
+              bgClip="text"
               fontWeight={"bold"}
               fontSize={{ base: "15px", md: "40px", lg: "xx-large" }}
             >
@@ -88,16 +85,15 @@ function Navbar() {
                   }}
                   to="/signin"
                 >
-                 Giriş
+                  Giriş
                 </NavLink>
               </ListItem>
-              
             </UnorderedList>
           </>
         )}
 
         {localStorage.getItem("access-token") && (
-          <Box ml={{ base: "15%", md: 0 }}>
+          <Box >
             <Box display={"flex"} alignItems={"center"}>
               <UnorderedList display={"flex"} gap={5} styleType="none">
                 <ListItem>
@@ -149,7 +145,7 @@ function Navbar() {
             </NavLink>
           </Box>
 
-          <Box display={""} as={Link} to="/basket"  >
+          <Box display={""} as={Link} to="/basket">
             <Box
               _hover={{
                 color: "blue",
@@ -158,7 +154,7 @@ function Navbar() {
               alignItems={"center"}
             >
               {items.length < 1 ? (
-                <Box  >
+                <Box>
                   <SlBasket
                     style={{
                       color: "white",
@@ -178,7 +174,7 @@ function Navbar() {
                     }}
                     to={"/basket"}
                   />
-                  <Box>
+                  <Box mr={"auto"} >
                     <Badge
                       position={"absolute"}
                       height={"1rem"}
@@ -195,7 +191,6 @@ function Navbar() {
           </Box>
         </Box>
       </Box>
-   
     </Box>
   );
 }

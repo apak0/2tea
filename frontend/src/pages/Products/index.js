@@ -68,8 +68,8 @@ function Products() {
   if (status === "error") return <Box>An error has occurred: {error.message}</Box>;
 
   return (
-    <motion.Box initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-center container sm:mx-0 " py={5}>
-      <Box className="flex gap-8" m={10}>
+    <Box  className=" sm:mx-0 " py={5}>
+      <Box className="grid gap-8" m={10}>
         {items.map((item, i) => (
           <Box key={i}>
             <Box className="box" w="100%" rounded="lg" key={item._id}>
@@ -78,6 +78,8 @@ function Products() {
           </Box>
         ))}
       </Box>
+
+      {/* Price and send order section */}
       <Box display="flex" flexDirection="column" alignSelf="baseline">
         <Box
           minW="100px"
@@ -121,7 +123,7 @@ function Products() {
           Siparişi Gönder
         </Button>
       </Box>
-    </motion.Box>
+    </Box>
   );
 }
 
