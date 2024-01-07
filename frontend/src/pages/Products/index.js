@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Flex, Button, defineStyleConfig } from "@chakra-ui/react";
+import { Box, Flex, Button } from "@chakra-ui/react";
 import Card from "../../components/Card";
 import { useInfiniteQuery } from "react-query";
 
@@ -8,27 +8,13 @@ import { fetchProductList } from "../../api";
 import { motion } from "framer-motion";
 
 import "./style.css";
-import { useBasket } from "../../contexts/BasketContext";
 
 function Products() {
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery("products", fetchProductList, {
-    getNextPageParam: (lastGroup, allGroups) => {
-      const morePagesExist = lastGroup?.length === 12;
-
-      if (!morePagesExist) {
-        return;
-      }
-
-      return allGroups.lenght + 1;
-    },
-  });
+  const { data, error, status } = useInfiniteQuery(
+    "products",
+    fetchProductList,
+    {}
+  );
 
   if (status === "loading")
     return (
@@ -38,7 +24,6 @@ function Products() {
         alignItems={"center"}
         fontSize={"3xl"}
         color={"cyan.400"}
-        
       >
         {" "}
         Loading...
@@ -53,7 +38,6 @@ function Products() {
       animate={{ opacity: 1 }}
       className=" items-center justify-center min-h-screen container sm:mx-0  "
       py={5}
-      
     >
       <Box
         className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -64,7 +48,7 @@ function Products() {
             {group.map((item) => {
               return (
                 <Box className="box" w={"100%"} rounded={"lg"} key={item._id}>
-                  <Card item={item} inBasket={false}  />
+                  <Card item={item} inBasket={false} />
                 </Box>
               );
             })}
@@ -72,7 +56,7 @@ function Products() {
         ))}
       </Box>
 
-      <Flex  mt="10" justifyContent="center">
+      <Flex mt="10" justifyContent="center">
         <Button m={5}>Sipariş ver</Button>
       </Flex>
     </motion.Box>
