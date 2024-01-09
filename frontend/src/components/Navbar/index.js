@@ -109,6 +109,7 @@ function Navbar() {
           <Box >
             <Box display={"flex"} alignItems={"center"}>
               <UnorderedList display={"flex"} gap={5} styleType="none">
+
                 <ListItem>
                   {user?.role === "admin" && (
                     <NavLink
@@ -124,6 +125,7 @@ function Navbar() {
                     </NavLink>
                   )}
                 </ListItem>
+
                 <ListItem >
                   <NavLink
                     style={({ isActive, isPending }) => {
@@ -132,11 +134,12 @@ function Navbar() {
                         borderBottom: isActive ? "solid" : "",
                       };
                     }}
-                    to="/profile"
+                    to="/"
                   >
                     Geçmiş
                   </NavLink>
                 </ListItem>
+
                 <ListItem >
                   <NavLink
                     style={({ isActive, isPending }) => {
@@ -150,6 +153,7 @@ function Navbar() {
                     Profile
                   </NavLink>
                 </ListItem>
+
                 {/* Button item length */}
               </UnorderedList>
             </Box>
