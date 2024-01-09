@@ -115,11 +115,11 @@ function NewProduct() {
       </Flex>
       <Formik
         initialValues={{
-          title: "Test",
-          description: " az kullanılmış shibinden",
+          title: "",
+          description: "",
           price: "100",
           photos: [],
-          quantity: 1,
+          quantity: 0,
         }}
         newProductScheme={newProductScheme}
         onSubmit={handleSubmit}

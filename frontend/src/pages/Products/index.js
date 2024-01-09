@@ -21,7 +21,7 @@ function Products() {
   const [fullName, setFullName] = useState(user.fullname);
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
-  const { data, error, status } = useInfiniteQuery(
+  const { data,error, status } = useInfiniteQuery(
     "products",
     fetchProductList,
     {}
@@ -51,16 +51,20 @@ function Products() {
       isClosable: true,
     });
 
-  useEffect(() => {
-    if (status === "success") {
-      // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
-      const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+  // useEffect(() => {
+  //   if (status === "success") {
+  //     // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+  //     const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
 
-      // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
-      setItems(allItems);
-    }
-  }, [data, status, setItems]);
+  //     // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+  //     setItems(allItems);
+  //   }
+  // }, [data, status, setItems, ]);
 
+
+
+
+// Order submit function
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
     const itemIds = selectedItems.map((item) => item._id);
@@ -77,11 +81,10 @@ function Products() {
     }, 400);
     toastForOrder();
   };
+//_________________________________________________________________________
 
-  const handleNavigate = () => {
-    navigate("/signintoorder");
-  };
 
+// Loading screen
   if (status === "loading")
     return (
       <Box
@@ -94,24 +97,45 @@ function Products() {
         Loading...
       </Box>
     );
-
-  const buttonText = items.some((item) => item.quantity > 0)
-    ? "Siparişi Gönder"
-    : "Ürün Seçin";
-
+//_________________________________________________________________________
+ 
+// Error messages
   if (status === "error")
     return <Box>An error has occurred: {error.message}</Box>;
+//_________________________________________________________________________
+
+
 
   console.log("data:", data.pages[0]);
   console.log("item:", items);
 
-  const mappedData = (
-    <Grid
+
+
+// Content
+ 
+//_________________________________________________________________________
+
+
+// Order button texts
+  const buttonText = items.some((item) => item.quantity > 0)
+  ? "Siparişi Gönder"
+  : "Ürün Seçin";
+//_________________________________________________________________________
+
+ // If user not loggedin
+  const handleNavigate = () => {
+    navigate("/signintoorder");
+  };
+//_________________________________________________________________________
+  return (
+    <Box className=" sm:mx-0  " py={5}>
+      <Grid
       
       templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
       gap={8}
       m={10}
     >
+      
       {items.map((item, j) => (
         <Box key={j}>
           <AspectRatio ratio={5 / 5} maxW="200px" mx="auto">
@@ -121,12 +145,8 @@ function Products() {
           </AspectRatio>
         </Box>
       ))}
+    
     </Grid>
-  );
-
-  return (
-    <Box className=" sm:mx-0  " py={5}>
-      <>{mappedData}</>
 
       {/* Price and send order section */}
       <Box display="flex" flexDirection="column" alignSelf="baseline">

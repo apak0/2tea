@@ -46,14 +46,14 @@ function Basket() {
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
     const itemIds = selectedItems.map((item) => item._id);
-    console.log(selectedItems);
+    
     const input = {
       fullName,
       phoneNumber,
       address,
       items: JSON.stringify(itemIds),
     };
-    console.log(input);
+   
     await postOrder(input);
     setTimeout(() => {
       const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));

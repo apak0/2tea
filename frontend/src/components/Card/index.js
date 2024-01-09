@@ -1,4 +1,10 @@
-import { Box, Image, Button, Text, useSafeLayoutEffect } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Button,
+  Text,
+  useSafeLayoutEffect,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useBasket } from "../../contexts/BasketContext";
@@ -8,18 +14,8 @@ import { useInfiniteQuery } from "react-query";
 import "./styles.css";
 import { useState } from "react";
 
-
-
 function Card({ item, inBasket }) {
-  const { data, error, status } = useInfiniteQuery(
-    "products",
-    fetchProductList,
-    {}
-  );
   const { items, setItems } = useBasket();
-  const {allData, setAllData} = useState(data.pages)
-
-
 
   const foundBasketItem = items.find(
     (basket_item) => basket_item._id === item._id
@@ -64,9 +60,8 @@ function Card({ item, inBasket }) {
       p="2"
       bg={"red"}
       h={"100%"}
-      
     >
-      <Box >
+      <Box>
         <Box className="flex justify-center items-center">
           <Image
             src={item.photos[0]}
