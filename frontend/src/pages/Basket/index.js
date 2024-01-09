@@ -12,7 +12,7 @@ import "./styles.css";
 
 function Basket() {
   const { user } = useAuth();
-  const [fullName, setFullName] = useState(user.fullname);
+  const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);

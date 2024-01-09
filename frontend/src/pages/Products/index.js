@@ -18,7 +18,7 @@ import { useBasket } from "../../contexts/BasketContext";
 function Products() {
   const { items, setItems } = useBasket();
   const { user } = useAuth();
-  const [fullName, setFullName] = useState(user.fullname);
+  const [fullName, setFullName] = useState(user);
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
   const { data,error, status } = useInfiniteQuery(
@@ -26,6 +26,8 @@ function Products() {
     fetchProductList,
     {}
   );
+
+  const [isPageChange, setIsPageChange] = useState(false);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   useEffect(() => {
@@ -42,6 +44,7 @@ function Products() {
   const toast = useToast();
   const navigate = useNavigate();
 
+  // Ordered toast 
   const toastForOrder = () =>
     toast({
       title: "Order sended",
@@ -50,16 +53,30 @@ function Products() {
       duration: 2000,
       isClosable: true,
     });
+//_________________________________________________________________________
+ 
 
-  // useEffect(() => {
-  //   if (status === "success") {
-  //     // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
-  //     const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
 
-  //     // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
-  //     setItems(allItems);
-  //   }
-  // }, [data, status, setItems, ]);
+    useEffect(() => {
+      if (status === "success") {
+        // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+        const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+  
+        // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
+        // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+        if (!isPageChange) {
+          setItems((prevItems) =>
+            prevItems.map((item) => {
+              const newItem = allItems.find((newItem) => newItem._id === item._id);
+              return newItem ? { ...item, quantity: newItem.quantity } : item;
+            })
+          );
+        }
+  
+        // Sayfa değişikliği olduğunu sıfırlıyoruz
+        setIsPageChange(false);
+      }
+    }, [data, status, setItems, isPageChange]);
 
 
 

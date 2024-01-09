@@ -35,7 +35,7 @@ function Signin() {
           password: values.password,
         });
         login(loginResponse);
-        navigate("/profile");
+        navigate("/");
       } catch (e) {
         bag.setErrors({ general: e.response.data.message });
       }

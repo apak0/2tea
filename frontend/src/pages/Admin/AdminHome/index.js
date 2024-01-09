@@ -1,8 +1,22 @@
 import React from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { NavLink, useNavigate } from "react-router-dom";
+import { BiLogOut } from "react-icons/bi";
+import { useAuth } from "../../../contexts/AuthContext";
 
 function AdminHome() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("basket");
+    logout()
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <motion.div 
     initial={{ opacity: 0 }}
@@ -17,7 +31,16 @@ function AdminHome() {
         as="b"
         color={"orange.400"}
       >
-        <Text>Admin Page</Text>
+        <Text>
+        <Box color={"red"}>
+                    <NavLink onClick={handleLogout} to="/">
+                      <Box display={"flex"} alignItems={"center"} gap={3}>
+                        <Text>Çıkış Yap</Text>
+                        <BiLogOut />
+                      </Box>
+                    </NavLink>
+                  </Box>
+        </Text>
       </Box>
     </Flex>
     </motion.div>

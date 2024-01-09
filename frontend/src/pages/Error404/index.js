@@ -1,10 +1,9 @@
 import { Box, Flex, Image } from "@chakra-ui/react";
 import React from "react";
-import { motion } from "framer-motion";
 
 function Error404() {
   return (
-    <motion.flex
+    <Flex
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       justifyContent="center"
@@ -16,7 +15,7 @@ function Error404() {
           alt="Dan Abramov"
         />
       </Box>
-    </motion.flex>
+    </Flex>
   );
 }
 

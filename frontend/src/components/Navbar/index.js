@@ -88,6 +88,19 @@ function Navbar() {
                   Giriş
                 </NavLink>
               </ListItem>
+              <ListItem>
+                <NavLink
+                  style={({ isActive, isPending }) => {
+                    return {
+                      color: isActive ? "MediumAquamarine" : "white",
+                      borderBottom: isActive ? "solid" : "",
+                    };
+                  }}
+                  to="/signup"
+                >
+                  Register
+                </NavLink>
+              </ListItem>
             </UnorderedList>
           </>
         )}
@@ -111,7 +124,7 @@ function Navbar() {
                     </NavLink>
                   )}
                 </ListItem>
-                <ListItem className="">
+                <ListItem >
                   <NavLink
                     style={({ isActive, isPending }) => {
                       return {
@@ -122,6 +135,19 @@ function Navbar() {
                     to="/profile"
                   >
                     Geçmiş
+                  </NavLink>
+                </ListItem>
+                <ListItem >
+                  <NavLink
+                    style={({ isActive, isPending }) => {
+                      return {
+                        color: isActive ? "MediumAquamarine" : "white",
+                        borderBottom: isActive ? "solid" : "",
+                      };
+                    }}
+                    to="/profile"
+                  >
+                    Profile
                   </NavLink>
                 </ListItem>
                 {/* Button item length */}
