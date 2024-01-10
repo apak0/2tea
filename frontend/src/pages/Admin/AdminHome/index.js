@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -18,7 +18,7 @@ function AdminHome() {
       .catch((err) => console.log(err));
   };
   return (
-    <motion.div 
+    <div 
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}>
     <Flex justifyContent={"center"} alignItems={"center"} p={2} bg={"#8d8d8d"}>
@@ -43,7 +43,7 @@ function AdminHome() {
         </Text>
       </Box>
     </Flex>
-    </motion.div>
+    </div>
   );
 }
 

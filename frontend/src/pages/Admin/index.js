@@ -5,13 +5,13 @@ import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { GrCaretPrevious } from "react-icons/gr";
 
 import { useAuth } from "../../contexts/AuthContext";
-import { motion } from "framer-motion";
+
 import { BiLogOut } from "react-icons/bi";
 
 function Admin() {
   const { user } = useAuth();
   return (
-    <motion.Box
+    <Box
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="topBox"
@@ -105,7 +105,7 @@ function Admin() {
           <Outlet />
         </Box>
       </Box>
-    </motion.Box>
+    </Box>
   );
 }
 

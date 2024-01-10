@@ -15,7 +15,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+
 import "./styles.css";
 
 function Profile() {
@@ -51,7 +51,7 @@ function Profile() {
       alignItems={"center"}
       mt={5}
     >
-      <motion.div
+      <div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="profileTopDiv"
@@ -166,7 +166,7 @@ function Profile() {
             </ButtonGroup>
           </CardFooter>
         </Card>
-      </motion.div>
+      </div>
     </Box>
   );
 }

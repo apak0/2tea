@@ -14,7 +14,7 @@ import {
   Flex,
   Button,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+
 
 import "./styles.css";
 
@@ -44,7 +44,7 @@ function AdminOrders() {
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -103,7 +103,7 @@ function AdminOrders() {
           ))}
         </Tbody>
       </Table>
-    </motion.div>
+    </div>
   );
 }
 export default AdminOrders;

@@ -67,7 +67,7 @@ function Basket() {
   };
 
   return (
-    <motion.Box
+    <Box
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="basketTopDiv"
@@ -148,7 +148,7 @@ function Basket() {
           </Button>
         </Box>
       </Box>
-    </motion.Box>
+    </Box>
   );
 }
 
