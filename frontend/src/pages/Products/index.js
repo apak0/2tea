@@ -10,7 +10,7 @@ import {
 import Card from "../../components/Card";
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList, postOrder } from "../../api";
-import { motion } from "framer-motion";
+
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useBasket } from "../../contexts/BasketContext";
@@ -57,26 +57,26 @@ function Products() {
  
 
 
-    useEffect(() => {
-      if (status === "success") {
-        // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
-        const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+    // useEffect(() => {
+    //   if (status === "success") {
+    //     // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+    //     const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
   
-        // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
-        // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
-        if (!isPageChange) {
-          setItems((prevItems) =>
-            prevItems.map((item) => {
-              const newItem = allItems.find((newItem) => newItem._id === item._id);
-              return newItem ? { ...item, quantity: newItem.quantity } : item;
-            })
-          );
-        }
+    //     // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
+    //     // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+    //     if (!isPageChange) {
+    //       setItems((prevItems) =>
+    //         prevItems.map((item) => {
+    //           const newItem = allItems.find((newItem) => newItem._id === item._id);
+    //           return newItem ? { ...item, quantity: newItem.quantity } : item;
+    //         })
+    //       );
+    //     }
   
-        // Sayfa değişikliği olduğunu sıfırlıyoruz
-        setIsPageChange(false);
-      }
-    }, [data, status, setItems, isPageChange]);
+    //     // Sayfa değişikliği olduğunu sıfırlıyoruz
+    //     setIsPageChange(false);
+    //   }
+    // }, [data, status, setItems, isPageChange]);
 
 
 
@@ -153,15 +153,17 @@ function Products() {
       m={10}
     >
       
-      {items.map((item, j) => (
-        <Box key={j}>
-          <AspectRatio ratio={5 / 5} maxW="200px" mx="auto">
-            <Box className="box" rounded="lg" overflow="hidden">
-              <Card item={item} inBasket={true} />
-            </Box>
-          </AspectRatio>
-        </Box>
-      ))}
+      {data.pages.map((group, i) => (
+          <React.Fragment key={i}>
+            {group.map((item) => {
+              return (
+                <Box className="box" w={"100%"} rounded={"lg"} key={item._id}>
+                  <Card item={item} inBasket={false} />
+                </Box>
+              );
+            })}
+          </React.Fragment>
+        ))}
     
     </Grid>
 

@@ -26,7 +26,7 @@ function App() {
 
         <div id="content" >
           <Routes>
-            <Route path="/" exact element={<Basket />} />
+            <Route path="/" exact element={<Products />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signintoorder" element={<SigninToOrder />} />
             <Route path="/signup" element={<Signup />} />
