@@ -17,16 +17,24 @@ import { useState } from "react";
 function Card({ item, inBasket }) {
   const { items, setItems } = useBasket();
 
+  
+  const { data,error, status } = useInfiniteQuery(
+    "products",
+    fetchProductList,
+    {}
+    );
+    
+
   const foundBasketItem = items.find(
     (basket_item) => basket_item._id === item._id
   );
 
   //Decrement item quantity in basket
   const decrement = (item_id) => {
-    const newCount = items.find((item) => item._id === item_id);
+    const newCount = data.pages.find((item) => item._id === item_id);
     if (newCount.quantity !== 0) {
       setItems(
-        items.map((item) =>
+        data.pages.map((item) =>
           item._id === item_id
             ? { ...newCount, quantity: newCount.quantity - 1 }
             : item
@@ -37,10 +45,10 @@ function Card({ item, inBasket }) {
 
   //Increment item quantity in basket
   const increment = (item_id) => {
-    const newCount = items.find((item) => item._id === item_id);
+    const newCount = data.pages.find((item) => item._id === item_id);
     if (newCount) {
       setItems(
-        items.map((item) =>
+        data.pages.map((item) =>
           item._id === item_id
             ? { ...newCount, quantity: newCount.quantity + 1 }
             : item
