@@ -134,7 +134,7 @@ function Navbar() {
                         borderBottom: isActive ? "solid" : "",
                       };
                     }}
-                    to="/"
+                    to="/history"
                   >
                     Geçmiş
                   </NavLink>

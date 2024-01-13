@@ -17,6 +17,7 @@ import NewProduct from "./pages/Admin/AdminProducts/NewProduct";
 import SigninToOrder from "./pages/Auth/Signin/indexToOrder";
 import Footer from "./components/Footer";
 import "./App.css";
+import History from "./pages/history/history";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/signintoorder" element={<SigninToOrder />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/basket" element={<Basket />} />
+            <Route path="/history" element={<History />} />
 
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />
