@@ -15,7 +15,7 @@ import "./styles.css";
 import { useState } from "react";
 
 function Card({ item, inBasket }) {
-  const { items, setItems } = useBasket();
+  const { addToBasket, items, setItems } = useBasket();
 
   
   const { data,error, status } = useInfiniteQuery(
@@ -72,7 +72,7 @@ function Card({ item, inBasket }) {
       <Box>
         <Box className="flex justify-center items-center">
           <Image
-            src={item.photos[0]}
+            src={item.photos}
             alt="product"
             loading="lazy"
             objectFit={"cover"}
@@ -132,6 +132,28 @@ function Card({ item, inBasket }) {
           >
             +
           </Button>
+        </Box>
+        <Box>
+        <>
+            {!foundBasketItem ? (
+              <Button
+                colorScheme={"blue"}
+                variant="solid"
+                onClick={() => addToBasket(item, foundBasketItem)}
+                _hover={{
+                  bg: "white",
+                  color: "blue.400",
+                  border: "1px solid #4299E1",
+                }}
+              >
+                Add to Basket
+              </Button>
+            ) : (
+              <Button colorScheme={"blue"} variant="solid" isDisabled>
+                Already in Basket
+              </Button>
+            )}
+          </>
         </Box>
       </Box>
     </Box>
