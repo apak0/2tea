@@ -61,6 +61,7 @@ function Products() {
       if (status === "success") {
         // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
         const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+        setItems(allItems)
   
         // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
         // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz

@@ -31,10 +31,10 @@ function Card({ item, inBasket }) {
 
   //Decrement item quantity in basket
   const decrement = (item_id) => {
-    const newCount = data.pages.find((item) => item._id === item_id);
+    const newCount = items.find((item) => item._id === item_id);
     if (newCount.quantity !== 0) {
       setItems(
-        data.pages.map((item) =>
+        items.map((item) =>
           item._id === item_id
             ? { ...newCount, quantity: newCount.quantity - 1 }
             : item
@@ -45,10 +45,10 @@ function Card({ item, inBasket }) {
 
   //Increment item quantity in basket
   const increment = (item_id) => {
-    const newCount = data.pages.find((item) => item._id === item_id);
+    const newCount = items.find((item) => item._id === item_id);
     if (newCount) {
       setItems(
-        data.pages.map((item) =>
+        items.map((item) =>
           item._id === item_id
             ? { ...newCount, quantity: newCount.quantity + 1 }
             : item
