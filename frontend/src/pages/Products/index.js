@@ -57,26 +57,26 @@ function Products() {
  
 
 
-    // useEffect(() => {
-    //   if (status === "success") {
-    //     // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
-    //     const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+    useEffect(() => {
+      if (status === "success") {
+        // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+        const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
   
-    //     // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
-    //     // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
-    //     if (!isPageChange) {
-    //       setItems((prevItems) =>
-    //         prevItems.map((item) => {
-    //           const newItem = allItems.find((newItem) => newItem._id === item._id);
-    //           return newItem ? { ...item, quantity: newItem.quantity } : item;
-    //         })
-    //       );
-    //     }
+        // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
+        // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+        if (!isPageChange) {
+          setItems((prevItems) =>
+            prevItems.map((item) => {
+              const newItem = allItems.find((newItem) => newItem._id === item._id);
+              return newItem ? { ...item, quantity: newItem.quantity } : item;
+            })
+          );
+        }
   
-    //     // Sayfa değişikliği olduğunu sıfırlıyoruz
-    //     setIsPageChange(false);
-    //   }
-    // }, [data, status, setItems, isPageChange]);
+        // Sayfa değişikliği olduğunu sıfırlıyoruz
+        setIsPageChange(false);
+      }
+    }, [data, status, setItems, isPageChange]);
 
 
 

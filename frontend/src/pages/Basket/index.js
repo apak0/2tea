@@ -7,7 +7,7 @@ import { postOrder } from "../../api";
 import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+
 import "./styles.css";
 
 function Basket() {

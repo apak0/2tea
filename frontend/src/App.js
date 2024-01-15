@@ -17,7 +17,8 @@ import NewProduct from "./pages/Admin/AdminProducts/NewProduct";
 import SigninToOrder from "./pages/Auth/Signin/indexToOrder";
 import Footer from "./components/Footer";
 import "./App.css";
-import History from "./pages/history/history";
+import History from "./pages/History";
+
 
 function App() {
   return (
