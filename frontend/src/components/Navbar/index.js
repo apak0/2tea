@@ -204,7 +204,7 @@ function Navbar() {
                     }}
                     to={"/basket"}
                   />
-                  <Box mr={"auto"} >
+                  {/* <Box mr={"auto"} >
                     <Badge
                       position={"absolute"}
                       height={"1rem"}
@@ -212,11 +212,12 @@ function Navbar() {
                       bg={"red"}
                       color={"white"}
                     >
-                      {!items.length < 1 && `${items.length}`}
+                      {!items.length < 1 && `${items.length }`}
                     </Badge>
-                  </Box>
+                  </Box> */}
                 </Box>
               )}
+              
             </Box>
           </Box>
         </Box>

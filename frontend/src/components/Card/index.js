@@ -3,7 +3,7 @@ import {
   Image,
   Button,
   Text,
-  useSafeLayoutEffect,
+  
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -17,13 +17,11 @@ import { useState } from "react";
 function Card({ item, inBasket }) {
   const { addToBasket, items, setItems } = useBasket();
 
-  
-  const { data,error, status } = useInfiniteQuery(
+  const { data, error, status } = useInfiniteQuery(
     "products",
     fetchProductList,
     {}
-    );
-    
+  );
 
   const foundBasketItem = items.find(
     (basket_item) => basket_item._id === item._id
@@ -61,6 +59,7 @@ function Card({ item, inBasket }) {
     <Box
       display={"flex"}
       flexDirection={"column"}
+      justifyContent={"center"}
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
@@ -76,12 +75,13 @@ function Card({ item, inBasket }) {
             alt="product"
             loading="lazy"
             objectFit={"cover"}
-            w={"100px"}
+            w={"100%"}
+            h={"200px"}
           />
         </Box>
       </Box>
 
-      <Box display={"flex"} flexDirection={"column"} mt={5}>
+      <Box display={"flex"} flexDirection={"column"} mt={5} mx={4}>
         <Box display={"flex"} justifyContent={"center"}>
           <Box
             fontSize={"2xl"}
@@ -101,6 +101,8 @@ function Card({ item, inBasket }) {
           flexDirection="row"
           border="solid 1px #2c3e50"
           borderRadius="8px"
+          mb={5}
+          px={5}
         >
           <Button
             className="minusBtn "
@@ -134,7 +136,7 @@ function Card({ item, inBasket }) {
           </Button>
         </Box>
         <Box>
-        <>
+          <>
             {!foundBasketItem ? (
               <Button
                 colorScheme={"blue"}

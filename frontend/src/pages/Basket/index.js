@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
@@ -46,14 +46,14 @@ function Basket() {
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
     const itemIds = selectedItems.map((item) => item._id);
-    
+
     const input = {
       fullName,
       phoneNumber,
       address,
       items: JSON.stringify(itemIds),
     };
-   
+
     await postOrder(input);
     setTimeout(() => {
       const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
@@ -67,21 +67,17 @@ function Basket() {
   };
 
   return (
-    <Box
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="basketTopDiv"
-    >
+    <Box className="basketTopDiv">
       <Box
         mx={"10%"}
         py={5}
         backgroundPosition="center"
         className=" totalDiv block  items-center justify-center sm:mx-0"
       >
-        <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-sm  ">
+        <Box className=" grid grid-cols- md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-sm  ">
           {items.map((item, i) => (
-            <Box   key={i}>
-              <Box className="box m-55" rounded={"lg"} w="100%">
+            <Box key={i}>
+              <Box className="flex justify-center m-55 " rounded={"lg"} w="100%">
                 <Card item={item} inBasket={true} />
               </Box>
             </Box>
