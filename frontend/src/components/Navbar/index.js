@@ -79,7 +79,7 @@ function Navbar() {
                 <NavLink
                   style={({ isActive, isPending }) => {
                     return {
-                      color: isActive ? "MediumAquamarine" : "white",
+                      color: isActive ? "#525CEB" : "white",
                       borderBottom: isActive ? "solid" : "",
                     };
                   }}
@@ -92,7 +92,7 @@ function Navbar() {
                 <NavLink
                   style={({ isActive, isPending }) => {
                     return {
-                      color: isActive ? "MediumAquamarine" : "white",
+                      color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
                     };
                   }}
@@ -115,7 +115,7 @@ function Navbar() {
                     <NavLink
                       style={({ isActive, isPending }) => {
                         return {
-                          color: isActive ? "MediumAquamarine" : "white",
+                          color: isActive ? "#FE7A36" : "white",
                           borderBottom: isActive ? "solid" : "",
                         };
                       }}
@@ -130,7 +130,7 @@ function Navbar() {
                   <NavLink
                     style={({ isActive, isPending }) => {
                       return {
-                        color: isActive ? "MediumAquamarine" : "white",
+                        color: isActive ? "#FE7A36" : "white",
                         borderBottom: isActive ? "solid" : "",
                       };
                     }}
@@ -144,13 +144,13 @@ function Navbar() {
                   <NavLink
                     style={({ isActive, isPending }) => {
                       return {
-                        color: isActive ? "MediumAquamarine" : "white",
+                        color: isActive ? "#FE7A36" : "white",
                         borderBottom: isActive ? "solid" : "",
                       };
                     }}
                     to="/profile"
                   >
-                    Profile
+                    Profil
                   </NavLink>
                 </ListItem>
 
@@ -165,7 +165,7 @@ function Navbar() {
             <NavLink
               style={({ isActive, isPending }) => {
                 return {
-                  color: isActive ? "MediumAquamarine" : "white",
+                  color: isActive ? "#FE7A36" : "white",
                   borderBottom: isActive ? "solid" : "",
                 };
               }}

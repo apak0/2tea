@@ -109,8 +109,8 @@ function Card({ item, inBasket }) {
             size={"xs"}
             m={1}
             onClick={() => decrement(item._id, foundBasketItem)}
-            bg={"#92C7CF"}
-            _hover={{ bg: "teal.600" }}
+            bg={"#ed8203"}
+            _hover={{ bg: "teal.200", color:"#0F1035" }}
           >
             -
           </Button>
@@ -125,8 +125,8 @@ function Card({ item, inBasket }) {
           </Text>
 
           <Button
-            bg={"#92C7CF"}
-            _hover={{ bg: "teal.600" }}
+            bg={"#ed8203"}
+            _hover={{ bg: "teal.200", color:"#0F1035" }}
             justifySelf={"flex-end"}
             size={"xs"}
             m={1}

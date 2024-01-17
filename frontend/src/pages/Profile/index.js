@@ -106,19 +106,19 @@ function Profile() {
                     bg={"blue.500"}
                   >
                     <FormLabel m={0} htmlFor="files">
-                      Select Photo{" "}
+                      Fotoğraf Seç{" "}
                     </FormLabel>
                   </Button>
                 </Box>
               ) : (
                 <Box>
                   <Button
-                    _hover={{ bg: "gray.100", color: "orange.300" }}
-                    bg={"orange.300"}
-                    color={"white"}
+                    _hover={{ bg: "gray.100", color: "red.300" }}
+                    bg={"red.300"}
+                    color={"gray.100"}
                     onClick={() => setSelectedImage(null)}
                   >
-                    Delete Photo
+                    Sil
                   </Button>
                 </Box>
               )}
@@ -131,7 +131,7 @@ function Profile() {
                 borderColor={"rgba(50, 150, 80, 0.6)"}
                 size="sm"
               >
-                Fullname : {user.fullname}{" "}
+                İsim : {user.fullname}{" "}
               </Heading>
               <Heading
                 border={"1px"}
@@ -147,7 +147,7 @@ function Profile() {
                 borderColor={"rgba(50, 150, 80, 0.6)"}
                 size="sm"
               >
-                Role : {user.role}{" "}
+                Rol : {user.role &&" Kullanıcı"}
               </Heading>
             </Stack>
           </CardBody>
@@ -161,7 +161,7 @@ function Profile() {
                 bg={"red.500"}
                 onClick={handleLogout}
               >
-                Logout
+                Çıkış
               </Button>
             </ButtonGroup>
           </CardFooter>
