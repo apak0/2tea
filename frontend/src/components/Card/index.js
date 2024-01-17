@@ -65,7 +65,7 @@ function Card({ item, inBasket }) {
       overflow="hidden"
       w={"200px"}
       p="2"
-      bg={"red"}
+      bg={"#B4D4FF"}
       h={"100%"}
     >
       <Box>
@@ -136,7 +136,9 @@ function Card({ item, inBasket }) {
           </Button>
         </Box>
         <Box>
-          <>
+          {/* add item to basket button */}
+
+          {/* <>
             {!foundBasketItem ? (
               <Button
                 colorScheme={"blue"}
@@ -155,7 +157,8 @@ function Card({ item, inBasket }) {
                 Already in Basket
               </Button>
             )}
-          </>
+          </> */}
+          
         </Box>
       </Box>
     </Box>
