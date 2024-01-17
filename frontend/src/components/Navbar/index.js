@@ -39,8 +39,8 @@ function Navbar() {
 
   return (
     <Box className={styles.nav}>
-      <Box display={"flex"} mr={"auto"} alignItems={"center"} className="">
-        <Box className="">
+      <Box display={"flex"} justifyContent={"space-around"} alignItems={"center"} className="">
+        <Box className="logo">
           <NavLink to="/">
             <Image
               borderRadius="full"
@@ -56,11 +56,11 @@ function Navbar() {
           display={"flex"}
           justifyContent={"center"}
           alignItems={"center"}
-          ml={[0, 4, 6, 8]}
+          ml={[2, 4, 6, 8]}
         >
           <NavLink to="/">
             <Text
-              ml={5}
+              
               bgGradient="linear(to-l, #e65c00, #F9D423)"
               bgClip="text"
               fontWeight={"bold"}
@@ -71,7 +71,7 @@ function Navbar() {
           </NavLink>
         </Box>
       </Box>
-      <Box display={"flex"} mr={10}>
+      <Box display={"flex"} >
         {!localStorage.getItem("access-token") && (
           <>
             <UnorderedList display={"flex"} gap={5} styleType="none">

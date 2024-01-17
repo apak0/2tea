@@ -1,21 +1,21 @@
 .nav {
-  background-color: #7FC7D9;
+  background-color: #7fc7d9;
   color: white;
   padding: 0.7rem;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 2;
- 
+
   font-family: "Chakra Petch", sans-serif;
 }
 
 @media screen and (max-width: 480px) {
   .nav {
-    padding-left: 0px;
+    
   }
 }
 

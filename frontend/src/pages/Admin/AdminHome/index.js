@@ -18,31 +18,34 @@ function AdminHome() {
       .catch((err) => console.log(err));
   };
   return (
-    <div 
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}>
-    <Flex justifyContent={"center"} alignItems={"center"} p={2} bg={"#8d8d8d"}>
-      <Box
-       
-        display={"flex"}
+    <div>
+      <Flex
         justifyContent={"center"}
         alignItems={"center"}
-        fontSize={"3xl"}
-        as="b"
-        color={"orange.400"}
+        p={2}
+        bg={"#8d8d8d"}
       >
-        <Text>
-        <Box color={"red"}>
-                    <NavLink onClick={handleLogout} to="/">
-                      <Box display={"flex"} alignItems={"center"} gap={3}>
-                        <Text>Çıkış Yap</Text>
-                        <BiLogOut />
-                      </Box>
-                    </NavLink>
-                  </Box>
-        </Text>
-      </Box>
-    </Flex>
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          fontSize={"3xl"}
+          as="b"
+          color={"orange.400"}
+        
+        >
+          <Text>
+            <Box color={"red"}>
+              <NavLink onClick={handleLogout} to="/">
+                <Box display={"flex"} alignItems={"center"} gap={3}>
+                  <Text>Çıkış Yap</Text>
+                  <BiLogOut />
+                </Box>
+              </NavLink>
+            </Box>
+          </Text>
+        </Box>
+      </Flex>
     </div>
   );
 }

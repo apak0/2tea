@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useBasket } from "../../contexts/BasketContext";
-import { postOrder } from "../../api";
+import { fetchProductList, postOrder } from "../../api";
 import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
+import { useInfiniteQuery } from "react-query";
 
 function Basket() {
   const { user } = useAuth();
@@ -18,6 +19,17 @@ function Basket() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const { items, setItems } = useBasket();
+
+  const { data,error, status } = useInfiniteQuery(
+    "products",
+    fetchProductList,
+    {}
+  );
+
+  // useEffect(() => {
+  //   const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
+  //   setItems(updatedItems);
+  // },[]);
 
   useEffect(() => {
     // items'dan herhangi birinin quantity'si 0'dan büyükse butonu enable yap
@@ -65,6 +77,8 @@ function Basket() {
   const handleNavigate = () => {
     navigate("/signintoorder");
   };
+  // console.log("items:" ,items)
+  // console.log("data:", data.pages[0])
 
   return (
     <Box className="basketTopDiv">
@@ -77,7 +91,11 @@ function Basket() {
         <Box className=" grid grid-cols- md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-sm  ">
           {items.map((item, i) => (
             <Box key={i}>
-              <Box className="flex justify-center m-55 " rounded={"lg"} w="100%">
+              <Box
+                className="flex justify-center m-55 "
+                rounded={"lg"}
+                w="100%"
+              >
                 <Card item={item} inBasket={true} />
               </Box>
             </Box>

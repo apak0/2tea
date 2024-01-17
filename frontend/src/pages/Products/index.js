@@ -65,14 +65,14 @@ function Products() {
   
         // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
         // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
-        if (!isPageChange) {
+      
           setItems((prevItems) =>
             prevItems.map((item) => {
               const newItem = allItems.find((newItem) => newItem._id === item._id);
               return newItem ? { ...item, quantity: newItem.quantity } : item;
             })
           );
-        }
+      
   
         // Sayfa değişikliği olduğunu sıfırlıyoruz
         setIsPageChange(false);
