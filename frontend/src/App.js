@@ -28,14 +28,14 @@ function App() {
 
         <div id="content" >
           <Routes>
-            <Route path="/" element={<Basket />} />
+            <Route path="/" exact element={<Products />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signintoorder" element={<SigninToOrder />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/basket" element={<Basket />} />
             <Route path="/history" element={<History />} />
 
             <Route element={<ProtectedRoute />}>
-            <Route path="/product" exact element={<Products />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/admin" element={<Admin />} admin={true}>
                 <Route exact path="home" element={<AdminHome />} />

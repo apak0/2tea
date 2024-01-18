@@ -1,10 +1,4 @@
-import {
-  Box,
-  Image,
-  Button,
-  Text,
-  
-} from "@chakra-ui/react";
+import { Box, Image, Button, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useBasket } from "../../contexts/BasketContext";
@@ -81,7 +75,7 @@ function Card({ item, inBasket }) {
         </Box>
       </Box>
 
-      <Box display={"flex"} flexDirection={"column"} mt={5} mx={4}>
+      <Box display={"flex"} flexDirection={"column"}>
         <Box display={"flex"} justifyContent={"center"}>
           <Box
             fontSize={"2xl"}
@@ -89,6 +83,8 @@ function Card({ item, inBasket }) {
             as="samp"
             lineHeight="tight"
             noOfLines={1}
+            mb={2}
+            color={"#FE7A36"}
           >
             {item.title}
           </Box>
@@ -99,18 +95,19 @@ function Card({ item, inBasket }) {
           display="flex"
           justifyContent={"space-between"}
           flexDirection="row"
-          border="solid 1px #2c3e50"
+          
           borderRadius="8px"
           mb={5}
-          px={5}
         >
           <Button
             className="minusBtn "
-            size={"xs"}
-            m={1}
+            size={"md"}
+            fontSize={"3xl"}
+            m={2}
             onClick={() => decrement(item._id, foundBasketItem)}
             bg={"#ed8203"}
-            _hover={{ bg: "teal.200", color:"#0F1035" }}
+            _hover={{ bg: "teal.400", color: "crimson" }}
+            _active={{ bg: "teal.300", color: "#fff" }}
           >
             -
           </Button>
@@ -119,17 +116,20 @@ function Card({ item, inBasket }) {
             display="flex"
             justifyContent={"center"}
             alignItems="center"
-            w={"20px"}
+            // w={"20px"}
+            fontSize={"3xl"}
           >
             {item.quantity}
           </Text>
 
           <Button
             bg={"#ed8203"}
-            _hover={{ bg: "teal.200", color:"#0F1035" }}
+            _hover={{ bg: "teal.400", color: "#crimson" }}
+            _active={{ bg: "teal.300", color: "#fff" }}
             justifySelf={"flex-end"}
-            size={"xs"}
-            m={1}
+            size={"md"}
+            fontSize={"3xl"}
+            m={2}
             onClick={() => increment(item._id)}
           >
             +
@@ -158,7 +158,6 @@ function Card({ item, inBasket }) {
               </Button>
             )}
           </> */}
-          
         </Box>
       </Box>
     </Box>
