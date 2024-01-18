@@ -95,7 +95,6 @@ function Card({ item, inBasket }) {
           display="flex"
           justifyContent={"space-between"}
           flexDirection="row"
-          
           borderRadius="8px"
           mb={5}
         >
@@ -106,6 +105,7 @@ function Card({ item, inBasket }) {
             m={2}
             onClick={() => decrement(item._id, foundBasketItem)}
             bg={"#ed8203"}
+            color={"#fff"}
             _hover={{ bg: "teal.400", color: "crimson" }}
             _active={{ bg: "teal.300", color: "#fff" }}
           >
@@ -123,8 +123,10 @@ function Card({ item, inBasket }) {
           </Text>
 
           <Button
+            className="plusBtn"
             bg={"#ed8203"}
-            _hover={{ bg: "teal.400", color: "#crimson" }}
+            color={"#fff"}
+            _hover={{ bg: "teal.400", color: "crimson" }}
             _active={{ bg: "teal.300", color: "#fff" }}
             justifySelf={"flex-end"}
             size={"md"}

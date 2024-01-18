@@ -20,7 +20,7 @@ function Basket() {
 
   const { items, setItems } = useBasket();
 
-  const { data,error, status } = useInfiniteQuery(
+  const { data, error, status } = useInfiniteQuery(
     "products",
     fetchProductList,
     {}
@@ -83,12 +83,12 @@ function Basket() {
   return (
     <Box className="basketTopDiv">
       <Box
-        mx={"10%"}
+        
         py={5}
         backgroundPosition="center"
         className=" totalDiv block  items-center justify-center sm:mx-0"
       >
-        <Box className=" grid grid-cols- md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-sm  ">
+        <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-sm  ">
           {items.map((item, i) => (
             <Box key={i}>
               <Box
