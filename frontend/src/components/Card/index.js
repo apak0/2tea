@@ -106,7 +106,7 @@ function Card({ item, inBasket }) {
             onClick={() => decrement(item._id, foundBasketItem)}
             bg={"#ed8203"}
             color={"#fff"}
-            _hover={{ bg: "teal.400", color: "crimson" }}
+            _hover={{ bg: "teal.400", color: "black" }}
             _active={{ bg: "teal.300", color: "#fff" }}
           >
             -
@@ -126,7 +126,7 @@ function Card({ item, inBasket }) {
             className="plusBtn"
             bg={"#ed8203"}
             color={"#fff"}
-            _hover={{ bg: "teal.400", color: "crimson" }}
+            _hover={{ bg: "teal.400", color: "black" }}
             _active={{ bg: "teal.300", color: "#fff" }}
             justifySelf={"flex-end"}
             size={"md"}

@@ -1,6 +1,17 @@
 import React, { useEffect } from "react";
 
-import { Box, Button, Text, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  useToast,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useBasket } from "../../contexts/BasketContext";
 import { fetchProductList, postOrder } from "../../api";
@@ -26,6 +37,7 @@ function Basket() {
     {}
   );
 
+  const orderedItems = items.filter((item) => item.quantity > 0);
   // useEffect(() => {
   //   const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
   //   setItems(updatedItems);
@@ -79,11 +91,11 @@ function Basket() {
   };
   // console.log("items:" ,items)
   // console.log("data:", data.pages[0])
+  console.log(items[0].quantity);
 
   return (
     <Box className="basketTopDiv">
       <Box
-        
         py={5}
         backgroundPosition="center"
         className=" totalDiv block  items-center justify-center sm:mx-0"
@@ -105,12 +117,100 @@ function Basket() {
         {/* Order Price Information */}
         <Box
           display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
           flexDirection={"column"}
           alignSelf={"baseline"}
           ml={"10%"}
           mr={"10%"}
         >
           <Box
+            py={5}
+            maxW={"5rem"}
+            className=" flex items-center justify-center sm:mx-0"
+          >
+            {/* Sipariş verilen ürünleri göster */}
+            {orderedItems.length > 0 ? (
+              <Box>
+                <Text fontSize="xl" mb="4">
+                  Sipariş Listesi:
+                </Text>
+                <Table variant="striped" colorScheme="gray">
+                  <Thead>
+                    <Tr>
+                      <Th color={"red"} >Ürün Adı</Th>
+                      <Th>Miktar</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {orderedItems.map((item, index) => (
+                      <Tr key={index}>
+                        <Td>{item.title}</Td>
+                        <Td>{item.quantity}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+                <Box mt="3">
+                  {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
+                  <Button
+                    fontSize={"2xl"}
+                    p={5}
+                    size="sm"
+                    bg={"#ed8203"}
+                    color={"#fff"}
+                    _hover={{ bg: "teal.400", color: "black" }}
+                    _active={{ bg: "teal.300", color: "#fff" }}
+                    onClick={() => {
+                      loggedIn ? handleSubmitForm() : handleNavigate();
+                    }}
+                  >
+                    Siparişi Gönder
+                  </Button>
+                </Box>
+              </Box>
+            ) : (
+              // Sipariş verilmemişse gösterilecek içerik
+              <Box>
+                <Text fontSize="xl" mb="4">
+                  Sipariş Listesi:
+                </Text>
+                <Table variant="striped" colorScheme="gray">
+                  <Thead>
+                    <Tr>
+                      <Th>Ürün Adı</Th>
+                      <Th>Miktar</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {orderedItems &&
+                      orderedItems.map((item, index) => (
+                        <Tr key={index}>
+                          <Td>{item.title}</Td>
+                          <Td>{item.quantity}</Td>
+                        </Tr>
+                      ))}
+                  </Tbody>
+                </Table>
+                <Box mt="3">
+                  {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
+                  <Button
+                    fontSize={"2xl"}
+                    p={5}
+                    size="sm"
+                    bg={"#ed8203"}
+                    color={"#fff"}
+                    _hover={{ bg: "teal.400", color: "black" }}
+                    _active={{ bg: "teal.300", color: "#fff" }}
+                  >
+                    Ürün Seçin
+                  </Button>
+                </Box>
+              </Box>
+            )}
+          </Box>
+
+          {/* <Box
             minW={"100px"}
             border="2px"
             borderColor="gray.300"
@@ -159,7 +259,7 @@ function Basket() {
           >
             {" "}
             Siparişi Gönder
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </Box>
