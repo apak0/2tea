@@ -138,15 +138,15 @@ function Basket() {
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
                     <Tr>
-                      <Th color={"red"} >Ürün Adı</Th>
-                      <Th>Miktar</Th>
+                      <Th color={"orange.400"} >Ürün Adı</Th>
+                      <Th color={"orange.400"}>Miktar</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
                     {orderedItems.map((item, index) => (
                       <Tr key={index}>
-                        <Td>{item.title}</Td>
-                        <Td>{item.quantity}</Td>
+                        <Td bg={"red.100"} >{item.title}</Td>
+                        <Td bg={"red.100"}>{item.quantity}</Td>
                       </Tr>
                     ))}
                   </Tbody>
