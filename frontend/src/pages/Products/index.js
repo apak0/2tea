@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  AspectRatio,
-  Box,
-  Button,
-  Grid,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Button, Text, useToast } from "@chakra-ui/react";
 
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList, postOrder } from "../../api";
@@ -131,14 +124,15 @@ function Products() {
   //_________________________________________________________________________
 
   return (
-    <Box>
-      {user && <Text  > {user.fullname} Bey, Hoşgeldiniz</Text> }
-      
-      <Button bg={"red.400"} color={"white"}>
-        <NavLink to={"/basket"}>Sipariş ver</NavLink>
-      </Button>
+    <Box className="h-full flex  ">
+      <Box className="flex justify-center items-center">
+        <Box>{user && <Text> {user.fullname} Bey, Hoşgeldiniz</Text>}</Box>
+
+        <Button bg={"red.400"} color={"white"}>
+          <NavLink to={"/basket"}>Sipariş ver</NavLink>
+        </Button>
+      </Box>
     </Box>
-    
   );
 }
 

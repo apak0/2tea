@@ -121,12 +121,14 @@ function Basket() {
           alignItems={"center"}
           flexDirection={"column"}
           alignSelf={"baseline"}
-          ml={"10%"}
-          mr={"10%"}
+          ml={10}
+          bg={"gray.300"}
+          p={3}
+          
         >
           <Box
             py={5}
-            maxW={"5rem"}
+            
             className=" flex items-center justify-center sm:mx-0"
           >
             {/* Sipariş verilen ürünleri göster */}
@@ -138,8 +140,8 @@ function Basket() {
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
                     <Tr>
-                      <Th color={"orange.400"} >Ürün Adı</Th>
-                      <Th color={"orange.400"}>Miktar</Th>
+                      <Th color={"orange.400"} fontSize={"lg"} >Ürün Adı</Th>
+                      <Th color={"orange.400"} fontSize={"lg"}>Miktar</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -152,8 +154,9 @@ function Basket() {
                   </Tbody>
                 </Table>
                 <Box mt="3">
-                  {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
+                
                   <Button
+                    minW={"200px"}
                     fontSize={"2xl"}
                     p={5}
                     size="sm"
@@ -171,15 +174,15 @@ function Basket() {
               </Box>
             ) : (
               // Sipariş verilmemişse gösterilecek içerik
-              <Box>
+              <Box >
                 <Text fontSize="xl" mb="4">
                   Sipariş Listesi:
                 </Text>
-                <Table variant="striped" colorScheme="gray">
+                <Table variant="striped" colorScheme="gray" >
                   <Thead>
-                    <Tr>
-                      <Th>Ürün Adı</Th>
-                      <Th>Miktar</Th>
+                    <Tr >
+                      <Th color={"orange.400"} fontSize={"lg"}>Ürün Adı</Th>
+                      <Th color={"orange.400"} fontSize={"lg"}>Miktar</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -195,15 +198,19 @@ function Basket() {
                 <Box mt="3">
                   {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
                   <Button
+                  
+                  cursor={"revert"}
+                  isActive={true}
+                   minW={"200px"}
                     fontSize={"2xl"}
                     p={5}
                     size="sm"
-                    bg={"#ed8203"}
+                    bg={"gray.400"}
                     color={"#fff"}
                     _hover={{ bg: "teal.400", color: "black" }}
                     _active={{ bg: "teal.300", color: "#fff" }}
                   >
-                    Ürün Seçin
+                    Ürün yok
                   </Button>
                 </Box>
               </Box>

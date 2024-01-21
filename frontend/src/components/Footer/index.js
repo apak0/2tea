@@ -12,6 +12,7 @@ function Footer() {
       mt={"auto"}
       px={10}
       textAlign={{ base: "center" }}
+      bottom={0}
     >
       <Text
         fontSize="sm"
