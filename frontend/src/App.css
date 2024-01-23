@@ -2,10 +2,11 @@
 #content {
   padding-left: 30px;
   padding-right: 30px;
-
-  background-color: #DCF2F1;
-  flex: 1 1 0%;
+  background-color: #dcf2f1;
   overflow: "auto";
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #app {

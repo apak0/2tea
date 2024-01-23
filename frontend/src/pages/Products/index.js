@@ -124,14 +124,12 @@ function Products() {
   //_________________________________________________________________________
 
   return (
-    <Box className="h-full flex  ">
-      <Box className="flex justify-center items-center">
-        <Box>{user && <Text> {user.fullname} Bey, Hoşgeldiniz</Text>}</Box>
+    <Box className="flex justify-center items-center">
+      <Box>{user && <Text> {user.fullname} Bey, Hoşgeldiniz</Text>}</Box>
 
-        <Button bg={"red.400"} color={"white"}>
-          <NavLink to={"/basket"}>Sipariş ver</NavLink>
-        </Button>
-      </Box>
+      <Button bg={"red.400"} color={"white"}>
+        <NavLink to={"/basket"}>Sipariş ver</NavLink>
+      </Button>
     </Box>
   );
 }

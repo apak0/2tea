@@ -121,13 +121,15 @@ function Basket() {
           alignItems={"center"}
           flexDirection={"column"}
           alignSelf={"baseline"}
-          ml={10}
+          mx={"auto"}
           bg={"gray.300"}
           p={3}
-          
+          mt={10}
+          ml={10}
         >
           <Box
             py={5}
+           
             
             className=" flex items-center justify-center sm:mx-0"
           >

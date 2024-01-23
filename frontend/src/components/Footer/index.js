@@ -9,7 +9,7 @@ function Footer() {
       justifyContent={"space-between"}
       color="white"
       py={4}
-      mt={"auto"}
+      
       px={10}
       textAlign={{ base: "center" }}
       bottom={0}
