@@ -124,7 +124,7 @@ function Products() {
   //_________________________________________________________________________
 
   return (
-    <Box className="flex justify-center items-center">
+    <Box className=" flex justify-center items-center">
       <Box>{user && <Text> {user.fullname} Bey, Hoşgeldiniz</Text>}</Box>
 
       <Button bg={"red.400"} color={"white"}>
