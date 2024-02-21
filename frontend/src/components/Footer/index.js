@@ -11,7 +11,9 @@ function Footer() {
       py={4}
       px={10}
       textAlign={{ base: "center" }}
+      position={"fixed"}
       bottom={0}
+      w={"100%"}
     >
       <Text
         fontSize="sm"
