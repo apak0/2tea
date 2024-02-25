@@ -106,7 +106,7 @@ function Basket() {
               <Box
                 className="flex justify-center m-55 "
                 rounded={"lg"}
-                w="100%"
+                
               >
                 <Card item={item} inBasket={true} />
               </Box>
