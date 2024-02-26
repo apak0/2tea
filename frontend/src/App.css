@@ -3,14 +3,11 @@
   padding-left: 30px;
   padding-right: 30px;
   background-color: #dcf2f1;
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 100%; /* ull height for mobile screen */
+
 
   /*Full height for pc screen */
   @media screen and (min-width: 768px) {
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 54px);
   }
 
   display: flex;
