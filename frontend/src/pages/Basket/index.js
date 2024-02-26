@@ -103,11 +103,7 @@ function Basket() {
         <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-sm  ">
           {items.map((item, i) => (
             <Box key={i}>
-              <Box
-                className="flex justify-center m-55 "
-                rounded={"lg"}
-                
-              >
+              <Box className="flex justify-center  " rounded={"lg"}>
                 <Card item={item} inBasket={true} />
               </Box>
             </Box>
@@ -127,12 +123,7 @@ function Basket() {
           mt={10}
           ml={10}
         >
-          <Box
-            py={5}
-           
-            
-            className=" flex items-center justify-center sm:mx-0"
-          >
+          <Box py={5} className=" flex items-center justify-center sm:mx-0">
             {/* Sipariş verilen ürünleri göster */}
             {orderedItems.length > 0 ? (
               <Box>
@@ -142,21 +133,24 @@ function Basket() {
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
                     <Tr>
-                      <Th color={"orange.400"} fontSize={"lg"} >Ürün Adı</Th>
-                      <Th color={"orange.400"} fontSize={"lg"}>Miktar</Th>
+                      <Th color={"orange.400"} fontSize={"lg"}>
+                        Ürün Adı
+                      </Th>
+                      <Th color={"orange.400"} fontSize={"lg"}>
+                        Miktar
+                      </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
                     {orderedItems.map((item, index) => (
                       <Tr key={index}>
-                        <Td bg={"red.100"} >{item.title}</Td>
+                        <Td bg={"red.100"}>{item.title}</Td>
                         <Td bg={"red.100"}>{item.quantity}</Td>
                       </Tr>
                     ))}
                   </Tbody>
                 </Table>
                 <Box mt="3">
-                
                   <Button
                     minW={"200px"}
                     fontSize={"2xl"}
@@ -176,15 +170,19 @@ function Basket() {
               </Box>
             ) : (
               // Sipariş verilmemişse gösterilecek içerik
-              <Box >
+              <Box>
                 <Text fontSize="xl" mb="4">
                   Sipariş Listesi:
                 </Text>
-                <Table variant="striped" colorScheme="gray" >
+                <Table variant="striped" colorScheme="gray">
                   <Thead>
-                    <Tr >
-                      <Th color={"orange.400"} fontSize={"lg"}>Ürün Adı</Th>
-                      <Th color={"orange.400"} fontSize={"lg"}>Miktar</Th>
+                    <Tr>
+                      <Th color={"orange.400"} fontSize={"lg"}>
+                        Ürün Adı
+                      </Th>
+                      <Th color={"orange.400"} fontSize={"lg"}>
+                        Miktar
+                      </Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -200,10 +198,9 @@ function Basket() {
                 <Box mt="3">
                   {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
                   <Button
-                  
-                  cursor={"revert"}
-                  isActive={true}
-                   minW={"200px"}
+                    cursor={"revert"}
+                    isActive={true}
+                    minW={"200px"}
                     fontSize={"2xl"}
                     p={5}
                     size="sm"

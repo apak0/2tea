@@ -127,7 +127,7 @@ function Products() {
     <Box className="">
       <Box >{user && <Text> {user.fullname} Bey, Hoşgeldiniz</Text>}</Box>
 
-      <Box>
+      <Box className="">
         <Button bg={"red.400"} color={"white"}>
           <NavLink to={"/basket"}>
             Ürünleri Görüntülemek için Tıklayınız

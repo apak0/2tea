@@ -6,7 +6,12 @@
   position: relative;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%; /* ull height for mobile screen */
+
+  /*Full height for pc screen */
+  @media screen and (min-width: 768px) {
+    min-height: calc(100vh - 64px);
+  }
 
   display: flex;
   justify-content: center;
