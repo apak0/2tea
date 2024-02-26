@@ -51,7 +51,7 @@ function App() {
 
             <Route path="*" element={<Error404 />} />
           </Routes>
-        <Footer />
+          <Footer />
         </div>
       </div>
     </Router>

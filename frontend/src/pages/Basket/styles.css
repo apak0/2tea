@@ -1,6 +1,8 @@
 .basketTopDiv {
   font-family: "Chakra Petch", sans-serif;
-  height: 100%;
+ 
+  margin-bottom: 200px;  
+
 }
 
 @media screen and (min-width: 480px) {

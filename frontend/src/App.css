@@ -3,8 +3,11 @@
   padding-left: 30px;
   padding-right: 30px;
   background-color: #dcf2f1;
-  height: 100%;
-  overflow: "auto";
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
