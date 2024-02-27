@@ -128,9 +128,9 @@ function Products() {
       <Box >{user && <Text> {user.fullname}, Hoşgeldiniz</Text>}</Box>
 
       <Box className="">
-        <Button bg={"red.400"} color={"white"}>
+        <Button bg={"red.400"} color={"white"} height={"10rem"} fontSize={"lg"} fontWeight={"bold"}>
           <NavLink to={"/basket"}>
-            Ürünleri Görüntülemek için Tıklayınız
+           Ürünleri Görüntülemek için Tıklayınız
           </NavLink>
         </Button>
       </Box>

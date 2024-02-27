@@ -2,7 +2,10 @@
 .content {
   padding-left: 30px;
   padding-right: 30px;
+  padding-top: 30px;
   background-color: #dcf2f1;
+  min-height: 100%;
+
 
 
   /*Full height for pc screen */
@@ -10,9 +13,9 @@
     min-height: calc(100vh - 54px);
   }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
+  
+  
 }
 
 #app {
