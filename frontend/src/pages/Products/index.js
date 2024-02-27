@@ -125,7 +125,7 @@ function Products() {
 
   return (
     <Box className="">
-      <Box >{user && <Text> {user.fullname} Bey, Hoşgeldiniz</Text>}</Box>
+      <Box >{user && <Text> {user.fullname}, Hoşgeldiniz</Text>}</Box>
 
       <Box className="">
         <Button bg={"red.400"} color={"white"}>
