@@ -96,9 +96,9 @@ function Basket() {
   return (
     <Box className="basketTopDiv">
       <Box
-        py={5}
+        py={5}  
         backgroundPosition="center"
-        className=" totalDiv block  items-center justify-center sm:mx-0"
+        className=" totalDiv block   "
       >
         <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-sm  ">
           {items.map((item, i) => (

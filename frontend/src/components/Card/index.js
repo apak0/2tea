@@ -57,6 +57,8 @@ function Card({ item, inBasket }) {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
+      minW={"200px"}
+      maxW={"200px"}
       
       p="2"
       bg={"#B4D4FF"}
