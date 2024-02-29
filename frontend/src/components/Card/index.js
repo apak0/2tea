@@ -57,38 +57,36 @@ function Card({ item, inBasket }) {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      w={"200px"}
+      
       p="2"
       bg={"#B4D4FF"}
-      h={"100%"}
     >
-      <Box>
-        <Box className="flex justify-center items-center">
-          <Image
-            src={item.photos}
-            alt="product"
-            loading="lazy"
-            objectFit={"cover"}
-            w={"100%"}
-            h={"200px"}
-          />
-        </Box>
+      <Box className="flex justify-center items-center">
+        <Image
+          src={item.photos}
+          alt="product"
+          loading="lazy"
+          objectFit={"cover"}
+          w={"100%"}
+          h={"200px"}
+        />
       </Box>
 
-      <Box display={"flex"} flexDirection={"column"}>
-        <Box display={"flex"} justifyContent={"center"}>
-          <Box
-            fontSize={"2xl"}
-            fontWeight="bold"
-            as="samp"
-            lineHeight="tight"
-            noOfLines={1}
-            mb={2}
-            color={"#FE7A36"}
-          >
-            {item.title}
-          </Box>
+      
+        <Box
+          fontSize={"2xl"}
+          fontWeight="bold"
+          as="samp"
+          lineHeight="tight"
+          noOfLines={1}
+          mb={2}
+          color={"#FE7A36"}
+          display={"flex"}
+          justifyContent={"center"}
+        >
+          {item.title}
         </Box>
+
         <Box
           className="counterContainer"
           minW={"100px"}
@@ -161,7 +159,7 @@ function Card({ item, inBasket }) {
             )}
           </> */}
         </Box>
-      </Box>
+      
     </Box>
   );
 }
