@@ -95,11 +95,7 @@ function Basket() {
 
   return (
     <Box className="basketTopDiv">
-      <Box
-        py={5}  
-        backgroundPosition="center"
-        className=" totalDiv block   "
-      >
+      <Box py={5} backgroundPosition="center" className=" totalDiv block   ">
         <Box className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-sm  ">
           {items.map((item, i) => (
             <Box key={i}>
@@ -122,8 +118,9 @@ function Basket() {
           p={3}
           mt={10}
           ml={10}
+          mb={36}
         >
-          <Box py={5} className=" flex items-center justify-center sm:mx-0">
+          <Box py={5} className=" flex items-center justify-center sm:mx-0 ">
             {/* Sipariş verilen ürünleri göster */}
             {orderedItems.length > 0 ? (
               <Box>
