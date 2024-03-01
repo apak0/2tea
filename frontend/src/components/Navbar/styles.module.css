@@ -1,4 +1,9 @@
-.nav {
+
+@font-face {
+  font-family: 'Rocher';
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+.nav{
   background-color: #7fc7d9;
   color: white;
   padding: 0.7rem;
@@ -10,7 +15,11 @@
   top: 0;
   z-index: 2;
 
-  font-family: "Chakra Petch", sans-serif;
+  font-family: "rocher";
+
+  font-palette: --Grays;
+
+  
 }
 
 @media screen and (max-width: 480px) {
@@ -52,3 +61,10 @@
   border-radius: 50%;
   transition: 0.3s;
 }
+
+
+@font-palette-values --Grays {
+  font-family: Rocher;
+  base-palette: 9;
+}
+
