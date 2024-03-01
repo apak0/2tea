@@ -139,7 +139,7 @@ function Basket() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {orderedItems.map((item, index) => (
+                    {orderedItems.slice().reverse().map((item, index) => (
                       <Tr key={index}>
                         <Td bg={"red.100"}>{item.title}</Td>
                         <Td bg={"red.100"}>{item.quantity}</Td>
