@@ -61,9 +61,7 @@ function Navbar() {
           <NavLink to="/">
             <Text
               
-              bgGradient="linear(to-l, #e65c00, #F9D423)"
-              bgClip="text"
-              fontWeight={"bold"}
+              
               fontSize={{ base: "15px", md: "40px", lg: "xx-large" }}
             >
               ÇAY OCAĞI

@@ -141,9 +141,15 @@ function Basket() {
                       .slice()
                       .reverse()
                       .map((item, index) => (
-                        <Tr border={"2px"} key={index}>
+                        <Tr
+                          border={"2px"}
+                          borderColor={"lightcoral"}
+                          key={index}
+                        >
                           <Td bg={"red.100"}>{item.title}</Td>
-                          <Td className="flex justify-center" bg={"red.100"}>{item.quantity}</Td>
+                          <Td className="flex justify-center" bg={"red.100"}>
+                            {item.quantity}
+                          </Td>
                         </Tr>
                       ))}
                   </Tbody>
