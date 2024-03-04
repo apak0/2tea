@@ -1,4 +1,6 @@
 import React from "react";
+import addNotification from "react-push-notification"
+import bizimLogo from "./assets/Bizim-Logo.png"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Signup from "./pages/Auth/Signup";
@@ -18,13 +20,26 @@ import SigninToOrder from "./pages/Auth/Signin/indexToOrder";
 import Footer from "./components/Footer";
 import "./App.css";
 import History from "./pages/History";
+import { Button } from "antd";
 
 
 function App() {
+
+  const clickNotify = () => {
+    addNotification({
+      title: "code with mami",
+      message: "visit gemlik",
+      duration: 4000,
+      icon: bizimLogo,
+      native: true,
+      
+    })
+  }
   return (
     <Router>
       <div id="app">
         <Navbar />
+        <Button onClick={clickNotify} >Click me</Button>
 
         <div className="content" >
           <Routes>
