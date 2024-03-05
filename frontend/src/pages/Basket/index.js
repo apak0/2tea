@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import addNotification from 'react-push-notification';
+
 import {
   Box,
   Button,
@@ -93,8 +95,25 @@ function Basket() {
   // console.log("data:", data.pages[0])
   console.log(items[0].quantity);
 
+  const buttonClick = () => {
+    addNotification({
+      title: "Warning",
+      subtitle: "This is a subtitle",
+      message: "This is a very long message",
+      duration:4000,
+      theme: "red",
+      native: false, // when using native, your OS will handle theming.
+      onClick: () => window.location = "https://www.youtube.com"
+    });
+
+    console.log("CLİCKED")
+  };
+
   return (
     <Box className="basketTopDiv">
+      <Button onClick={buttonClick} className="button">
+        Hello world.
+      </Button>
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (
