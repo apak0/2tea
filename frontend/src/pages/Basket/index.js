@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import addNotification from "react-push-notification";
+import { fetchOrders } from "../../api";
 
 import {
   Box,
@@ -22,10 +23,14 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 import "./styles.css";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
 
 function Basket() {
   const { user } = useAuth();
+  const { isLoading, isError, data:datas, error:errors } = useQuery(
+    "admin:orders",
+    fetchOrders
+  );
   const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
@@ -69,6 +74,23 @@ function Basket() {
       isClosable: true,
     });
 
+    // Admin chrome notification function
+    const buttonClick = () => {
+      user.role === "admin"
+        ? addNotification({
+            title: "Yeni sipariş",
+            message: `${user.fullname} bir sipariş gönderdi`,
+            duration: 4000,
+  
+            native: true,
+            onClick: () => "https:/localhost:3000/admin/orders",
+          })
+        : console.log("admin değil");
+  
+      console.log(user.role);
+    };
+  
+
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
     const itemIds = selectedItems.map((item) => item._id);
@@ -86,6 +108,8 @@ function Basket() {
       setItems(updatedItems);
     }, 400);
     toastForOrder();
+    buttonClick()
+    
   };
 
   const handleNavigate = () => {
@@ -95,24 +119,10 @@ function Basket() {
   // console.log("data:", data.pages[0])
   console.log(items[0].quantity);
 
-  const buttonClick = () => {
-    user.role === "admin"
-      ? addNotification({
-          title: "Yeni sipariş",
-          message: `${user.fullname} bir sipariş gönderdi`,
-          duration: 4000,
-
-          native: true,
-          onClick: () => "https:/localhost:3000/admin/orders",
-        })
-      : console.log("admin değil");
-
-    console.log(user.role);
-  };
 
   return (
     <Box className="basketTopDiv">
-      <Button onClick={buttonClick} className="button">
+      <Button  className="button">
         Hello world.
       </Button>
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">

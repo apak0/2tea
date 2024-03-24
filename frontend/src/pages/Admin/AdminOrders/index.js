@@ -15,7 +15,6 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-
 import "./styles.css";
 
 function AdminOrders() {
@@ -64,7 +63,7 @@ function AdminOrders() {
         </Box>
 
         <Box>
-          {/* this box using for design, can not be active */}
+          {/* this box using for design, its not active */}
 
           <Button
             opacity={0}
@@ -82,9 +81,14 @@ function AdminOrders() {
       </Flex>
 
       <Table variant="simple">
-        <Thead  bg={"blue.200"}>
+        <Thead bg={"blue.200"}>
           <Tr>
-            <Th  className="flex justify-center" fontSize={"14px"} p={5} color={"black"}>
+            <Th
+              className="flex justify-center"
+              fontSize={"14px"}
+              p={5}
+              color={"black"}
+            >
               USERNAME
             </Th>
 
@@ -95,8 +99,8 @@ function AdminOrders() {
         </Thead>
         <Tbody>
           {data.map((item) => (
-            <Tr key={item._id} >
-              <Td className="flex justify-center" >{item.user.fullname}</Td>
+            <Tr key={item._id}>
+              <Td className="flex justify-center">{item.user.fullname}</Td>
 
               <Td isNumeric>{item.items.length}</Td>
             </Tr>
