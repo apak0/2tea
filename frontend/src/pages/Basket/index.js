@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-
 import addNotification from "react-push-notification";
 import { fetchOrders } from "../../api";
-
 import {
   Box,
   Button,
@@ -21,16 +19,17 @@ import { fetchProductList, postOrder } from "../../api";
 import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-
-import "./styles.css";
 import { useInfiniteQuery, useQuery } from "react-query";
+import "./styles.css";
 
 function Basket() {
   const { user } = useAuth();
-  const { isLoading, isError, data:datas, error:errors } = useQuery(
-    "admin:orders",
-    fetchOrders
-  );
+  const {
+    isLoading,
+    isError,
+    data: datas,
+    error: errors,
+  } = useQuery("admin:orders", fetchOrders);
   const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
@@ -45,13 +44,9 @@ function Basket() {
   );
 
   const orderedItems = items.filter((item) => item.quantity > 0);
-  // useEffect(() => {
-  //   const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
-  //   setItems(updatedItems);
-  // },[]);
 
   useEffect(() => {
-    // items'dan herhangi birinin quantity'si 0'dan büyükse butonu enable yap
+    // if any items quantitys more than zero then button enable
     const anyItemHasQuantity = items.some((item) => item.quantity > 0);
     setIsButtonDisabled(!anyItemHasQuantity);
   }, [items]);
@@ -62,6 +57,9 @@ function Basket() {
     (acc, item) => acc + item.quantity * item.price,
     0
   );
+
+
+  // user order toast notification 
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -74,22 +72,21 @@ function Basket() {
       isClosable: true,
     });
 
-    // Admin chrome notification function
-    const buttonClick = () => {
-      user.role === "admin"
-        ? addNotification({
-            title: "Yeni sipariş",
-            message: `${user.fullname} bir sipariş gönderdi`,
-            duration: 4000,
-  
-            native: true,
-            onClick: () => "https:/localhost:3000/admin/orders",
-          })
-        : console.log("admin değil");
-  
-      console.log(user.role);
-    };
-  
+  // Admin chrome notification function
+  const buttonClick = () => {
+    user.role === "admin"
+      ? addNotification({
+          title: "Yeni sipariş",
+          message: `${user.fullname} bir sipariş gönderdi`,
+          duration: 4000,
+
+          native: true,
+          onClick: () => "https:/localhost:3000/admin/orders",
+        })
+      : console.log("admin değil");
+
+    console.log(user.role);
+  };
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -108,8 +105,7 @@ function Basket() {
       setItems(updatedItems);
     }, 400);
     toastForOrder();
-    buttonClick()
-    
+    buttonClick();
   };
 
   const handleNavigate = () => {
@@ -119,12 +115,9 @@ function Basket() {
   // console.log("data:", data.pages[0])
   console.log(items[0].quantity);
 
-
   return (
     <Box className="basketTopDiv">
-      <Button  className="button">
-        Hello world.
-      </Button>
+      <Button className="button">Hello world.</Button>
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (
