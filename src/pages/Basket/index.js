@@ -25,6 +25,7 @@ import "./styles.css";
 function Basket() {
   const { user } = useAuth();
   const {
+    refetch
     isLoading,
     isError,
     data: datas,
@@ -133,6 +134,7 @@ useEffect(() => {
     }, 400);
     toastForOrder();
     buttonClick();
+    refetch()
   };
 
   const handleNavigate = () => {
