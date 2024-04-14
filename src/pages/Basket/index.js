@@ -59,6 +59,33 @@ function Basket() {
   );
 
 
+// Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
+useEffect(() => {
+  if (status === "success") {
+    // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+    const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+    setItems(allItems);
+
+    // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
+    // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+
+    setItems((prevItems) =>
+      prevItems.map((item) => {
+        const newItem = allItems.find((newItem) => newItem._id === item._id);
+        return newItem ? { ...item, quantity: newItem.quantity } : item;
+      })
+    );
+
+    // Sayfa değişikliği olduğunu sıfırlıyoruz
+   
+  }
+}, [data, status, setItems,]);
+//_________________________________________________________________________
+
+
+
+
+
   // user order toast notification 
   const toast = useToast();
   const navigate = useNavigate();
@@ -76,12 +103,12 @@ function Basket() {
   const buttonClick = () => {
     user.role === "admin"
       ? addNotification({
-          title: "Yeni sipariş",
+          title: "Yeni sipariş var",
           message: `${user.fullname} bir sipariş gönderdi`,
           duration: 4000,
 
           native: true,
-          onClick: () => "https:/localhost:3000/admin/orders",
+          onClick: () => "https://twotea.onrender.com/admin/orders",
         })
       : console.log("admin değil");
 
@@ -111,13 +138,11 @@ function Basket() {
   const handleNavigate = () => {
     navigate("/signintoorder");
   };
-  // console.log("items:" ,items)
-  // console.log("data:", data.pages[0])
-  console.log(items[0].quantity);
+
 
   return (
     <Box className="basketTopDiv">
-      <Button className="button">Hello world.</Button>
+      
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (
