@@ -100,21 +100,7 @@ useEffect(() => {
       isClosable: true,
     });
 
-  // Admin chrome notification function
-  const buttonClick = () => {
-    user.role === "admin"
-      ? addNotification({
-          title: "Yeni sipariş var",
-          message: `${user.fullname} bir sipariş gönderdi`,
-          duration: 4000,
-
-          native: true,
-          onClick: () => "https://twotea.onrender.com/admin/orders",
-        })
-      : console.log("admin değil");
-
-    console.log(user.role);
-  };
+  
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -133,10 +119,25 @@ useEffect(() => {
       setItems(updatedItems);
     }, 400);
     toastForOrder();
-    buttonClick();
     refetch()
+    notificationAction();
   };
 
+  // Admin chrome notification function
+  const notificationAction = () => {
+    user.role === "admin"
+      ? addNotification({
+          title: "Yeni sipariş var",
+          message: `${user.fullname} bir sipariş gönderdi`,
+          duration: 4000,
+
+          native: true,
+          onClick: () => "https://twotea.onrender.com/admin/orders",
+        })
+      : console.log("admin değil");
+
+    console.log(user.role);
+  };
   const handleNavigate = () => {
     navigate("/signintoorder");
   };
