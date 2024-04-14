@@ -25,7 +25,7 @@ import "./styles.css";
 function Basket() {
   const { user } = useAuth();
   const {
-    refetch
+    refetch,
     isLoading,
     isError,
     data: datas,
