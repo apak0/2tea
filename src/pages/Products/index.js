@@ -125,16 +125,33 @@ function Products() {
 
   return (
     <Box className="">
-      <Box >{user && <Text> {user.fullname}, Hoşgeldiniz</Text>}</Box>
+    <Box></Box>
 
-      <Box className="">
-        <Button bg={"red.400"} color={"white"} height={"10rem"} fontSize={"lg"} fontWeight={"bold"}>
-          <NavLink to={"/basket"}>
-           Ürünleri Görüntülemek için Tıklayınız
-          </NavLink>
-        </Button>
-      </Box>
+    <Box className="">
+      <Button
+        bg={"cyan.200"}
+        _hover={{
+          background: "gray.300",
+          color: "teal.500",
+        }}
+        color={"gray.500"}
+        height={"10rem"}
+        fontSize={"lg"}
+        fontWeight={"bold"}
+        marginTop={10}
+      >
+        <NavLink to={"/basket"}>
+          {user && (
+            <Box className="">
+              <Text textColor={"orange.500"}  >{user.fullname}</Text>
+              <Text>Hoşgeldin</Text>
+            </Box>
+          )}
+          Ürünleri Görüntülemek için Tıklayınız
+        </NavLink>
+      </Button>
     </Box>
+  </Box>
   );
 }
 
