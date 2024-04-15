@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import addNotification from "react-push-notification";
-import { fetchOrders } from "../../api";
+import { fetchProductList, postOrder, fetchOrders } from "../../api";
 import {
   Box,
   Button,
@@ -13,9 +13,7 @@ import {
   Th,
   Td,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { useBasket } from "../../contexts/BasketContext";
-import { fetchProductList, postOrder } from "../../api";
 import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +21,14 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
 
 function Basket() {
-  const { user } = useAuth();
+  const [forceUpdate, setForceUpdate] = useState(false);
+
+  const handleClick = () => {
+    // forceUpdate state'ini tersine çevirerek componentin yeniden yüklenmesini sağla
+    setForceUpdate(prevForceUpdate => !prevForceUpdate);
+  };
+
+  const { user, loggedIn } = useAuth();
   const {
     refetch,
     isLoading,
@@ -31,18 +36,18 @@ function Basket() {
     data: datas,
     error: errors,
   } = useQuery("admin:orders", fetchOrders);
-  const [fullName, setFullName] = useState(user ? user.fullname : "");
-  const [phoneNumber, setPhoneNumber] = useState(123);
-  const [address, setAddress] = useState("test3");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
-  const { items, setItems } = useBasket();
 
   const { data, error, status } = useInfiniteQuery(
     "products",
     fetchProductList,
     {}
   );
+
+  const [fullName, setFullName] = useState(user ? user.fullname : "");
+  const [phoneNumber, setPhoneNumber] = useState(123);
+  const [address, setAddress] = useState("test3");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const { items, setItems } = useBasket();
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
@@ -52,44 +57,36 @@ function Basket() {
     setIsButtonDisabled(!anyItemHasQuantity);
   }, [items]);
 
-  const { loggedIn } = useAuth();
-
   const total = items.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
 
+  // 14.04.2024 saat 15:05 aşşağıdaki product datalarını baskete gönderen useeffect
+  // componenti basket componentine kopyalandı. Burada bekletmememin sebebi backup yapabilmek.
 
-// Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
-useEffect(() => {
-  if (status === "success") {
-    // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
-    const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
-    setItems(allItems);
+  // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
+  useEffect(() => {
+    if (status === "success") {
+      // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+      const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
+      setItems(allItems);
 
-    // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
-    // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+      // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
+      // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
 
-    setItems((prevItems) =>
-      prevItems.map((item) => {
-        const newItem = allItems.find((newItem) => newItem._id === item._id);
-        return newItem ? { ...item, quantity: newItem.quantity } : item;
-      })
-    );
+      setItems((prevItems) =>
+        prevItems.map((item) => {
+          const newItem = allItems.find((newItem) => newItem._id === item._id);
+          return newItem ? { ...item, quantity: newItem.quantity } : item;
+        })
+      );
+    }
+  }, [data, status, setItems]);
+  //_________________________________________________________________________
 
-    // Sayfa değişikliği olduğunu sıfırlıyoruz
-   
-  }
-}, [data, status, setItems,]);
-//_________________________________________________________________________
-
-
-
-
-
-  // user order toast notification 
+  // user order toast notification
   const toast = useToast();
-  const navigate = useNavigate();
 
   const toastForOrder = () =>
     toast({
@@ -100,6 +97,31 @@ useEffect(() => {
       isClosable: true,
     });
 
+  // Admin chrome notification function
+   
+
+
+
+  const notificationClick = () => {
+    user.role === "admin"
+      ? addNotification({
+          title: "Yeni sipariş var",
+          message: `${user.fullname} bir sipariş gönderdi`,
+          duration: 4000,
+
+          native: true,
+          onClick: () => "https://twotea.onrender.com/admin/orders",
+        })
+      : console.log("admin değil");
+
+    console.log(user.role);
+  };
+
+  useEffect(() => {
+    notificationClick()
+  
+    
+  }, [datas])
   
 
   const handleSubmitForm = async () => {
@@ -114,38 +136,28 @@ useEffect(() => {
     };
 
     await postOrder(input);
-    setTimeout(() => {
-      const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
-      setItems(updatedItems);
-    }, 400);
+    const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
+    setItems(updatedItems);
     toastForOrder();
-    refetch()
-    notificationAction();
+    // notificationClick();
+    refetch();
+    handleClick()
   };
 
-  // Admin chrome notification function
-  const notificationAction = () => {
-    user.role === "admin"
-      ? addNotification({
-          title: "Yeni sipariş var",
-          message: `${user.fullname} bir sipariş gönderdi`,
-          duration: 4000,
+  useEffect(() => {
+   console.log("data updated: for handleclick", datas ? datas.length : "")
+  
+   
+  }, [datas])
+  
 
-          native: true,
-          onClick: () => "https://twotea.onrender.com/admin/orders",
-        })
-      : console.log("admin değil");
-
-    console.log(user.role);
-  };
+  const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/signintoorder");
   };
 
-
   return (
     <Box className="basketTopDiv">
-      
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (
