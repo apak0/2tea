@@ -25,7 +25,7 @@ function Basket() {
 
   const handleClick = () => {
     // forceUpdate state'ini tersine çevirerek componentin yeniden yüklenmesini sağla
-    setForceUpdate(prevForceUpdate => !prevForceUpdate);
+    setForceUpdate((prevForceUpdate) => !prevForceUpdate);
   };
 
   const { user, loggedIn } = useAuth();
@@ -36,6 +36,8 @@ function Basket() {
     data: datas,
     error: errors,
   } = useQuery("admin:orders", fetchOrders);
+
+  const [datasItem, setDatasItem] = useState(datas);
 
   const { data, error, status } = useInfiniteQuery(
     "products",
@@ -98,11 +100,8 @@ function Basket() {
     });
 
   // Admin chrome notification function
-   
 
-
-
-  const notificationClick = () => {
+  const notificationAction = () => {
     user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
@@ -118,11 +117,8 @@ function Basket() {
   };
 
   useEffect(() => {
-    notificationClick()
-  
-    
-  }, [datas])
-  
+    notificationAction();
+  }, [datasItem]);
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -139,17 +135,17 @@ function Basket() {
     const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
     setItems(updatedItems);
     toastForOrder();
-    // notificationClick();
+    // notificationAction();
     refetch();
-    handleClick()
+    handleClick();
   };
 
   useEffect(() => {
-   console.log("data updated: for handleclick", datas ? datas.length : "")
-  
-   
-  }, [datas])
-  
+    console.log(
+      "data updated: for handleclick",
+      datasItem ? datasItem.length : ""
+    );
+  }, [datasItem]);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
@@ -282,57 +278,6 @@ function Basket() {
               </Box>
             )}
           </Box>
-
-          {/* <Box
-            minW={"100px"}
-            border="2px"
-            borderColor="gray.300"
-            boxShadow="lg"
-            rounded="md"
-            bg="white"
-            display={"flex"}
-            flexDirection={"column"}
-            mt={10}
-            p={2}
-            mx={"auto"}
-          >
-            <Box
-              display={"flex"}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <Text
-                textDecoration={"underline"}
-                color={"blue.500"}
-                fontSize="xl"
-              >
-                Ücret:
-              </Text>
-            </Box>
-
-            <Box display={"flex"} justifyContent={"flex-end"}>
-              <Text as={"b"} color={"orange.400"} fontSize="lg">
-                {total} TL
-              </Text>
-            </Box>
-          </Box>
-
-          <Button
-            isDisabled={isButtonDisabled}
-            fontSize={"2xl"}
-            p={5}
-            mt="5"
-            size="sm"
-            bg={"orange.400"}
-            color={"gray.100"}
-            mx={"auto"}
-            onClick={() => {
-              loggedIn ? handleSubmitForm() : handleNavigate();
-            }}
-          >
-            {" "}
-            Siparişi Gönder
-          </Button> */}
         </Box>
       </Box>
     </Box>
