@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import addNotification from "react-push-notification";
+
 import { fetchProductList, postOrder, fetchOrders } from "../../api";
 import {
   Box,
@@ -20,6 +21,9 @@ import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
 
+import io from "socket.io-client";
+
+const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 function Basket() {
   const [forceUpdate, setForceUpdate] = useState(false);
 
@@ -101,6 +105,22 @@ function Basket() {
 
   // Admin chrome notification function
 
+  useEffect(() => {
+    // Listen for incoming notifications
+    socket.on("notification", (data) => {
+      notificationAction(data);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const sendNotification = () => {
+    // Send notification to other connected users
+    socket.emit("notification", "New notification!");
+  };
+
   const notificationAction = () => {
     user.role === "admin"
       ? addNotification({
@@ -115,10 +135,6 @@ function Basket() {
 
     console.log(user.role);
   };
-
-  useEffect(() => {
-    notificationAction();
-  }, [datasItem]);
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -138,6 +154,7 @@ function Basket() {
     // notificationAction();
     refetch();
     handleClick();
+    sendNotification();
   };
 
   useEffect(() => {
