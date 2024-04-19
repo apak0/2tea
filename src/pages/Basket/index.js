@@ -68,8 +68,6 @@ function Basket() {
     0
   );
 
-  // 14.04.2024 saat 15:05 aşşağıdaki product datalarını baskete gönderen useeffect
-  // componenti basket componentine kopyalandı. Burada bekletmememin sebebi backup yapabilmek.
 
   // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
@@ -154,7 +152,7 @@ function Basket() {
     const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
     setItems(updatedItems);
     toastForOrder();
-    // notificationAction();
+    notificationAction();
     refetch();
     handleClick();
     sendNotification();
