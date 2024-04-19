@@ -154,8 +154,8 @@ function Basket() {
     toastForOrder();
     refetch();
     handleClick();
-    sendNotification();
     notificationAction();
+    sendNotification();
   };
 
   useEffect(() => {
