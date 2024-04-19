@@ -23,7 +23,7 @@ import "./styles.css";
 
 import io from "socket.io-client";
 
-const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
+const socket = io("http://localhost:4000");
 function Basket() {
   const [forceUpdate, setForceUpdate] = useState(false);
 
@@ -103,7 +103,8 @@ function Basket() {
       isClosable: true,
     });
 
-  // Admin chrome notification function
+ 
+// SOKET IO NOTIFICATION
 
   useEffect(() => {
     // Listen for incoming notifications
@@ -120,6 +121,8 @@ function Basket() {
     // Send notification to other connected users
     socket.emit("notification", "New notification!");
   };
+
+
 
   const notificationAction = () => {
     user.role === "admin"
