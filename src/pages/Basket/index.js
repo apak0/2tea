@@ -152,10 +152,10 @@ function Basket() {
     const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
     setItems(updatedItems);
     toastForOrder();
-    notificationAction();
     refetch();
     handleClick();
     sendNotification();
+    notificationAction();
   };
 
   useEffect(() => {
