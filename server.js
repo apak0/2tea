@@ -9,6 +9,6 @@ app.get('/cors', (req, res) => {
   res.send({ "msg": "This has CORS enabled 🎈" })
   })
 
-app.listen(9000, () => console.log("App is served at: http://localhost:9000"));
+app.listen(4000, () => console.log("App is served at: http://localhost:4000"));
 
 
