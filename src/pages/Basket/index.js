@@ -23,7 +23,7 @@ import "./styles.css";
 
 import io from "socket.io-client";
 
-const socket = io("https://twotea-backend.onrender.com");
+const socket = io("http://localhost:4000");
 function Basket() {
   const [forceUpdate, setForceUpdate] = useState(false);
 
@@ -68,7 +68,6 @@ function Basket() {
     0
   );
 
-
   // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
     if (status === "success") {
@@ -101,12 +100,12 @@ function Basket() {
       isClosable: true,
     });
 
- 
-// SOKET IO NOTIFICATION
+  // SOKET IO NOTIFICATION
 
   useEffect(() => {
     // Listen for incoming notifications
     socket.on("notification", (data) => {
+      console.log("notification received and listening");
       notificationAction(data);
     });
 
@@ -116,11 +115,10 @@ function Basket() {
   }, []);
 
   const sendNotification = () => {
-    // Send notification to other connected users
+    // Send notification to other connected usersc
+
     socket.emit("notification", "New notification!");
   };
-
-
 
   const notificationAction = () => {
     user.role === "admin"
@@ -134,7 +132,7 @@ function Basket() {
         })
       : console.log("admin değil");
 
-    console.log(user.role);
+    console.log("notification Action")
   };
 
   const handleSubmitForm = async () => {
@@ -154,7 +152,7 @@ function Basket() {
     toastForOrder();
     refetch();
     handleClick();
-    notificationAction();
+
     sendNotification();
   };
 
