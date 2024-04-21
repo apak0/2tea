@@ -127,7 +127,7 @@ function Basket() {
           message: `${user.fullname} bir sipariş gönderdi`,
           duration: 4000,
 
-          native: true,
+          native: false,
           onClick: () => "https://twotea.onrender.com/admin/orders",
         })
       : console.log("admin değil");
