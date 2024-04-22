@@ -39,7 +39,7 @@ function Footer() {
       >
         Source code available on{" "}
         <Link
-          href="https://github.com/apak0/Bizim-Shop"
+          href="https://github.com/apak0/2tea"
           color="blue.300"
           isExternal
         >
