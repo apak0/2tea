@@ -41,7 +41,7 @@ function Basket() {
     error: errors,
   } = useQuery("admin:orders", fetchOrders);
 
-  const [datasItem, setDatasItem] = useState(datas);
+  // const [datasItem, setDatasItem] = useState(datas);
 
   const { data, error, status } = useInfiniteQuery(
     "products",
@@ -124,7 +124,7 @@ function Basket() {
     user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
-          message: `${user.fullname} bir sipariş gönderdi`,
+          message: `${datas.pop().fullName} bir sipariş gönderdi`,
           duration: 4000,
 
           native: true,
@@ -156,12 +156,9 @@ function Basket() {
     sendNotification();
   };
 
-  useEffect(() => {
-    console.log(
-      "data updated: for handleclick",
-      datasItem ? datasItem.length : ""
-    );
-  }, [datasItem]);
+  // useEffect(() => {
+  //   console.log(datas.pop().fullName)
+  // },[]);
 
   const navigate = useNavigate();
   const handleNavigate = () => {
