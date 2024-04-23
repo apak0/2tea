@@ -126,7 +126,7 @@ function Basket() {
     user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",  
-          // message: datas ? `${} bir sipariş gönderdi` :"owner yok",
+          message: datas ? `${lastItemFullName} bir sipariş gönderdi` :"owner yok",
           duration: 4000,
 
           native: true,
