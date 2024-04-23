@@ -27,10 +27,7 @@ const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 function Basket() {
   const [forceUpdate, setForceUpdate] = useState(false);
 
-  const handleClick = () => {
-    // forceUpdate state'ini tersine çevirerek componentin yeniden yüklenmesini sağla
-    setForceUpdate((prevForceUpdate) => !prevForceUpdate);
-  };
+
 
   const { user, loggedIn } = useAuth();
   const {
@@ -54,6 +51,8 @@ function Basket() {
   const [address, setAddress] = useState("test3");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { items, setItems } = useBasket();
+  const [lastItemFullName, setLastItemFullName] = useState(null);
+  
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
@@ -67,6 +66,8 @@ function Basket() {
     (acc, item) => acc + item.quantity * item.price,
     0
   );
+
+
 
   // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
@@ -108,9 +109,10 @@ function Basket() {
       console.log("notification received and listening");
       notificationAction(data);
     });
-
+    
     return () => {
       socket.disconnect();
+      
     };
   }, []);
 
@@ -123,8 +125,8 @@ function Basket() {
   const notificationAction = () => {
     user.role === "admin"
       ? addNotification({
-          title: "Yeni sipariş var",
-          message: datas? `${datas.pop().fullName} bir sipariş gönderdi` :"",
+          title: "Yeni sipariş var",  
+          // message: datas ? `${} bir sipariş gönderdi` :"owner yok",
           duration: 4000,
 
           native: true,
@@ -134,6 +136,23 @@ function Basket() {
 
     console.log("notification Action")
   };
+
+
+  // Show the last order owner fullName when page load
+  useEffect(() => {
+    if (datas && datas.length > 0) {
+      const fullName = datas[datas.length - 1].fullName;
+      setLastItemFullName(fullName);
+    }
+  }, [datas]);
+
+  // lastItemFullName'e istediğiniz zaman erişebilirsiniz
+  console.log(lastItemFullName);
+// _____________________________________________________________
+
+
+
+// Order submition 
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -151,15 +170,12 @@ function Basket() {
     setItems(updatedItems);
     toastForOrder();
     refetch();
-    handleClick();
+    
 
     sendNotification();
   };
 
-  // useEffect(() => {
-  //   console.log(datas.pop().fullName)
-  // },[]);
-
+ 
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/signintoorder");
