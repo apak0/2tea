@@ -96,6 +96,12 @@ function Basket() {
       isClosable: true,
     });
 
+    useEffect(() => {
+      if (lastItemFullName) {
+        notificationAction();
+      }
+    }, [lastItemFullName]);
+
   // SOKET IO NOTIFICATION
 
   useEffect(() => {
@@ -110,11 +116,7 @@ function Basket() {
     };
   }, []);
 
-  useEffect(() => {
-    if (lastItemFullName) {
-      notificationAction();
-    }
-  }, [lastItemFullName]);
+
 
   const sendNotification = () => {
     // Send notification to other connected usersc
