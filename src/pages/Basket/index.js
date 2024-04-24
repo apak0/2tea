@@ -135,6 +135,7 @@ function Basket() {
       const fullName = datas[datas.length - 1].fullName;
       setLastItemFullName(fullName);
     }
+    refetch();
     notificationAction()
   }, [datas]);
 
