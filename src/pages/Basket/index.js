@@ -101,6 +101,9 @@ function Basket() {
         notificationAction();
       }
     }, [lastItemFullName]);
+  
+
+   
 
   // SOKET IO NOTIFICATION
 
@@ -115,6 +118,7 @@ function Basket() {
       socket.disconnect();
     };
   }, []);
+
 
 
 
@@ -136,7 +140,7 @@ function Basket() {
   // _____________________________________________________________
 
   const notificationAction = () => {
-    user.role === "admin"
+    lastItemFullName || user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
           message: lastItemFullName
