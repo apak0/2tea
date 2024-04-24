@@ -121,6 +121,18 @@ function Basket() {
 
     socket.emit("notification", "New notification!");
   };
+  // Show the last order owner fullName when page load
+  useEffect(() => {
+    if (datas && datas.length > 0) {
+      const fullName = datas[datas.length - 1].fullName;
+      setLastItemFullName(fullName);
+    }
+  }, [datas]);
+
+  // lastItemFullName'e istediğiniz zaman erişebilirsiniz
+  console.log(lastItemFullName);
+// _____________________________________________________________
+
 
   const notificationAction = () => {
     user.role === "admin"
@@ -138,18 +150,7 @@ function Basket() {
   };
 
 
-  // Show the last order owner fullName when page load
-  useEffect(() => {
-    if (datas && datas.length > 0) {
-      const fullName = datas[datas.length - 1].fullName;
-      setLastItemFullName(fullName);
-    }
-  }, [datas]);
-
-  // lastItemFullName'e istediğiniz zaman erişebilirsiniz
-  console.log(lastItemFullName);
-// _____________________________________________________________
-
+  
 
 
 // Order submition 
