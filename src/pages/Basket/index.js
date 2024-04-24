@@ -25,8 +25,6 @@ import io from "socket.io-client";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 function Basket() {
-  const [forceUpdate, setForceUpdate] = useState(false);
-
   const { user, loggedIn } = useAuth();
   const {
     refetch,
@@ -96,15 +94,6 @@ function Basket() {
       isClosable: true,
     });
 
-    useEffect(() => {
-      if (lastItemFullName) {
-        notificationAction();
-      }
-    }, [lastItemFullName]);
-  
-
-   
-
   // SOKET IO NOTIFICATION
 
   useEffect(() => {
@@ -119,33 +108,17 @@ function Basket() {
     };
   }, []);
 
-
-
-
   const sendNotification = () => {
     // Send notification to other connected usersc
 
     socket.emit("notification", "New notification!");
   };
-  // Show the last order owner fullName when page load
-  useEffect(() => {
-    if (datas && datas.length > 0) {
-      const fullName = datas[datas.length - 1].fullName;
-      setLastItemFullName(fullName);
-    }
-  }, []);
-
-  // lastItemFullName'e istediğiniz zaman erişebilirsiniz
-  console.log(lastItemFullName);
-  // _____________________________________________________________
 
   const notificationAction = () => {
-    lastItemFullName || user.role === "admin"
+    user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
-          message: lastItemFullName
-            ? `${lastItemFullName} bir sipariş gönderdi`
-            : "owner yok",
+          message: `${lastItemFullName} bir sipariş gönderdi`,
           duration: 4000,
 
           native: true,
@@ -155,6 +128,19 @@ function Basket() {
 
     console.log("notification Action");
   };
+
+  // Show the last order owner fullName when page load
+  useEffect(() => {
+    if (datas && datas.length > 0) {
+      const fullName = datas[datas.length - 1].fullName;
+      setLastItemFullName(fullName);
+    }
+    notificationAction()
+  }, [datas]);
+
+  // lastItemFullName'e istediğiniz zaman erişebilirsiniz
+  console.log(lastItemFullName);
+  // _____________________________________________________________
 
   // Order submition
 
