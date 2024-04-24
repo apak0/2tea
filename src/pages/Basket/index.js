@@ -27,8 +27,6 @@ const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 function Basket() {
   const [forceUpdate, setForceUpdate] = useState(false);
 
-
-
   const { user, loggedIn } = useAuth();
   const {
     refetch,
@@ -52,7 +50,6 @@ function Basket() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { items, setItems } = useBasket();
   const [lastItemFullName, setLastItemFullName] = useState(null);
-  
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
@@ -66,8 +63,6 @@ function Basket() {
     (acc, item) => acc + item.quantity * item.price,
     0
   );
-
-
 
   // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
@@ -109,12 +104,17 @@ function Basket() {
       console.log("notification received and listening");
       notificationAction(data);
     });
-    
+
     return () => {
       socket.disconnect();
-      
     };
   }, []);
+
+  useEffect(() => {
+    if (lastItemFullName) {
+      notificationAction();
+    }
+  }, [lastItemFullName]);
 
   const sendNotification = () => {
     // Send notification to other connected usersc
@@ -131,14 +131,15 @@ function Basket() {
 
   // lastItemFullName'e istediğiniz zaman erişebilirsiniz
   console.log(lastItemFullName);
-// _____________________________________________________________
-
+  // _____________________________________________________________
 
   const notificationAction = () => {
     user.role === "admin"
       ? addNotification({
-          title: "Yeni sipariş var",  
-          message: lastItemFullName ? `${lastItemFullName} bir sipariş gönderdi` :"owner yok",
+          title: "Yeni sipariş var",
+          message: lastItemFullName
+            ? `${lastItemFullName} bir sipariş gönderdi`
+            : "owner yok",
           duration: 4000,
 
           native: true,
@@ -146,14 +147,10 @@ function Basket() {
         })
       : console.log("admin değil");
 
-    console.log("notification Action")
+    console.log("notification Action");
   };
 
-
-  
-
-
-// Order submition 
+  // Order submition
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -171,12 +168,10 @@ function Basket() {
     setItems(updatedItems);
     toastForOrder();
     refetch();
-    
 
     sendNotification();
   };
 
- 
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/signintoorder");
