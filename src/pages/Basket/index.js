@@ -133,7 +133,7 @@ function Basket() {
       const fullName = datas[datas.length - 1].fullName;
       setLastItemFullName(fullName);
     }
-  }, [datas]);
+  }, []);
 
   // lastItemFullName'e istediğiniz zaman erişebilirsiniz
   console.log(lastItemFullName);
