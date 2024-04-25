@@ -79,6 +79,8 @@ useEffect(() => {
   // Listen for incoming notifications
   socket.on("notification", (data) => {
     console.log("notification received and listening");
+    const fullName = datas[datas.length - 1].fullName;
+        setLastItemFullName(fullName);
     notificationAction(data);
   });
 
