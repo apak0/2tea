@@ -29,7 +29,7 @@ function Footer() {
         bgClip="text"
         bgGradient={"linear(to right, #12c2e9, #c471ed, #f64f59)"}
       >
-        &copy; {new Date().getFullYear()} Çağ Ocağı All rights reserved
+        &copy; {new Date().getFullYear()} Çay Ocağı All rights reserved
       </Text>
 
       <Text
