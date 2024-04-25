@@ -53,27 +53,18 @@ function Basket() {
 
 
 
-    // SOKET IO NOTIFICATION
-
-    useEffect(() => {
-      // Listen for incoming notifications
-      socket.on("notification", (data) => {
-        console.log("notification received and listening");
-        notificationAction(data);
-      });
-  
-      return () => {
-        socket.disconnect();
-      };
-    }, []);
-  
+    
     
     // Show the last order owner fullName when page load
     useEffect(() => {
-      
-    }, [datas]);
+      if (datas && datas.length > 0) {
+        const fullName = datas[datas.length - 1].fullName;
+        setLastItemFullName(fullName);
+        console.log(fullName); // Son siparişin sahibinin tam adını konsola yazdır
+      }
+    }, [datas, setLastItemFullName]);
     
-    // lastItemFullName'e istediğiniz zaman erişebilirsiniz
+    
     const sendNotification = () => {
       // Send notification to other connected usersc
       
@@ -104,7 +95,7 @@ function Basket() {
         })
       );
     }
-    
+    console.log(lastItemFullName);
     
   }, [data, status, setItems]);
   //_________________________________________________________________________
@@ -123,11 +114,7 @@ function Basket() {
 
 
   const notificationAction = () => {
-    if (datas && datas.length > 0) {
-      const fullName = datas[datas.length - 1].fullName;
-      setLastItemFullName(fullName);
-     console.log(lastItemFullName)
-    }
+   
     user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
@@ -163,6 +150,44 @@ function Basket() {
     refetch();
     sendNotification();
   };
+
+
+
+
+// SOKET IO NOTIFICATION
+
+useEffect(() => {
+  // Listen for incoming notifications
+  socket.on("notification", (data) => {
+    console.log("notification received and listening");
+    notificationAction(data);
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const navigate = useNavigate();
   const handleNavigate = () => {
