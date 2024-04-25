@@ -73,6 +73,22 @@ function Basket() {
     };
   // _____________________________________________________________
 
+  // SOKET IO NOTIFICATION
+
+useEffect(() => {
+  // Listen for incoming notifications
+  socket.on("notification", (data) => {
+    console.log("notification received and listening");
+    notificationAction(data);
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, []);
+
+
+
   const total = items.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
@@ -95,7 +111,7 @@ function Basket() {
         })
       );
     }
-    console.log(lastItemFullName);
+    
     
   }, [data, status, setItems]);
   //_________________________________________________________________________
@@ -153,20 +169,6 @@ function Basket() {
 
 
 
-
-// SOKET IO NOTIFICATION
-
-useEffect(() => {
-  // Listen for incoming notifications
-  socket.on("notification", (data) => {
-    console.log("notification received and listening");
-    notificationAction(data);
-  });
-
-  return () => {
-    socket.disconnect();
-  };
-}, []);
 
 
 
