@@ -51,7 +51,12 @@ function Basket() {
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
-
+  useEffect(() => {
+    refetch()
+  
+   
+  }, [])
+  
 
     
     
