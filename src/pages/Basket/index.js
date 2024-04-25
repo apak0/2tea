@@ -45,17 +45,42 @@ function Basket() {
   const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
   const { items, setItems } = useBasket();
   const [lastItemFullName, setLastItemFullName] = useState(null);
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
-  useEffect(() => {
-    // if any items quantitys more than zero then button enable
-    const anyItemHasQuantity = items.some((item) => item.quantity > 0);
-    setIsButtonDisabled(!anyItemHasQuantity);
-  }, [items]);
+
+
+    // SOKET IO NOTIFICATION
+
+    useEffect(() => {
+      // Listen for incoming notifications
+      socket.on("notification", (data) => {
+        console.log("notification received and listening");
+        notificationAction(data);
+      });
+  
+      return () => {
+        socket.disconnect();
+      };
+    }, []);
+  
+    
+    // Show the last order owner fullName when page load
+    useEffect(() => {
+      
+    }, [datas]);
+    
+    // lastItemFullName'e istediğiniz zaman erişebilirsiniz
+    const sendNotification = () => {
+      // Send notification to other connected usersc
+      
+      socket.emit("notification", "New notification!");
+     
+    };
+  // _____________________________________________________________
 
   const total = items.reduce(
     (acc, item) => acc + item.quantity * item.price,
@@ -79,6 +104,8 @@ function Basket() {
         })
       );
     }
+    
+    
   }, [data, status, setItems]);
   //_________________________________________________________________________
 
@@ -94,27 +121,13 @@ function Basket() {
       isClosable: true,
     });
 
-  // SOKET IO NOTIFICATION
-
-  useEffect(() => {
-    // Listen for incoming notifications
-    socket.on("notification", (data) => {
-      console.log("notification received and listening");
-      notificationAction(data);
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
-  const sendNotification = () => {
-    // Send notification to other connected usersc
-
-    socket.emit("notification", "New notification!");
-  };
 
   const notificationAction = () => {
+    if (datas && datas.length > 0) {
+      const fullName = datas[datas.length - 1].fullName;
+      setLastItemFullName(fullName);
+     console.log(lastItemFullName)
+    }
     user.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
@@ -146,26 +159,10 @@ function Basket() {
     const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
     setItems(updatedItems);
     toastForOrder();
+    
     refetch();
-
     sendNotification();
   };
-
-  
-  // Show the last order owner fullName when page load
-  useEffect(() => {
-    if (datas && datas.length > 0) {
-      const fullName = datas[datas.length - 1].fullName;
-      setLastItemFullName(fullName);
-    }
-    refetch();
-    notificationAction()
-  }, [datas]);
-
-  // lastItemFullName'e istediğiniz zaman erişebilirsiniz
-  console.log(lastItemFullName);
-  // _____________________________________________________________
-
 
   const navigate = useNavigate();
   const handleNavigate = () => {
