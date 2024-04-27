@@ -53,7 +53,7 @@ function Basket() {
 
   useEffect(() => {
     refetch()
-  
+  console.log(datas)
    
   })
   
