@@ -51,12 +51,7 @@ function Basket() {
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
-  useEffect(() => {
-    refetch()
-  console.log(datas)
-   
-  })
-  
+
 
     
     
@@ -133,7 +128,7 @@ useEffect(() => {
 
 
   const notificationAction = () => {
-   
+   refetch()
     user 
       ? addNotification({
           title: "Yeni sipariş var",
