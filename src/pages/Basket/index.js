@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import addNotification from "react-push-notification";
+
 import { fetchProductList, postOrder, fetchOrders } from "../../api";
 import {
   Box,
@@ -19,99 +20,197 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
+
 import io from "socket.io-client";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
-
 function Basket() {
   const { user, loggedIn } = useAuth();
-  const { refetch: refetchOrders, data: orderData } = useQuery("admin:orders", fetchOrders);
-  const { data: productListData, status: productListStatus } = useInfiniteQuery(
+  const {
+    refetch,
+    isLoading,
+    isError,
+    data: datas,
+    error: errors,
+  } = useQuery("basket", fetchOrders);
+
+  // const [datasItem, setDatasItem] = useState(datas);
+
+  const { data, error, status } = useInfiniteQuery(
     "products",
-    fetchProductList
+    fetchProductList,
+    {}
   );
+
   const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
+
   const { items, setItems } = useBasket();
-  const [lastOrderFullName, setLastOrderFullName] = useState(null);
+  const [lastItemFullName, setLastItemFullName] = useState(null);
+
+  const orderedItems = items.filter((item) => item.quantity > 0);
 
   useEffect(() => {
-    if (orderData && orderData.length > 0) {
-      const lastOrder = orderData[orderData.length - 1];
-      setLastOrderFullName(lastOrder.fullName);
-    }
-  }, [orderData]);
+    refetch()
+  
+   
+  }, [])
+  
 
+    
+    
+    // Show the last order owner fullName when page load
+    useEffect(() => {
+      if (datas && datas.length > 0) {
+        const fullName = datas[datas.length - 1].fullName;
+        setLastItemFullName(fullName);
+        console.log(fullName); // Son siparişin sahibinin tam adını konsola yazdır
+      }
+    }, [datas, setLastItemFullName]);
+    
+    
+    const sendNotification = () => {
+      // Send notification to other connected usersc
+      
+      socket.emit("notification", "New notification!");
+     
+    };
+  // _____________________________________________________________
+
+  // SOKET IO NOTIFICATION
+
+useEffect(() => {
+  // Listen for incoming notifications
+  socket.on("notification", (data) => {
+    console.log("notification received and listening");
+    
+    notificationAction(data);
+  });
+
+  return () => {
+    socket.disconnect();
+  };
+}, []);
+
+
+
+
+
+  // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
-    if (productListStatus === "success") {
-      const allItems = productListData.pages.reduce((acc, page) => [...acc, ...page], []);
+    if (status === "success") {
+      // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
+      const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
       setItems(allItems);
-    }
-  }, [productListData, productListStatus, setItems]);
 
+      // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
+      // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
+
+      setItems((prevItems) =>
+        prevItems.map((item) => {
+          const newItem = allItems.find((newItem) => newItem._id === item._id);
+          return newItem ? { ...item, quantity: newItem.quantity } : item;
+        })
+      );
+    }
+    
+    
+  }, [data, status, setItems]);
+  //_________________________________________________________________________
+
+  // user order toast notification
   const toast = useToast();
 
-  const sendNotification = (fullName) => {
-    console.log("notification Action");
-    user.role === "admin"
-      ? addNotification({
-          title: "New Order",
-          message: `${fullName} bir sipariş gönderdi`,
-          duration: 4000,
-          native: true,
-          onClick: () => "https://twotea.onrender.com/admin/orders",
-        })
-      : console.log("admin değil");
-  };
-
-  const handleOrderSubmit = async () => {
-    const selectedItems = items.filter((item) => item.quantity > 0);
-    const itemIds = selectedItems.map((item) => item._id);
-
-    const orderInput = {
-      fullName,
-      phoneNumber,
-      address,
-      items: JSON.stringify(itemIds),
-    };
-
-    await postOrder(orderInput);
-
-    const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
-    setItems(updatedItems);
-
+  const toastForOrder = () =>
     toast({
-      title: "Order Submitted",
+      title: "Order sended ",
       description: "Siparişiniz alındı...",
       status: "success",
       duration: 2000,
       isClosable: true,
     });
 
-    refetchOrders();
-    sendNotification(lastOrderFullName);
+
+  const notificationAction = () => {
+   
+    user 
+      ? addNotification({
+          title: "Yeni sipariş var",
+          message: `${lastItemFullName} bir sipariş gönderdi`,
+          duration: 4000,
+
+          native: true,
+          onClick: () => "https://twotea.onrender.com/admin/orders",
+        })
+      : console.log("admin değil");
+
+    console.log("notification Action");
   };
 
-  const navigate = useNavigate();
+  // Order submition
 
-  const handleNavigation = () => {
+  const handleSubmitForm = async () => {
+    const selectedItems = items.filter((item) => item.quantity > 0);
+    const itemIds = selectedItems.map((item) => item._id);
+
+    const input = {
+      fullName,
+      phoneNumber,
+      address,
+      items: JSON.stringify(itemIds),
+    };
+
+    await postOrder(input);
+    const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
+    setItems(updatedItems);
+    toastForOrder();
+    
+    refetch();
+    sendNotification();
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const navigate = useNavigate();
+  const handleNavigate = () => {
     navigate("/signintoorder");
   };
 
-
-
   return (
     <Box className="basketTopDiv">
-      <Box py={5} backgroundPosition="center" className="totalDiv block">
+      <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
-          {items.map((item, index) => (
-            <Box key={index} className="flex justify-center">
+          {items.map((item, i) => (
+            <Box key={i} className="flex justify-center">
               <Card item={item} inBasket={true} />
             </Box>
           ))}
         </Box>
 
+        {/* Order Price Information */}
         <Box
           display={"flex"}
           justifyContent={"center"}
@@ -125,8 +224,9 @@ function Basket() {
           ml={10}
           mb={48}
         >
-          <Box py={5} className="flex items-center justify-center sm:mx-0">
-            {items.length > 0 ? (
+          <Box py={5} className=" flex items-center justify-center sm:mx-0 ">
+            {/* Sipariş verilen ürünleri göster */}
+            {orderedItems.length > 0 ? (
               <Box>
                 <Text fontSize="xl" mb="4">
                   Sipariş Listesi:
@@ -143,10 +243,15 @@ function Basket() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {items
-                      .filter((item) => item.quantity > 0)
+                    {orderedItems
+                      .slice()
+                      .reverse()
                       .map((item, index) => (
-                        <Tr key={index} border={"2px"} borderColor={"lightcoral"}>
+                        <Tr
+                          border={"2px"}
+                          borderColor={"lightcoral"}
+                          key={index}
+                        >
                           <Td bg={"red.100"}>{item.title}</Td>
                           <Td className="flex justify-center" bg={"red.100"}>
                             {item.quantity}
@@ -166,7 +271,7 @@ function Basket() {
                     _hover={{ bg: "teal.400", color: "black" }}
                     _active={{ bg: "teal.300", color: "#fff" }}
                     onClick={() => {
-                      loggedIn ? handleOrderSubmit() : handleNavigation();
+                      loggedIn ? handleSubmitForm() : handleNavigate();
                     }}
                   >
                     Siparişi Gönder
@@ -174,6 +279,7 @@ function Basket() {
                 </Box>
               </Box>
             ) : (
+              // Sipariş verilmemişse gösterilecek içerik
               <Box>
                 <Text fontSize="xl" mb="4">
                   Sipariş Listesi:
@@ -190,15 +296,17 @@ function Basket() {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {items.map((item, index) => (
-                      <Tr key={index}>
-                        <Td>{item.title}</Td>
-                        <Td>{item.quantity}</Td>
-                      </Tr>
-                    ))}
+                    {orderedItems &&
+                      orderedItems.map((item, index) => (
+                        <Tr key={index}>
+                          <Td>{item.title}</Td>
+                          <Td>{item.quantity}</Td>
+                        </Tr>
+                      ))}
                   </Tbody>
                 </Table>
                 <Box mt="3">
+                  {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
                   <Button
                     cursor={"revert"}
                     isActive={true}

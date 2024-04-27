@@ -22,6 +22,7 @@ function AdminOrders() {
     "admin:orders",
     fetchOrders
   );
+  // console.log(data)
 
   if (isLoading) {
     return (
