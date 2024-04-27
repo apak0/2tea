@@ -26,15 +26,14 @@ import io from "socket.io-client";
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 function Basket() {
   const { user, loggedIn } = useAuth();
+
   const {
     refetch,
     isLoading,
     isError,
     data: datas,
     error: errors,
-  } = useQuery("basket", fetchOrders);
-
-  // const [datasItem, setDatasItem] = useState(datas);
+  } = useQuery("orders", fetchOrders);
 
   const { data, error, status } = useInfiniteQuery(
     "products",
@@ -45,52 +44,29 @@ function Basket() {
   const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
-
   const { items, setItems } = useBasket();
-  const [lastItemFullName, setLastItemFullName] = useState(null);
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
+  const sendNotification = () => {
+    // Send notification to other connected usersc
 
-
-    
-    
-    // Show the last order owner fullName when page load
-    useEffect(() => {
-      if (datas && datas.length > 0) {
-        const fullName = datas[datas.length - 1].fullName;
-        setLastItemFullName(fullName);
-        console.log(fullName); // Son siparişin sahibinin tam adını konsola yazdır
-      }
-    }, [datas, setLastItemFullName]);
-    
-    
-    const sendNotification = () => {
-      // Send notification to other connected usersc
-      
-      socket.emit("notification", "New notification!");
-     
-    };
+    socket.emit("notification", { customer: fullName });
+  };
   // _____________________________________________________________
 
   // SOKET IO NOTIFICATION
 
-useEffect(() => {
-  // Listen for incoming notifications
-  socket.on("notification", (data) => {
-    console.log("notification received and listening");
-    
-    notificationAction(data);
-  });
+  useEffect(() => {
+    // Listen for incoming notifications
+    socket.on("notification", (data) => {
+      notificationAction(data);
+    });
 
-  return () => {
-    socket.disconnect();
-  };
-}, []);
-
-
-
-
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
@@ -109,8 +85,6 @@ useEffect(() => {
         })
       );
     }
-    
-    
   }, [data, status, setItems]);
   //_________________________________________________________________________
 
@@ -126,19 +100,15 @@ useEffect(() => {
       isClosable: true,
     });
 
+  const notificationAction = (notificationInfo) => {
+    addNotification({
+      title: "Yeni sipariş var",
+      message: `${notificationInfo?.customer} bir sipariş gönderdi`,
+      duration: 4000,
 
-  const notificationAction = () => {
-   refetch()
-    user 
-      ? addNotification({
-          title: "Yeni sipariş var",
-          message: `${lastItemFullName} bir sipariş gönderdi`,
-          duration: 4000,
-
-          native: true,
-          onClick: () => "https://twotea.onrender.com/admin/orders",
-        })
-      : console.log("admin değil");
+      native: true,
+      onClick: () => "https://twotea.onrender.com/admin/orders",
+    });
 
     console.log("notification Action");
   };
@@ -160,34 +130,10 @@ useEffect(() => {
     const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
     setItems(updatedItems);
     toastForOrder();
-    
-    refetch();
+
     sendNotification();
+    refetch();
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const navigate = useNavigate();
   const handleNavigate = () => {

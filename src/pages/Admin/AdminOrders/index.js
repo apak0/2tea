@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useQuery } from "react-query";
 import { fetchOrders } from "../../../api";
@@ -22,7 +22,12 @@ function AdminOrders() {
     "admin:orders",
     fetchOrders
   );
-  // console.log(data)
+  useEffect(() => {
+  console.log("data:", data)
+  
+   
+  }, [])
+  
 
   if (isLoading) {
     return (
