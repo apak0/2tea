@@ -130,7 +130,7 @@ const sentNotification = (lastItemFullName) => {
   user.role === "admin"
     ? addNotification({
         title: "Yeni sipariş var",
-        message: `${fullName} bir sipariş gönderdi`,
+        message: `${lastItemFullName} bir sipariş gönderdi`,
         duration: 4000,
         native: true,
         onClick: () => "https://twotea.onrender.com/admin/orders",
