@@ -1,2 +1,2 @@
-# [Bizim Shop](https://bizim.onrender.com/)
+# [Çay Ocağı](https://twotea.onrender.com/)
 
