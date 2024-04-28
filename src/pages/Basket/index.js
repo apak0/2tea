@@ -21,6 +21,8 @@ import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
 
+import ScrollToTopButton from "../../components/ScrollToTopButton"; //
+
 import io from "socket.io-client";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
@@ -265,6 +267,7 @@ function Basket() {
                     Ürün yok
                   </Button>
                 </Box>
+                <ScrollToTopButton />
               </Box>
             )}
           </Box>
