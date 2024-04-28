@@ -147,7 +147,7 @@ function Basket() {
   };
 
   return (
-    <Box className="basketTopDiv">
+    <Box className="basketTopDiv ">
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (

@@ -121,6 +121,7 @@ function Navbar() {
 
                 <ListItem>
                   <NavLink
+                  
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
@@ -171,13 +172,13 @@ function Navbar() {
                 <>
 
                     <NavLink to="/signin">
-                  <MenuItem>
+                  <MenuItem className="flex justify-center items-center">
                       Giriş
                   </MenuItem>
                       </NavLink>
 
                     <NavLink to="/signup">
-                  <MenuItem>
+                  <MenuItem className="flex justify-center items-center">
                       Register
                   </MenuItem>
                       </NavLink>
@@ -187,7 +188,7 @@ function Navbar() {
                   {user?.role === "admin" && (
 
                     <NavLink to="/admin/home">
-                        <MenuItem>
+                        <MenuItem className="flex justify-center items-center">
                         Admin
                     </MenuItem>
                         </NavLink>
@@ -195,14 +196,14 @@ function Navbar() {
 
 
                     <NavLink to="/profile">
-                  <MenuItem>
+                  <MenuItem className="flex justify-center items-center">
                       Profil
                   </MenuItem>
                     </NavLink>
 
 
                     <NavLink to="/history">
-                  <MenuItem>
+                  <MenuItem className="flex justify-center items-center">
                       Geçmiş Siparişler
                   </MenuItem>
                     </NavLink>
