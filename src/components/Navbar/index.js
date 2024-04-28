@@ -168,26 +168,43 @@ function Navbar() {
             <MenuList>
               {!localStorage.getItem("access-token") ? (
                 <>
+
+                    <NavLink to="/signin">
                   <MenuItem>
-                    <NavLink to="/signin">Giriş</NavLink>
+                      Giriş
                   </MenuItem>
+                      </NavLink>
+
+                    <NavLink to="/signup">
                   <MenuItem>
-                    <NavLink to="/signup">Register</NavLink>
+                      Register
                   </MenuItem>
+                      </NavLink>
                 </>
               ) : (
                 <>
                   {user?.role === "admin" && (
-                    <MenuItem>
-                      <NavLink to="/admin/home">Admin</NavLink>
+
+                    <NavLink to="/admin/home">
+                        <MenuItem>
+                        Admin
                     </MenuItem>
+                        </NavLink>
                   )}
+
+
+                    <NavLink to="/profile">
                   <MenuItem>
-                    <NavLink to="/profile">Profil</NavLink>
+                      Profil
                   </MenuItem>
+                    </NavLink>
+
+
+                    <NavLink to="/history">
                   <MenuItem>
-                    <NavLink to="/history">Geçmiş Siparişler</NavLink>
+                      Geçmiş Siparişler
                   </MenuItem>
+                    </NavLink>
                   <MenuItem onClick={handleLogout}>
                     <IoMdLogOut style={{ color: "red", fontSize: "20px" }} />
                   </MenuItem>
