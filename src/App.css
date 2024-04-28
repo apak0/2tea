@@ -2,9 +2,15 @@
 .content {
   padding-left: 30px;
   padding-right: 30px;
+  
   background-color: #dcf2f1;
   display: flex;
   justify-content: center;
+}
+@media (min-width: 1024px) {
+  .content {
+    height: 100%;
+  }
 }
 
 #app {

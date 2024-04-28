@@ -18,7 +18,7 @@ function Admin() {
     >
       {user?.role !== "admin" && <Navigate to={"/"} replace={true} />}
       <Box mx={[0, 10, 10, 10]} >
-        <Box borderBottom={"2px"} borderColor={"#8d8d8d"}>
+        <Box borderBottom={"2px"} borderColor={"#8d8d8d"} width={"90vw"} className="">
           <NavLink
             to="/"
             style={({ isActive, isPending }) => {
@@ -45,6 +45,7 @@ function Admin() {
             </Box>
           </NavLink>
           <UnorderedList
+          
             mt={5}
             mb={2}
             styleType="none"

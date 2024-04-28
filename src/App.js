@@ -33,7 +33,7 @@ function App() {
         <Navbar />
        
 
-        <div className="content" >
+        <div className=" content " >
           <Routes>
             <Route path="/" exact element={<Basket />} />
             <Route path="/signin" element={<Signin />} />
