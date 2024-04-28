@@ -93,8 +93,8 @@ function Basket() {
 
   const toastForOrder = () =>
     toast({
-      title: "Order sended ",
-      description: "Siparişiniz alındı...",
+      title: "SİPARİŞ GÖNDERİLDİ ",
+      description: "Siparişiniz alındı...Afiyet olsun...",
       status: "success",
       duration: 2000,
       isClosable: true,
@@ -149,8 +149,10 @@ function Basket() {
       <Box py={5} backgroundPosition="center" className=" totalDiv block    ">
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8">
           {items.map((item, i) => (
-            <Box key={i} className="flex justify-center">
-              <Card item={item} inBasket={true} />
+            <Box key={i} className="flex flex-wrap justify-center gap-4">
+              <div className="flex-initial w-full sm:w-auto md:w-1/3 lg:w-1/3">
+                <Card item={item} inBasket={true} />
+              </div>
             </Box>
           ))}
         </Box>
@@ -163,19 +165,17 @@ function Basket() {
           flexDirection={"column"}
           alignSelf={"baseline"}
           mx={"auto"}
-          bg={"gray.300"}
+          bg={"gray.200"}
           p={3}
           mt={10}
           ml={10}
-          mb={48}
+          mb={{ base: 48, md: 0 }}
         >
           <Box py={5} className=" flex items-center justify-center sm:mx-0 ">
             {/* Sipariş verilen ürünleri göster */}
             {orderedItems.length > 0 ? (
               <Box>
-                <Text fontSize="xl" mb="4">
-                  Sipariş Listesi:
-                </Text>
+                <Text fontSize="xl">Sipariş Listesi:</Text>
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
                     <Tr>
@@ -226,9 +226,7 @@ function Basket() {
             ) : (
               // Sipariş verilmemişse gösterilecek içerik
               <Box>
-                <Text fontSize="xl" mb="4">
-                  Sipariş Listesi:
-                </Text>
+                <Text fontSize="xl">Sipariş Listesi:</Text>
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
                     <Tr>

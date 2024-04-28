@@ -46,7 +46,7 @@ function Navbar() {
               borderRadius="full"
               height={"40px"}
               minW={"50px"}
-              src="https://www.mksmarmara.com/images/uploads/F218/ade7cc3f-2533-4a85-bb30-de67904bc530_logo.png"
+              src="https://i.hizliresim.com/47cwcdu.ico"
               alt="mks-logo"
             />
           </NavLink>

@@ -1,4 +1,4 @@
-import { Box, Image, Button, Text } from "@chakra-ui/react";
+import { Box, Image, Button, Text, Select  } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 import { useBasket } from "../../contexts/BasketContext";
@@ -8,8 +8,14 @@ import { useInfiniteQuery } from "react-query";
 import "./styles.css";
 import { useState } from "react";
 
-function Card({ item, inBasket }) {
+function Card({ item, inBasket,}) {
   const { addToBasket, items, setItems } = useBasket();
+  const [sugarOption, setSugarOption] = useState(""); // Şeker seçeneğini tutacak state
+  // Şeker miktarını güncellemek için fonksiyon
+ // Şeker seçeneğini güncellemek için fonksiyon
+ const handleSugarChange = (value) => {
+  setSugarOption(value);
+};
 
   const { data, error, status } = useInfiniteQuery(
     "products",
@@ -51,16 +57,18 @@ function Card({ item, inBasket }) {
 
   return (
     <Box
-      display={"flex"}
-      flexDirection={"column"}
-      justifyContent={"center"}
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      minW={"200px"}
-      maxW={"200px"}
-      p="2"
-      bg={"#B4D4FF"}
+    display={"flex"}
+    flexDirection={"column"}
+    a
+    justifyContent={"space-evenly"}
+    borderWidth="1px"
+    borderRadius="lg"
+    overflow="hidden"
+    minW={"200px"}
+    maxW={"200px"}
+    p="2"
+    bg={"#B4D4FF"}
+    h="100%" // Kartların eşit yüksekliği için
     >
       <Box className="flex justify-center items-center cards">
         <Image
@@ -86,6 +94,20 @@ function Card({ item, inBasket }) {
       >
         {item.title}
       </Box>
+      {/* Şeker seçeneğini gösteren dropdown */}
+      {item.title === "Türk Kahvesi" && (
+        <Box display="flex"   justifyContent="center" >
+          <Select
+            placeholder="Şeker Seçiniz"
+            value={sugarOption}
+            onChange={(e) => handleSugarChange(e.target.value)}
+          >
+            <option value="sade">Sade</option>
+            <option value="orta">Orta</option>
+            <option value="şekerli">Şekerli</option>
+          </Select>
+        </Box>
+      )}
 
       <Box
         className="counterContainer"
@@ -94,7 +116,8 @@ function Card({ item, inBasket }) {
         justifyContent={"space-between"}
         flexDirection="row"
         borderRadius="8px"
-        mb={5}
+        
+        
       >
         <Button
           className="minusBtn "
