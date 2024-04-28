@@ -101,14 +101,18 @@ function Basket() {
     });
 
   const notificationAction = (notificationInfo) => {
-    addNotification({
-      title: "Yeni sipariş var",
-      message: `${notificationInfo?.customer} bir sipariş gönderdi`,
-      duration: 4000,
+    user?.role === "admin"
+      ? addNotification({
+          title: "Yeni sipariş var",
+          message: `${notificationInfo?.customer} bir sipariş gönderdi`,
+          duration: 4000,
+          native: true,
 
-      native: true,
-      onClick: () => "https://twotea.onrender.com/admin/orders",
-    });
+          onClick: () => {
+            window.open("https://twotea.onrender.com/admin/orders", "_blank");
+          },
+        })
+      : console.log("admin değil");
 
     console.log("notification Action");
   };
