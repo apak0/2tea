@@ -15,6 +15,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
+
 import { IoMdLogOut } from "react-icons/io";
 
 import { SlBasket, SlBasketLoaded } from "react-icons/sl";
@@ -214,6 +215,7 @@ function Navbar() {
           </Menu>
         </Box>
       </Box>
+     
     </Box>
   );
 }

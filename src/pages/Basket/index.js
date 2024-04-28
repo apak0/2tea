@@ -267,7 +267,7 @@ function Basket() {
                     Ürün yok
                   </Button>
                 </Box>
-                <ScrollToTopButton />
+                {/* <ScrollToTopButton /> */}
               </Box>
             )}
           </Box>
