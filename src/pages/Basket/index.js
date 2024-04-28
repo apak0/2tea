@@ -106,7 +106,7 @@ function Basket() {
       message: `${notificationInfo?.customer} bir sipariş gönderdi`,
       duration: 4000,
 
-      native: false,
+      native: true,
       onClick: () => "https://twotea.onrender.com/admin/orders",
     });
 
