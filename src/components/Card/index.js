@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Box, Image, Button, Text, Select  } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -6,16 +7,22 @@ import { fetchProductList, postOrder } from "../../api";
 import { useInfiniteQuery } from "react-query";
 
 import "./styles.css";
-import { useState } from "react";
 
-function Card({ item, inBasket,}) {
+function Card({ item, }) {
   const { addToBasket, items, setItems } = useBasket();
   const [sugarOption, setSugarOption] = useState(""); // Şeker seçeneğini tutacak state
-  // Şeker miktarını güncellemek için fonksiyon
+ 
  // Şeker seçeneğini güncellemek için fonksiyon
  const handleSugarChange = (value) => {
   setSugarOption(value);
 };
+
+useEffect(() => {
+  setSugarOption("")
+
+ 
+}, [])
+
 
   const { data, error, status } = useInfiniteQuery(
     "products",
@@ -98,7 +105,7 @@ function Card({ item, inBasket,}) {
       {item.title === "Türk Kahvesi" && (
         <Box display="flex"   justifyContent="center" >
           <Select
-            placeholder="Şeker Seçiniz"
+            
             value={sugarOption}
             onChange={(e) => handleSugarChange(e.target.value)}
           >

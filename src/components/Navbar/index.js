@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import {
   Badge,
   Box,
+  Icon,
   Image,
   ListItem,
   Menu,
@@ -14,9 +15,10 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
-import { BiLogOut } from "react-icons/bi";
+import { IoMdLogOut } from "react-icons/io";
 
 import { SlBasket, SlBasketLoaded } from "react-icons/sl";
+import { HiOutlineMenu } from "react-icons/hi";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { useBasket } from "../../contexts/BasketContext";
@@ -25,8 +27,6 @@ function Navbar() {
   const { user, logout } = useAuth();
   const { items } = useBasket();
   const navigate = useNavigate();
-
-  // loggedIn changed because login transaction bind to access token
 
   const handleLogout = () => {
     localStorage.removeItem("basket");
@@ -39,7 +39,13 @@ function Navbar() {
 
   return (
     <Box className={styles.nav}>
-      <Box display={"flex"} justifyContent={"space-around"} alignItems={"center"} className="">
+      <Box
+        display={"flex"}
+        justifyContent={"space-around"}
+        width={"100%"}
+        alignItems={"center"}
+        px={4}
+      >
         <Box className="logo">
           <NavLink to="/">
             <Image
@@ -60,63 +66,51 @@ function Navbar() {
         >
           <NavLink to="/">
             <Text
-              
-              
               fontSize={{ base: "15px", md: "40px", lg: "xx-large" }}
             >
               ÇAY OCAĞI
             </Text>
           </NavLink>
         </Box>
-      </Box>
-      <Box display={"flex"} >
-        {!localStorage.getItem("access-token") && (
-          <>
-            <UnorderedList display={"flex"} gap={5} styleType="none">
-              <ListItem>
-                <NavLink
-                  style={({ isActive, isPending }) => {
-                    return {
+
+        <Box display={{ base: "none", md: "block" }}>
+          <UnorderedList display={"flex"} gap={5} styleType="none">
+            {!localStorage.getItem("access-token") && (
+              <>
+                <ListItem>
+                  <NavLink
+                    style={({ isActive, isPending }) => ({
                       color: isActive ? "#525CEB" : "white",
                       borderBottom: isActive ? "solid" : "",
-                    };
-                  }}
-                  to="/signin"
-                >
-                  Giriş
-                </NavLink>
-              </ListItem>
-              <ListItem>
-                <NavLink
-                  style={({ isActive, isPending }) => {
-                    return {
+                    })}
+                    to="/signin"
+                  >
+                    Giriş
+                  </NavLink>
+                </ListItem>
+                <ListItem>
+                  <NavLink
+                    style={({ isActive, isPending }) => ({
                       color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
-                    };
-                  }}
-                  to="/signup"
-                >
-                  Register
-                </NavLink>
-              </ListItem>
-            </UnorderedList>
-          </>
-        )}
+                    })}
+                    to="/signup"
+                  >
+                    Register
+                  </NavLink>
+                </ListItem>
+              </>
+            )}
 
-        {localStorage.getItem("access-token") && (
-          <Box >
-            <Box display={"flex"} alignItems={"center"}>
-              <UnorderedList display={"flex"} gap={5} styleType="none">
-
+            {localStorage.getItem("access-token") && (
+              <>
                 <ListItem>
                   {user?.role === "admin" && (
                     <NavLink
-                      style={({ isActive, isPending }) => {
-                        return {
-                          color: isActive ? "#FE7A36" : "white",
-                          borderBottom: isActive ? "solid" : "",
-                        };
-                      }}
+                      style={({ isActive, isPending }) => ({
+                        color: isActive ? "#FE7A36" : "white",
+                        borderBottom: isActive ? "solid" : "",
+                      })}
                       to="/admin/home"
                     >
                       Admin
@@ -124,100 +118,83 @@ function Navbar() {
                   )}
                 </ListItem>
 
-                <ListItem >
+                <ListItem>
                   <NavLink
-                    style={({ isActive, isPending }) => {
-                      return {
-                        color: isActive ? "#FE7A36" : "white",
-                        borderBottom: isActive ? "solid" : "",
-                      };
-                    }}
-                    to="/history"
-                  >
-                    Geçmiş
-                  </NavLink>
-                </ListItem>
-
-                <ListItem >
-                  <NavLink
-                    style={({ isActive, isPending }) => {
-                      return {
-                        color: isActive ? "#FE7A36" : "white",
-                        borderBottom: isActive ? "solid" : "",
-                      };
-                    }}
+                    style={({ isActive, isPending }) => ({
+                      color: isActive ? "#FE7A36" : "white",
+                      borderBottom: isActive ? "solid" : "",
+                    })}
                     to="/profile"
                   >
                     Profil
                   </NavLink>
                 </ListItem>
 
-                {/* Button item length */}
-              </UnorderedList>
-            </Box>
-          </Box>
-        )}
+                <ListItem>
+                  <NavLink
+                    style={({ isActive, isPending }) => ({
+                      color: isActive ? "#FE7A36" : "white",
+                      borderBottom: isActive ? "solid" : "",
+                    })}
+                    to="/history"
+                  >
+                    Geçmiş Siparişler
+                  </NavLink>
+                </ListItem>
 
-        <Box ml={3} display={"flex"}>
-          <Box>
-            <NavLink
-              style={({ isActive, isPending }) => {
-                return {
-                  color: isActive ? "#FE7A36" : "white",
-                  borderBottom: isActive ? "solid" : "",
-                };
-              }}
-              to="/basket"
-            >
-              Sepetim{" "}
-            </NavLink>
-          </Box>
+                <ListItem className="flex justify-center items-center bg-red-400">
+                  <NavLink
+                   
+                    onClick={handleLogout}
+                  >
+                    <IoMdLogOut style={{ color: "red", fontSize: "20px" }} />
+                  </NavLink>
+                </ListItem>
+              </>
+            )}
+          </UnorderedList>
+        </Box>
 
-          <Box display={""} as={Link} to="/basket">
-            <Box
-              _hover={{
-                color: "blue",
-              }}
-              display={"flex"}
-              alignItems={"center"}
+        <Box display={{ base: "block", md: "none" }}>
+          <Menu>
+            <MenuButton
+              as={Box}
+              p={2}
+              _hover={{ bg: "gray.100" }}
+              _expanded={{ bg: "gray.100" }}
             >
-              {items.length < 1 ? (
-                <Box>
-                  <SlBasket
-                    style={{
-                      color: "white",
-                      height: 20,
-                      width: 20,
-                    }}
-                  />{" "}
-                </Box>
+              <Icon as={HiOutlineMenu} fontSize="1.5rem" />
+            </MenuButton>
+            <MenuList>
+              {!localStorage.getItem("access-token") ? (
+                <>
+                  <MenuItem>
+                    <NavLink to="/signin">Giriş</NavLink>
+                  </MenuItem>
+                  <MenuItem>
+                    <NavLink to="/signup">Register</NavLink>
+                  </MenuItem>
+                </>
               ) : (
-                <Box display={"flex"}>
-                  {" "}
-                  <SlBasketLoaded
-                    style={{
-                      color: "#FFC23C",
-                      height: 20,
-                      width: 20,
-                    }}
-                    to={"/basket"}
-                  />
-                  {/* <Box mr={"auto"} >
-                    <Badge
-                      position={"absolute"}
-                      height={"1rem"}
-                      rounded={"full"}
-                      bg={"red"}
-                      color={"white"}
-                    >
-                      {!items.length < 1 && `${items.length }`}
-                    </Badge>
-                  </Box> */}
-                </Box>
+                <>
+                  {user?.role === "admin" && (
+                    <MenuItem>
+                      <NavLink to="/admin/home">Admin</NavLink>
+                    </MenuItem>
+                  )}
+                  <MenuItem>
+                    <NavLink to="/profile">Profil</NavLink>
+                  </MenuItem>
+                  <MenuItem>
+                    <NavLink to="/history">Geçmiş Siparişler</NavLink>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <IoMdLogOut style={{ color: "red", fontSize: "20px" }} />
+                  </MenuItem>
+                </>
               )}
-              
-            </Box>
-          </Box>
+            </MenuList>
+          </Menu>
         </Box>
       </Box>
     </Box>
