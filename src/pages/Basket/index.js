@@ -106,9 +106,9 @@ function Basket() {
     user?.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
-          message: window.innerWidth <= 768 ? false : `${notificationInfo?.customer} bir sipariş gönderdi`,
+          message: `${notificationInfo?.customer} bir sipariş gönderdi`,
           duration: 4000,
-          native: true,
+          native:  window.innerWidth <= 768 ? false : true,
 
           onClick: () => {
             window.open("https://twotea.onrender.com/admin/orders", "_blank");
