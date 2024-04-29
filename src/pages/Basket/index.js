@@ -106,7 +106,7 @@ function Basket() {
     user?.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
-          message: `${notificationInfo?.customer} bir sipariş gönderdi`,
+          message: window.innerWidth <= 768 ? false : `${notificationInfo?.customer} bir sipariş gönderdi`,
           duration: 4000,
           native: true,
 
