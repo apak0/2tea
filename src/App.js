@@ -1,5 +1,5 @@
 import React from "react";
-import { Notifications } from 'react-push-notification';
+import { Notifications } from "react-push-notification";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -19,28 +19,25 @@ import NewProduct from "./pages/Admin/AdminProducts/NewProduct";
 import SigninToOrder from "./pages/Auth/Signin/indexToOrder";
 import Footer from "./components/Footer";
 import "./App.css";
-import History from "./pages/History";
-import { Button } from "antd";
 
+import { Button } from "antd";
+import OrderHistory from "./pages/OrderHistory";
 
 function App() {
-
- 
   return (
     <Router>
       <div id="app">
-        <Notifications/>
+        <Notifications />
         <Navbar />
-       
 
-        <div className=" content " >
+        <div className=" content ">
           <Routes>
             <Route path="/" exact element={<Basket />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signintoorder" element={<SigninToOrder />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/basket" element={<Basket />} />
-            <Route path="/history" element={<History />} />
+            <Route path="/orderhistory" element={<OrderHistory />} />
 
             <Route element={<ProtectedRoute />}>
               <Route path="/profile" element={<Profile />} />

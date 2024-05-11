@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useClearOrders } from "./useClearOrders ";
 
 import { useQuery } from "react-query";
 import { fetchOrders } from "../../../api";
@@ -16,18 +17,20 @@ import {
 } from "@chakra-ui/react";
 
 import "./styles.css";
+import { useAuth } from "../../../contexts/AuthContext";
 
 function AdminOrders() {
   const { isLoading, isError, data, error } = useQuery(
     "admin:orders",
     fetchOrders
   );
-  useEffect(() => {
-  console.log("data:", data)
+  const { user } = useAuth();
   
-   
-  }, [])
-  
+  const clearOrders = useClearOrders();
+
+  const handleClearOrders = () => {
+    clearOrders(); // Bu fonksiyon çağrıldığında fetchOrders'dan gelen veriler temizlenecek
+  };
 
   if (isLoading) {
     return (
@@ -47,6 +50,8 @@ function AdminOrders() {
   if (isError) {
     <div>Error {error.message}</div>;
   }
+
+ 
 
   return (
     <div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -97,6 +102,11 @@ function AdminOrders() {
             >
               USERNAME
             </Th>
+            <Th>
+              <Button bg={"red"} onClick={handleClearOrders} maxH={"20px"}>
+                Sil
+              </Button>
+            </Th>
 
             <Th fontSize={"14px"} color={"black"} isNumeric>
               ITEMS
@@ -104,13 +114,24 @@ function AdminOrders() {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item) => (
-            <Tr key={item._id}>
-              <Td className="flex justify-center">{item.user.fullname}</Td>
-
-              <Td isNumeric>{item.items.length}</Td>
-            </Tr>
-          ))}
+          {data.map((item) => {
+            console.log(item.user._id)
+            // Kullanıcı giriş yapmışsa ve siparişin kullanıcısı ile giriş yapmış kullanıcı aynıysa
+            if (
+              localStorage.getItem("access-token") &&
+              item.user._id === user._id
+            ) {
+              return (
+                <Tr key={item._id}>
+                  <Td className="flex justify-center">{item.user.fullname}</Td>
+                  <Td isNumeric>{item.items.length}</Td>
+                </Tr>
+              );
+            } else {
+              // Giriş yapmış kullanıcı yoksa veya siparişin kullanıcısı ile giriş yapmış kullanıcı aynı değilse
+              return null;
+            }
+          })}
         </Tbody>
       </Table>
     </div>

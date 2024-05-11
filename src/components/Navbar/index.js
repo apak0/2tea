@@ -138,7 +138,7 @@ function Navbar() {
                       color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
                     })}
-                    to="/history"
+                    to="/orderhistory"
                   >
                     Geçmiş Siparişler
                   </NavLink>
@@ -202,7 +202,7 @@ function Navbar() {
                     </NavLink>
 
 
-                    <NavLink to="/history">
+                    <NavLink to="/orderhistory">
                   <MenuItem className="flex justify-center items-center">
                       Geçmiş Siparişler
                   </MenuItem>
