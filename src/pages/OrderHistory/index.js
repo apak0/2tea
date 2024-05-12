@@ -52,7 +52,7 @@ function OrderHistory() {
               p={5}
               color={"black"}
             >
-              USERNAME
+              İSİM
             </Th>
 
             <Th
@@ -61,7 +61,7 @@ function OrderHistory() {
               style={{ textAlign: "center" }}
               isNumeric
             >
-              ITEMS
+              SİPARİŞ
             </Th>
           </Tr>
         </Thead>
