@@ -115,6 +115,19 @@ useEffect(() => {
           </Select>
         </Box>
       )}
+       {item.title === "Çay" && (
+        <Box display="flex"   justifyContent="center" >
+          <Select
+            
+            value={sugarOption}
+            onChange={(e) => handleSugarChange(e.target.value)}
+          >
+            <option value="normal">Normal</option>
+            <option value="açık">Açık</option>
+            <option value="demli">Demli</option>
+          </Select>
+        </Box>
+      )}
 
       <Box
         className="counterContainer"
