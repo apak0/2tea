@@ -90,7 +90,7 @@ function OrderHistory() {
               p={5}
               color={"black"}
             >
-              Tarih
+              TARİH
             </Th>
           </Tr>
         </Thead>
