@@ -22,6 +22,27 @@ function OrderHistory() {
     "admin:orders",
     fetchOrders
   );
+
+  const formatTimeAgo = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diff = now - date;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return `${days} gün önce`;
+    } else if (hours > 0) {
+      return `${hours} saat önce`;
+    } else if (minutes > 0) {
+      return `${minutes} dakika önce`;
+    } else {
+      return `${seconds} saniye önce`;
+    }
+  };
   return (
     <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}>
       <Flex
@@ -63,6 +84,14 @@ function OrderHistory() {
             >
               SİPARİŞ
             </Th>
+            <Th
+              className="flex justify-center"
+              fontSize={"14px"}
+              p={5}
+              color={"black"}
+            >
+              Tarih
+            </Th>
           </Tr>
         </Thead>
         <Tbody >
@@ -84,6 +113,9 @@ function OrderHistory() {
                     <Td style={{ textAlign: "center", fontSize: "30px" }} isNumeric>
                       {item.items.length}
                     </Td>
+                    <Td style={{ textAlign: 'center', fontSize: '30px' }} isNumeric>
+                          {formatTimeAgo(item.createdAt)}
+                        </Td>
                   </Tr>
                 );
               } else {
