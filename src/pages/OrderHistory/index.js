@@ -60,7 +60,7 @@ function OrderHistory() {
           color={"orange.300"}
           width={"full"}
         >
-          <Text>Orders</Text>
+          <Text>SİPARİŞLER</Text>
         </Box>
       </Flex>
 
