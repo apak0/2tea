@@ -1,81 +1,33 @@
 import { useEffect, useState } from "react";
-import { Box, Image, Button, Text, Select  } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-
+import { Box, Image, Button, Text, Select } from "@chakra-ui/react";
 import { useBasket } from "../../contexts/BasketContext";
-import { fetchProductList, postOrder } from "../../api";
-import { useInfiniteQuery } from "react-query";
-
 import "./styles.css";
 
-function Card({ item, }) {
-  const { addToBasket, items, setItems } = useBasket();
-  const [sugarOption, setSugarOption] = useState(""); // Şeker seçeneğini tutacak state
- 
- // Şeker seçeneğini güncellemek için fonksiyon
- const handleSugarChange = (value) => {
-  setSugarOption(value);
-};
+function Card({ item }) {
+  const { increment, decrement } = useBasket();
+  const [sugarOption, setSugarOption] = useState("");
 
-useEffect(() => {
-  setSugarOption("")
-
- 
-}, [])
-
-
-  const { data, error, status } = useInfiniteQuery(
-    "products",
-    fetchProductList,
-    {}
-  );
-
-  const foundBasketItem = items.find(
-    (basket_item) => basket_item._id === item._id
-  );
-
-  //Decrement item quantity in basket
-  const decrement = (item_id) => {
-    const newCount = items.find((item) => item._id === item_id);
-    if (newCount.quantity !== 0) {
-      setItems(
-        items.map((item) =>
-          item._id === item_id
-            ? { ...newCount, quantity: newCount.quantity - 1 }
-            : item
-        )
-      );
-    }
+  const handleSugarChange = (value) => {
+    setSugarOption(value);
   };
 
-  //Increment item quantity in basket
-  const increment = (item_id) => {
-    const newCount = items.find((item) => item._id === item_id);
-    if (newCount) {
-      setItems(
-        items.map((item) =>
-          item._id === item_id
-            ? { ...newCount, quantity: newCount.quantity + 1 }
-            : item
-        )
-      );
-    }
-  };
+  useEffect(() => {
+    setSugarOption("");
+  }, []);
 
   return (
     <Box
-    display={"flex"}
-    flexDirection={"column"}
-    a
-    justifyContent={"space-evenly"}
-    borderWidth="1px"
-    borderRadius="lg"
-    overflow="hidden"
-    minW={"200px"}
-    maxW={"200px"}
-    p="2"
-    bg={"#B4D4FF"}
-    h="100%" // Kartların eşit yüksekliği için
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"space-evenly"}
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      minW={"200px"}
+      maxW={"200px"}
+      p="2"
+      bg={"#B4D4FF"}
+      h="100%"
     >
       <Box className="flex justify-center items-center cards">
         <Image
@@ -101,27 +53,18 @@ useEffect(() => {
       >
         {item.title}
       </Box>
-      {/* Şeker seçeneğini gösteren dropdown */}
       {item.title === "Türk Kahvesi" && (
-        <Box display="flex"   justifyContent="center" >
-          <Select
-            
-            value={sugarOption}
-            onChange={(e) => handleSugarChange(e.target.value)}
-          >
+        <Box display="flex" justifyContent="center">
+          <Select value={sugarOption} onChange={(e) => handleSugarChange(e.target.value)}>
             <option value="sade">Sade</option>
             <option value="orta">Orta</option>
             <option value="şekerli">Şekerli</option>
           </Select>
         </Box>
       )}
-       {item.title === "Çay" && (
-        <Box display="flex"   justifyContent="center" >
-          <Select
-            
-            value={sugarOption}
-            onChange={(e) => handleSugarChange(e.target.value)}
-          >
+      {item.title === "Çay" && (
+        <Box display="flex" justifyContent="center">
+          <Select value={sugarOption} onChange={(e) => handleSugarChange(e.target.value)}>
             <option value="normal">Normal</option>
             <option value="açık">Açık</option>
             <option value="demli">Demli</option>
@@ -136,15 +79,13 @@ useEffect(() => {
         justifyContent={"space-between"}
         flexDirection="row"
         borderRadius="8px"
-        
-        
       >
         <Button
-          className="minusBtn "
+          className="minusBtn"
           size={"md"}
           fontSize={"3xl"}
           m={2}
-          onClick={() => decrement(item._id, foundBasketItem)}
+          onClick={() => decrement(item._id)}
           bg={"#ed8203"}
           color={"#fff"}
           _hover={{ bg: "teal.400", color: "black" }}
@@ -153,13 +94,7 @@ useEffect(() => {
           -
         </Button>
 
-        <Text
-          display="flex"
-          justifyContent={"center"}
-          alignItems="center"
-          // w={"20px"}
-          fontSize={"3xl"}
-        >
+        <Text display="flex" justifyContent={"center"} alignItems="center" fontSize={"3xl"}>
           {item.quantity}
         </Text>
 
@@ -177,30 +112,6 @@ useEffect(() => {
         >
           +
         </Button>
-      </Box>
-      <Box>
-        {/* add item to basket button */}
-
-        {/* <>
-            {!foundBasketItem ? (
-              <Button
-                colorScheme={"blue"}
-                variant="solid"
-                onClick={() => addToBasket(item, foundBasketItem)}
-                _hover={{
-                  bg: "white",
-                  color: "blue.400",
-                  border: "1px solid #4299E1",
-                }}
-              >
-                Add to Basket
-              </Button>
-            ) : (
-              <Button colorScheme={"blue"} variant="solid" isDisabled>
-                Already in Basket
-              </Button>
-            )}
-          </> */}
       </Box>
     </Box>
   );
