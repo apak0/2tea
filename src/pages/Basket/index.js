@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import addNotification from "react-push-notification";
-
 import { fetchProductList, postOrder, fetchOrders } from "../../api";
 import {
   Box,
@@ -20,12 +19,11 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
-
-import ScrollToTopButton from "../../components/ScrollToTopButton"; //
-
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 import io from "socket.io-client";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
+
 function Basket() {
   const { user, loggedIn } = useAuth();
 
@@ -46,19 +44,16 @@ function Basket() {
   const [fullName, setFullName] = useState(user ? user.fullname : "");
   const [phoneNumber, setPhoneNumber] = useState(123);
   const [address, setAddress] = useState("test3");
-  const { items, setItems } = useBasket();
+  const { items, setItems, increment, decrement } = useBasket();
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
   const sendNotification = () => {
-    // Send notification to other connected usersc
-
+    // Send notification to other connected users
     socket.emit("notification", { customer: fullName });
   };
-  // _____________________________________________________________
 
   // SOKET IO NOTIFICATION
-
   useEffect(() => {
     // Listen for incoming notifications
     socket.on("notification", (data) => {
@@ -73,12 +68,8 @@ function Basket() {
   // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
     if (status === "success") {
-      // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
       const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
       setItems(allItems);
-
-      // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
-      // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
 
       setItems((prevItems) =>
         prevItems.map((item) => {
@@ -88,9 +79,7 @@ function Basket() {
       );
     }
   }, [data, status, setItems]);
-  //_________________________________________________________________________
 
-  // user order toast notification
   const toast = useToast();
 
   const toastForOrder = () =>
@@ -108,7 +97,7 @@ function Basket() {
           title: "Yeni sipariş var",
           message: `${notificationInfo?.customer} bir sipariş gönderdi`,
           duration: 4000,
-          native:  window.innerWidth <= 768 ? false : true,
+          native: window.innerWidth <= 768 ? false : true,
 
           onClick: () => {
             window.open("https://twotea.onrender.com/admin/orders", "_blank");
@@ -118,8 +107,6 @@ function Basket() {
 
     console.log("notification Action");
   };
-
-  // Order submition
 
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
@@ -176,7 +163,7 @@ function Basket() {
           <Box py={5} className=" flex items-center justify-center sm:mx-0 ">
             {/* Sipariş verilen ürünleri göster */}
             {orderedItems.length > 0 ? (
-              <Box>
+              <Box className="min-w-full">
                 <Text fontSize="xl">Sipariş Listesi:</Text>
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
@@ -194,14 +181,24 @@ function Basket() {
                       .slice()
                       .reverse()
                       .map((item, index) => (
-                        <Tr
-                          border={"2px"}
-                          borderColor={"lightcoral"}
-                          key={index}
-                        >
-                          <Td bg={"red.100"}>{item.title}</Td>
-                          <Td className="flex justify-center" bg={"red.100"}>
+                        <Tr display={"flex"} justifyContent={"center"} alignItems={"center"}>
+                          <Td
+                           fontSize={"x-large"}
+                          >
+                            {item.title}
+                          </Td>
+
+                          <Td
+                            className="flex justify-center items-center"
+                            bg={"red.100"}
+                          >
+                            <Button marginRight={2} onClick={() => increment(item._id)}>
+                              +
+                            </Button>
                             {item.quantity}
+                            <Button onClick={() => decrement(item._id)}>
+                              -
+                            </Button>
                           </Td>
                         </Tr>
                       ))}
@@ -226,8 +223,7 @@ function Basket() {
                 </Box>
               </Box>
             ) : (
-              // Sipariş verilmemişse gösterilecek içerik
-              <Box>
+              <Box className="min-w-full">
                 <Text fontSize="xl">Sipariş Listesi:</Text>
                 <Table variant="striped" colorScheme="gray">
                   <Thead>
@@ -251,7 +247,6 @@ function Basket() {
                   </Tbody>
                 </Table>
                 <Box mt="3">
-                  {/* Sipariş bilgisi ve Sipariş Gönder butonu burada olabilir */}
                   <Button
                     cursor={"revert"}
                     isActive={true}
@@ -267,7 +262,6 @@ function Basket() {
                     Ürün yok
                   </Button>
                 </Box>
-                {/* <ScrollToTopButton /> */}
               </Box>
             )}
           </Box>

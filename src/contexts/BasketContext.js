@@ -1,3 +1,4 @@
+// contexts/BasketContext.js
 import { useState, createContext, useContext, useEffect } from "react";
 
 const BasketContext = createContext();
@@ -17,12 +18,32 @@ const BasketProvider = ({ children }) => {
     }
   };
 
-  const removeFromBasket = (item_id, findBasketItem) => {
+  const removeFromBasket = (item_id) => {
     const filtered = items.filter((item) => item._id !== item_id);
     setItems(filtered);
   };
 
   const emptyBasket = () => setItems([]);
+
+  const increment = (item_id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item._id === item_id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+    );
+  };
+
+  const decrement = (item_id) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item._id === item_id && item.quantity > 0
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  };
 
   const values = {
     items,
@@ -30,6 +51,8 @@ const BasketProvider = ({ children }) => {
     addToBasket,
     removeFromBasket,
     emptyBasket,
+    increment,
+    decrement,
   };
 
   return (
