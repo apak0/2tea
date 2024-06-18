@@ -5,6 +5,7 @@ import { fetchProductList, postOrder } from "../../api";
 import { useAuth } from "../../contexts/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useBasket } from "../../contexts/BasketContext";
+import "../../tailwind.css"; // Tailwind CSS'i import edin
 
 function Products() {
   const { items, setItems } = useBasket();
@@ -101,41 +102,53 @@ function Products() {
 
   return (
     <Box>
-      <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        
-     
-        
-        p={4}
-      >
+      <Flex direction="column" align="center" justify="center" p={4}>
         {user && (
-          <VStack spacing={4} align="center" textAlign="center">
-            <Text fontSize="2xl" color="gray.700">
-              Hoşgeldin, <Text as="span" color="orange.500">{user.fullname}</Text>
+          <VStack
+            spacing={4}
+            align="center"
+            textAlign="center"
+            className="flex items-center justify-center "
+          >
+            <Text
+              fontSize="2xl"
+              color="gray.700"
+              className="text-4xl font-bold animate-rgb"
+            >
+              Hoşgeldin,{" "}
+              <Text as="span" color="orange.500">
+                {user.fullname}
+              </Text>
             </Text>
-            <Text fontSize="lg" color="gray.500">
-             
-            </Text>
+            <Text fontSize="lg" color="gray.500"></Text>
           </VStack>
         )}
         <Box mt={6}>
-          <Button
-            as={NavLink}
-            to={"/basket"}
-            bg="cyan.200"
-            _hover={{ bg: "cyan.300" }}
-            color="gray.700"
-            fontSize="lg"
-            fontWeight="bold"
-            py={6}
-            px={10}
-            borderRadius="lg"
-            shadow="md"
+          <a
+            href="/basket"
+            class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
+            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                ></path>
+              </svg>
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
             Menüye Git
-          </Button>
+            </span>
+            <span class="relative invisible">Menüye Git</span>
+          </a>
         </Box>
       </Flex>
     </Box>
