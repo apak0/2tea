@@ -84,7 +84,7 @@ function Card({ item }) {
             display="flex"
             justifyContent={"center"}
             alignItems="center"
-            fontSize={"3xl"}
+            fontSize={"xl"}
           >
             {item.quantity}
           </Text>

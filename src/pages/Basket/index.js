@@ -12,6 +12,7 @@ import {
   Tr,
   Th,
   Td,
+  Textarea,
 } from "@chakra-ui/react";
 import { useBasket } from "../../contexts/BasketContext";
 import Card from "../../components/Card";
@@ -137,6 +138,9 @@ function Basket() {
     ? "SİPARİŞİ GÖNDER"
     : "ÜRÜN SEÇİN";
 
+  const [showTextarea, setShowTextarea] = useState(true);
+  const [orderNote, setOrderNote] = useState("");
+
   return (
     <Box className="basketTopDiv w-full ">
       <Box
@@ -154,7 +158,6 @@ function Basket() {
         </Box>
 
         {/* Order Price Information */}
-
         <Box
           className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0  "
           width={"380px"}
@@ -162,7 +165,7 @@ function Basket() {
           borderColor={"gray.400"}
         >
           {orderedItems.length > 0 ? (
-            <Box className="min-w-60">
+            <Box className="w-96 mx-4">
               <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
               <Table variant="striped" colorScheme="gray">
                 <Thead>
@@ -260,6 +263,17 @@ function Basket() {
                 >
                   {buttonText}
                 </Button>
+                <Box mt={3}>
+                  <Text fontSize="lg" mb={2}>
+                    Sipariş Notu:
+                  </Text>
+                  <Textarea
+                    placeholder="Siparişinizle ilgili eklemek istediğiniz bir not var mı?"
+                    value={orderNote}
+                    onChange={(e) => setOrderNote(e.target.value)}
+                    size="sm"
+                  />
+                </Box>
               </Box>
             </Box>
           ) : (
