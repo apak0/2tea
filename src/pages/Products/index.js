@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Text, useToast } from "@chakra-ui/react";
-
+import { Box, Button, Text, useToast, Flex, VStack } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList, postOrder } from "../../api";
-
 import { useAuth } from "../../contexts/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useBasket } from "../../contexts/BasketContext";
@@ -21,7 +19,6 @@ function Products() {
   );
 
   const [isPageChange, setIsPageChange] = useState(false);
-
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   useEffect(() => {
     const anyItemHasQuantity = items.some((item) => item.quantity > 0);
@@ -35,41 +32,29 @@ function Products() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  // Ordered toast
   const toastForOrder = () =>
     toast({
-      title: "Order sended",
+      title: "Order sent",
       description: "Siparişiniz alındı...",
       status: "success",
       duration: 2000,
       isClosable: true,
     });
-  //_________________________________________________________________________
 
-  // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
     if (status === "success") {
-      // data'nın içindeki tüm ürünleri bir dizi içinde topluyoruz
       const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
       setItems(allItems);
-
-      // Sayfa değişikliği olmadıysa ve daha önce bir değişiklik yapılmışsa,
-      // setItems fonksiyonu ile BasketContext'teki items state'ini güncelliyoruz
-
       setItems((prevItems) =>
         prevItems.map((item) => {
           const newItem = allItems.find((newItem) => newItem._id === item._id);
           return newItem ? { ...item, quantity: newItem.quantity } : item;
         })
       );
-
-      // Sayfa değişikliği olduğunu sıfırlıyoruz
       setIsPageChange(false);
     }
   }, [data, status, setItems, isPageChange]);
-  //_________________________________________________________________________
 
-  // Order submit function
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
     const itemIds = selectedItems.map((item) => item._id);
@@ -86,9 +71,7 @@ function Products() {
     }, 400);
     toastForOrder();
   };
-  //_________________________________________________________________________
 
-  // Loading screen
   if (status === "loading")
     return (
       <Box
@@ -101,57 +84,61 @@ function Products() {
         Loading...
       </Box>
     );
-  //_________________________________________________________________________
 
-  // Error messages
   if (status === "error")
     return <Box>An error has occurred: {error.message}</Box>;
-  //_________________________________________________________________________
 
   console.log("data:", data.pages[0]);
   console.log("item:", items);
 
-  // Order button texts
   const buttonText = items.some((item) => item.quantity > 0)
     ? "Siparişi Gönder"
     : "Ürün Seçin";
-  //_________________________________________________________________________
 
-  // If user not loggedin
   const handleNavigate = () => {
     navigate("/signintoorder");
   };
-  //_________________________________________________________________________
 
   return (
-    <Box className="">
-    <Box></Box>
-
-    <Box className="">
-      <Button
-        bg={"cyan.200"}
-        _hover={{
-          background: "gray.300",
-          color: "teal.500",
-        }}
-        color={"gray.500"}
-        height={"10rem"}
-        fontSize={"lg"}
-        fontWeight={"bold"}
-        marginTop={10}
+    <Box>
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        
+     
+        
+        p={4}
       >
-        <NavLink to={"/basket"}>
-          {user && (
-            <Box className="">
-              <Text textColor={"orange.500"}  >{user.fullname}</Text>
-              <Text>Hoşgeldin</Text>
-            </Box>
-          )}
-          Ürünleri Görüntülemek için Tıklayınız
-        </NavLink>
-      </Button>
+        {user && (
+          <VStack spacing={4} align="center" textAlign="center">
+            <Text fontSize="2xl" color="gray.700">
+              Hoşgeldin, <Text as="span" color="orange.500">{user.fullname}</Text>
+            </Text>
+            <Text fontSize="lg" color="gray.500">
+             
+            </Text>
+          </VStack>
+        )}
+        <Box mt={6}>
+          <Button
+            as={NavLink}
+            to={"/basket"}
+            bg="cyan.200"
+            _hover={{ bg: "cyan.300" }}
+            color="gray.700"
+            fontSize="lg"
+            fontWeight="bold"
+            py={6}
+            px={10}
+            borderRadius="lg"
+            shadow="md"
+          >
+            Menüye Git
+          </Button>
+        </Box>
+      </Flex>
     </Box>
-  </Box>
   );
 }
 
