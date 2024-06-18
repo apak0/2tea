@@ -137,10 +137,12 @@ function Basket() {
     ? "SİPARİŞİ GÖNDER"
     : "ÜRÜN SEÇİN";
 
-
   return (
-    <Box className="basketTopDiv ">
-      <Box py={5} backgroundPosition="center" className=" totalDiv block ">
+    <Box className="basketTopDiv w-full ">
+      <Box
+        py={5}
+        className="totalDiv flex flex-col sm:flex-row justify-around "
+      >
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 ">
           {items.map((item, i) => (
             <Box key={i} className="flex flex-wrap  gap-4">
@@ -152,18 +154,27 @@ function Basket() {
         </Box>
 
         {/* Order Price Information */}
-       
-        <Box py={5} px={10} mx={2} mb={20} className="flex  justify-center sm:mx-0">
+
+        <Box
+          className="flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0 "
+          width={"400px"}
+          border={"2px"}
+          borderColor={"gray.400"}
+        >
           {orderedItems.length > 0 ? (
-            <Box className="min-w-full">
-              <Text fontSize="small">SİPARİŞ LİSTESİ</Text>
+            <Box className="min-w-60">
+              <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
               <Table variant="striped" colorScheme="gray">
                 <Thead>
-                  <Tr >
+                  <Tr>
                     <Th color={"orange.400"} fontSize={"lg"}>
                       ÜRÜN ADI
                     </Th>
-                    <Th color={"orange.400"} fontSize={"lg"} className="flex justify-center items-center">
+                    <Th
+                      color={"orange.400"}
+                      fontSize={"lg"}
+                      className="flex justify-center items-center"
+                    >
                       MİKTARI
                     </Th>
                   </Tr>
@@ -173,32 +184,60 @@ function Basket() {
                     .slice()
                     .reverse()
                     .map((item, index) => (
-                      <Tr key={index}>
+                      <Tr
+                        key={index}
+                        minW={"400px"}
+                        mx={10}
+                        verticalAlign={"middle"}
+                      >
                         <Td
                           fontSize={"x-large"}
-                          maxWidth="150px"
+                          width="200px"
                           overflow="hidden"
                           textOverflow="ellipsis"
                           whiteSpace="nowrap"
+                          bg={"gray.100"}
+                          p={2}
                         >
                           {item.title}
                         </Td>
                         <Td
-                          className="flex justify-center items-center"
-                          bg={"red.100"}
+                          display={"flex"}
+                          justifyContent={"space-between"}
+                          alignItems={"center"}
+                          bg={"gray.100"}
                           minWidth="150px"
+                          paddingX={0}
+                          gap={3}
+                          px={2}
                         >
-                          <Button marginLeft={2} onClick={() => decrement(item._id)}>
-                            -
-                          </Button>
-                          <Text className="mx-5">
-
-                          {item.quantity}
-                          </Text>
-                          
-                          <Button marginRight={2} onClick={() => increment(item._id)}>
-                            +
-                          </Button>
+                          <div>
+                            <button
+                              className="   text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-3xl px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"
+                              onClick={() => decrement(item._id)}
+                            >
+                              -
+                            </button>
+                          </div>
+                          <div className="">
+                            <Text
+                              width={"40px"}
+                              display={"flex"}
+                              justifyContent={"center"}
+                              alignItems={"center"}
+                              fontSize={"x-large"}
+                            >
+                              {item.quantity}
+                            </Text>
+                          </div>
+                          <div>
+                            <button
+                              className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-3xl px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"
+                              onClick={() => increment(item._id)}
+                            >
+                              +
+                            </button>
+                          </div>
                         </Td>
                       </Tr>
                     ))}
@@ -223,20 +262,20 @@ function Basket() {
               </Box>
             </Box>
           ) : (
-            <Box className="min-w-full">
-              <Text fontSize="xl">Order List:</Text>
+            <Box>
+              <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
               <Table variant="striped" colorScheme="gray">
                 <Thead>
-                  <Tr > 
+                  <Tr>
                     <Th color={"orange.400"} fontSize={"lg"}>
-                    ÜRÜN ADI
+                      ÜRÜN ADI
                     </Th>
                     <Th color={"orange.400"} fontSize={"lg"}>
                       MİKTARI
                     </Th>
                   </Tr>
                 </Thead>
-                <Tbody>
+                <Tbody width={"200px"}>
                   {orderedItems &&
                     orderedItems.map((item, index) => (
                       <Tr key={index}>
@@ -273,8 +312,7 @@ function Basket() {
           )}
         </Box>
       </Box>
-        </Box>
-    
+    </Box>
   );
 }
 

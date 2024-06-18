@@ -53,33 +53,10 @@ function Card({ item }) {
       >
         {item.title}
       </Box>
-      {item.title === "Türk Kahvesi" && (
-        <Box display="flex" justifyContent="center">
-          <Select
-            value={sugarOption}
-            onChange={(e) => handleSugarChange(e.target.value)}
-          >
-            <option value="sade">Sade</option>
-            <option value="orta">Orta</option>
-            <option value="şekerli">Şekerli</option>
-          </Select>
-        </Box>
-      )}
-      {item.title === "Çay" && (
-        <Box display="flex" justifyContent="center">
-          <Select
-            value={sugarOption}
-            onChange={(e) => handleSugarChange(e.target.value)}
-          >
-            <option value="normal">Normal</option>
-            <option value="açık">Açık</option>
-            <option value="demli">Demli</option>
-          </Select>
-        </Box>
-      )}
+     
 
       <Box
-        className="counterContainer"
+        
         minW={"100px"}
         display="flex"
         justifyContent={"space-between"}
@@ -102,7 +79,7 @@ function Card({ item }) {
           </Button>
         </Box>
 
-        <Box>
+        <Box className="min-w-10" >
           <Text
             display="flex"
             justifyContent={"center"}
