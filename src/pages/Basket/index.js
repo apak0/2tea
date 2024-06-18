@@ -156,8 +156,8 @@ function Basket() {
         {/* Order Price Information */}
 
         <Box
-          className="flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0 "
-          width={"400px"}
+          className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0  "
+          width={"380px"}
           border={"2px"}
           borderColor={"gray.400"}
         >
@@ -192,7 +192,7 @@ function Basket() {
                       >
                         <Td
                           fontSize={"x-large"}
-                          width="200px"
+                          width="100px"
                           overflow="hidden"
                           textOverflow="ellipsis"
                           whiteSpace="nowrap"
@@ -213,7 +213,7 @@ function Basket() {
                         >
                           <div>
                             <button
-                              className="   text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-3xl px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"
+                              className=" text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-3xl px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900"
                               onClick={() => decrement(item._id)}
                             >
                               -
@@ -248,6 +248,7 @@ function Basket() {
                   minW={"100px"}
                   fontSize={"large"}
                   p={5}
+                  mb={5}
                   size="sm"
                   bg={"#ed8203"}
                   color={"#fff"}
@@ -275,7 +276,7 @@ function Basket() {
                     </Th>
                   </Tr>
                 </Thead>
-                <Tbody width={"200px"}>
+                <Tbody width={"100px"}>
                   {orderedItems &&
                     orderedItems.map((item, index) => (
                       <Tr key={index}>
@@ -299,6 +300,7 @@ function Basket() {
                   minW={"200px"}
                   fontSize={"2xl"}
                   p={5}
+                  mb={5}
                   size="sm"
                   bg={"gray.400"}
                   color={"#fff"}
