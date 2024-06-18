@@ -144,7 +144,7 @@ function Navbar() {
                   </NavLink>
                 </ListItem>
 
-                <ListItem className="flex justify-center items-center bg-red-400">
+                <ListItem className="flex justify-center items-center">
                   <NavLink
                    
                     onClick={handleLogout}
@@ -208,7 +208,7 @@ function Navbar() {
                   </MenuItem>
                     </NavLink>
                   <MenuItem onClick={handleLogout} display={"flex"} justifyContent={"center"} >
-                    <IoMdLogOut style={{ color: "red", fontSize: "40px" }} />
+                    <IoMdLogOut style={{ color: "red", fontSize: "50px" }} />
                   </MenuItem>
                 </>
               )}
