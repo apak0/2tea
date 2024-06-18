@@ -60,6 +60,7 @@ function Card({ item }) {
         minW={"100px"}
         display="flex"
         justifyContent={"space-between"}
+        alignItems={"center"}
         flexDirection="row"
         borderRadius="8px"
       >

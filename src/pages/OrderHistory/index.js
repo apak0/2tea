@@ -13,6 +13,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import React from "react";
@@ -22,11 +23,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function OrderHistory() {
   const { user } = useAuth();
-
-  const { isLoading, isError, data, error } = useQuery(
-    "admin:orders",
-    fetchOrders
-  );
+  const { isLoading, isError, data, error } = useQuery("admin:orders", fetchOrders);
 
   const formatTimeAgo = (dateString) => {
     const date = new Date(dateString);
@@ -50,8 +47,11 @@ function OrderHistory() {
   };
 
   console.log(data);
+
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
-    <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}>
+    <div style={{ width: isMobile ? "100%" : "70%", marginLeft: "auto", marginRight: "auto" }}>
       <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -71,61 +71,61 @@ function OrderHistory() {
         </Box>
       </Flex>
 
-      <Table variant="simple">
-      <Thead bg="blue.200">
-        <Tr>
-          <Th className="flex justify-center" fontSize="14px" p={5} color="black">
-            İSİM
-          </Th>
-          <Th fontSize="14px" color="black" style={{ textAlign: 'center' }} isNumeric>
-            SİPARİŞ
-          </Th>
-          <Th className="flex justify-center" fontSize="14px" p={5} color="black">
-            TARİH
-          </Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {data && data.length > 0 ? (
-          data.slice().reverse().map((item) => {
-            if (localStorage.getItem('access-token') && item.user._id === user._id) {
-              return (
-                <Tr key={item._id}>
-                  <Td className="flex justify-center" style={{ fontSize: '30px' }}>
-                    {item.user.fullname}
-                  </Td>
-                  <Td style={{ textAlign: 'center', fontSize: '30px' }} isNumeric>
-                    <Menu>
-                      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                        {item.items.length} Ürün
-                      </MenuButton>
-                      <MenuList>
-                        {item.items.map((orderItem, index) => (
-                          <MenuItem key={index}>
-                            {orderItem.title} - {orderItem.quantity}
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  </Td>
-                  <Td style={{ textAlign: 'center', fontSize: '30px' }} isNumeric>
-                    {formatTimeAgo(item.createdAt)}
-                  </Td>
-                </Tr>
-              );
-            } else {
-              return null;
-            }
-          })
-        ) : (
-          <Box textAlign="center">
-            <Text fontSize="30px" textColor="tomato">
-              Daha önce sipariş verilmedi
-            </Text>
-          </Box>
-        )}
-      </Tbody>
-    </Table>
+      <Table variant="simple" size={isMobile ? "sm" : "md"}>
+        <Thead bg="blue.200">
+          <Tr>
+            <Th fontSize="14px" p={5} color="black" textAlign={isMobile ? "left" : "center"}>
+              İSİM
+            </Th>
+            <Th fontSize="14px" color="black" textAlign="center" isNumeric>
+              SİPARİŞ
+            </Th>
+            <Th fontSize="14px" p={5} color="black" textAlign={isMobile ? "left" : "center"}>
+              TARİH
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {data && data.length > 0 ? (
+            data.slice().reverse().map((item) => {
+              if (localStorage.getItem('access-token') && item.user._id === user._id) {
+                return (
+                  <Tr key={item._id}>
+                    <Td style={{ fontSize: isMobile ? '16px' : '30px' }} textAlign={isMobile ? "left" : "center"}>
+                      {item.user.fullname}
+                    </Td>
+                    <Td style={{ fontSize: isMobile ? '16px' : '30px', textAlign: 'center' }} isNumeric>
+                      <Menu>
+                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                          {item.items.length} Ürün
+                        </MenuButton>
+                        <MenuList>
+                          {item.items.map((orderItem, index) => (
+                            <MenuItem key={index}>
+                              {orderItem.title} - {orderItem.quantity}
+                            </MenuItem>
+                          ))}
+                        </MenuList>
+                      </Menu>
+                    </Td>
+                    <Td style={{ fontSize: isMobile ? '16px' : '30px', textAlign: 'center' }} isNumeric>
+                      {formatTimeAgo(item.createdAt)}
+                    </Td>
+                  </Tr>
+                );
+              } else {
+                return null;
+              }
+            })
+          ) : (
+            <Box textAlign="center" w="full">
+              <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
+                Daha önce sipariş verilmedi
+              </Text>
+            </Box>
+          )}
+        </Tbody>
+      </Table>
     </div>
   );
 }

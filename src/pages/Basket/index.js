@@ -263,7 +263,7 @@ function Basket() {
                 >
                   {buttonText}
                 </Button>
-                <Box mt={3}>
+                <Box mt={3} mb={3}>
                   <Text fontSize="lg" mb={2}>
                     Sipariş Notu:
                   </Text>

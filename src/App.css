@@ -1,7 +1,7 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 .content {
   padding-left: 5px;
-  padding-right: 25px;
+  padding-right: 5px;
   
   background-color: #dcf2f1;
   display: flex;
