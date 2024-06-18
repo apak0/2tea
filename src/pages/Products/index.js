@@ -101,8 +101,8 @@ function Products() {
   };
 
   return (
-    <Box>
-      <Flex direction="column" align="center" justify="center" p={4}>
+    <Box  >
+      <Flex direction="column" align="center" justify="center" p={4} className="mt-2 sm:mt-36">
         {user && (
           <VStack
             spacing={4}
@@ -111,12 +111,12 @@ function Products() {
             className="flex items-center justify-center "
           >
             <Text
-              fontSize="2xl"
-              color="gray.700"
-              className="text-4xl font-bold animate-rgb"
+              fontSize="4xl"
+              color="black.500"
+              className="text-4xl font-bold "
             >
               Hoşgeldin,{" "}
-              <Text as="span" color="orange.500">
+              <Text as="span"  className="animate-rgb">
                 {user.fullname}
               </Text>
             </Text>
@@ -126,11 +126,11 @@ function Products() {
         <Box mt={6}>
           <a
             href="/basket"
-            class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
+            class=" size-72 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
           >
             <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
               <svg
-                class="w-6 h-6"
+                class="w-12 h-12"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -144,7 +144,7 @@ function Products() {
                 ></path>
               </svg>
             </span>
-            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
+            <span class=" font-bold text-4xl absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
             Menüye Git
             </span>
             <span class="relative invisible">Menüye Git</span>
