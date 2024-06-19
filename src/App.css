@@ -6,6 +6,7 @@
   background-color: #dcf2f1;
   display: flex;
   justify-content: center;
+  
 }
 @media (min-width: 1024px) {
   .content {

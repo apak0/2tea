@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Text, useToast, Flex, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  useToast,
+  Flex,
+  VStack,
+  Link,
+} from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList, postOrder } from "../../api";
 import { useAuth } from "../../contexts/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useBasket } from "../../contexts/BasketContext";
-import "../../tailwind.css"; // Tailwind CSS'i import edin
+import "../../tailwind.css";
+import "./style.css";
 
 function Products() {
   const { items, setItems } = useBasket();
@@ -101,8 +110,14 @@ function Products() {
   };
 
   return (
-    <Box  >
-      <Flex direction="column" align="center" justify="center" p={4} className="mt-2 sm:mt-36">
+    <Box>
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        p={4}
+        className="mt-2 sm:mt-36"
+      >
         {user && (
           <VStack
             spacing={4}
@@ -116,40 +131,27 @@ function Products() {
               className="text-4xl font-bold "
             >
               Hoşgeldin,{" "}
-              <Text as="span"  className="animate-rgb">
+              <Text as="span" className="animate-rgb">
                 {user.fullname}
               </Text>
             </Text>
             <Text fontSize="lg" color="gray.500"></Text>
           </VStack>
         )}
-        <Box mt={6}>
-          <a
-            href="/basket"
-            class=" size-72 relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
-          >
-            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-              <svg
-                class="w-12 h-12"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
-            </span>
-            <span class=" font-bold text-4xl absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
-            Menüye Git
-            </span>
-            <span class="relative invisible">Menüye Git</span>
-          </a>
-        </Box>
+
+        <Link _hover={{ textDecoration: "none" }} className="linkToMenu" href="/basket">
+          <Box className="mt-5" cursor="pointer">
+            <div className="square blob">
+              <Box className="menüBtn ">
+                <h1 className="  text-4xl font-bold ">Menüye Git</h1>
+              </Box>
+
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </Box>
+        </Link>
       </Flex>
     </Box>
   );
