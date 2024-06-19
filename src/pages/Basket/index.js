@@ -159,7 +159,7 @@ function Basket() {
 
         {/* Order Price Information */}
         <Box
-          className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0  "
+          className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0 mx-auto "
           width={"380px"}
           border={"2px"}
           borderColor={"gray.400"}
@@ -277,7 +277,7 @@ function Basket() {
               </Box>
             </Box>
           ) : (
-            <Box>
+            <Box > 
               <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
               <Table variant="striped" colorScheme="gray">
                 <Thead>
