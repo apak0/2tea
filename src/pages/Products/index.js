@@ -128,10 +128,10 @@ function Products() {
             <Text
               fontSize="4xl"
               color="black.500"
-              className="text-4xl font-bold "
+              className="text-4xl font-bold font-mono "
             >
               Hoşgeldin,{" "}
-              <Text as="span" className="animate-rgb">
+              <Text as="span" className="animate-rgb font-extralight">
                 {user.fullname}
               </Text>
             </Text>
@@ -139,11 +139,15 @@ function Products() {
           </VStack>
         )}
 
-        <Link _hover={{ textDecoration: "none" }} className="linkToMenu" href="/basket">
+        <Link
+          _hover={{ textDecoration: "none" }}
+          className="linkToMenu"
+          href="/basket"
+        >
           <Box className="mt-5" cursor="pointer">
             <div className="square blob">
               <Box className="menüBtn ">
-                <h1 className="  text-4xl font-bold ">Menüye Git</h1>
+                <h1 className="  text-4xl font-bold font-serif opacity-80 text-orange-300  ">Menü</h1>
               </Box>
 
               <span></span>
