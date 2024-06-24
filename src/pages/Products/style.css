@@ -1,4 +1,7 @@
-
+@font-face {
+  font-family: 'Rocher';
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
 
 .square {
   position: relative;
@@ -71,7 +74,7 @@
   padding: 40px 60px;
   color: #2b2a2a;
   text-align: center;
-  
+  font-family: rocher;
   cursor: pointer;
   transition: 0.5s;
   z-index: 1000;

@@ -91,7 +91,7 @@ function Products() {
           <Box className="mt-5" cursor="pointer">
             <div className="square blob">
               <Box className="menüBtn ">
-                <h1 className="  text-4xl font-bold font-lora opacity-80 text-orange-300  ">
+                <h1 className="  text-6xl font-bold   text-yellow-300  ">
                   Menü
                 </h1>
               </Box>

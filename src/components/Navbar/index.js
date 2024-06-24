@@ -26,7 +26,7 @@ import { useBasket } from "../../contexts/BasketContext";
 
 function Navbar() {
   const { user, logout } = useAuth();
-  const { items } = useBasket();
+  
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -67,7 +67,7 @@ function Navbar() {
         >
           <NavLink to="/">
             <Text
-              fontSize={{ base: "15px", md: "40px", lg: "xx-large" }}
+              fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}
             >
               ÇAY OCAĞI
             </Text>
