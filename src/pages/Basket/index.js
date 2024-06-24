@@ -20,7 +20,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
+
 import io from "socket.io-client";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
@@ -47,7 +47,7 @@ function Basket() {
   const [address, setAddress] = useState("test3");
   const { items, setItems, increment, decrement } = useBasket();
 
-  const [showTextarea, setShowTextarea] = useState(true);
+  
   const [orderNote, setOrderNote] = useState("");
 
   const orderedItems = items.filter((item) => item.quantity > 0);
@@ -115,7 +115,7 @@ function Basket() {
   const handleSubmitForm = async () => {
     
     const selectedItems = items.filter((item) => item.quantity > 0);
-    const selectedItemsNotice = items.filter((item) => item.quantity > 0);
+    
    
 
     const input = {
@@ -123,7 +123,7 @@ function Basket() {
       phoneNumber,
       address,
       items: selectedItems,
-      notice:selectedItemsNotice
+     
     };
 
     await postOrder(input);
@@ -133,8 +133,7 @@ function Basket() {
 
     sendNotification();
     refetch();
-    console.log(orderNote)
-    setOrderNote("")
+    
 
   };
   
