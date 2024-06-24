@@ -4,6 +4,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        lora: ['Lora', 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
+      },
       keyframes: {
         rgb: {
           '0%, 100%': { color: 'rgb(255, 0, 0)' }, // kırmızı
