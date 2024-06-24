@@ -60,10 +60,8 @@ function Navbar() {
         </Box>
 
         <Box
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          ml={[2, 4, 6, 8]}
+           className="flex justify-center items-center ml-0 md:ml-80"
+          
         >
           <NavLink to="/">
             <Text
