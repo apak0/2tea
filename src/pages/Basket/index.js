@@ -47,6 +47,9 @@ function Basket() {
   const [address, setAddress] = useState("test3");
   const { items, setItems, increment, decrement } = useBasket();
 
+  const [showTextarea, setShowTextarea] = useState(true);
+  const [orderNote, setOrderNote] = useState("");
+
   const orderedItems = items.filter((item) => item.quantity > 0);
 
   const sendNotification = () => {
@@ -112,6 +115,7 @@ function Basket() {
   const handleSubmitForm = async () => {
     
     const selectedItems = items.filter((item) => item.quantity > 0);
+    const selectedItemsNotice = items.filter((item) => item.quantity > 0);
    
 
     const input = {
@@ -119,6 +123,7 @@ function Basket() {
       phoneNumber,
       address,
       items: selectedItems,
+      notice:selectedItemsNotice
     };
 
     await postOrder(input);
@@ -128,8 +133,11 @@ function Basket() {
 
     sendNotification();
     refetch();
-  };
+    console.log(orderNote)
+    setOrderNote("")
 
+  };
+  
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/signintoorder");
@@ -139,8 +147,8 @@ function Basket() {
     ? "SİPARİŞİ GÖNDER"
     : "ÜRÜN SEÇİN";
 
-  const [showTextarea, setShowTextarea] = useState(true);
-  const [orderNote, setOrderNote] = useState("");
+ 
+  
 
   return (
     <Box className="basketTopDiv w-full ">

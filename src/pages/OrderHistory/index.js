@@ -86,45 +86,49 @@ function OrderHistory() {
           </Tr>
         </Thead>
         <Tbody>
-          {data && data.length > 0 ? (
-            data.slice().reverse().map((item) => {
-              if (localStorage.getItem('access-token') && item.user._id === user._id) {
-                return (
-                  <Tr key={item._id}>
-                    <Td style={{ fontSize: isMobile ? '16px' : '30px' }} textAlign={isMobile ? "left" : "center"}>
-                      {item.user.fullname}
-                    </Td>
-                    <Td style={{ fontSize: isMobile ? '16px' : '30px', textAlign: 'center' }} isNumeric>
-                      <Menu>
-                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                          {item.items.length} Ürün
-                        </MenuButton>
-                        <MenuList>
-                          {item.items.map((orderItem, index) => (
-                            <MenuItem key={index}>
-                              {orderItem.title} - {orderItem.quantity}
-                            </MenuItem>
-                          ))}
-                        </MenuList>
-                      </Menu>
-                    </Td>
-                    <Td style={{ fontSize: isMobile ? '16px' : '30px', textAlign: 'center' }} isNumeric>
-                      {formatTimeAgo(item.createdAt)}
-                    </Td>
-                  </Tr>
-                );
-              } else {
-                return null;
-              }
-            })
-          ) : (
-            <Box textAlign="center" w="full">
-              <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
-                Daha önce sipariş verilmedi
-              </Text>
-            </Box>
-          )}
-        </Tbody>
+  {data && data.length > 0 ? (
+    data.slice().reverse().map((item) => {
+      if (
+        localStorage.getItem('access-token') &&
+        (user.role === 'admin' || item.user._id === user._id)
+      ) {
+        return (
+          <Tr key={item._id}>
+            <Td style={{ fontSize: isMobile ? '16px' : '30px' }} textAlign={isMobile ? "left" : "center"}>
+              {item.user.fullname}
+            </Td>
+            <Td style={{ fontSize: isMobile ? '16px' : '30px', textAlign: 'center' }} isNumeric>
+              <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                  {item.items.length} Ürün
+                </MenuButton>
+                <MenuList>
+                  {item.items.map((orderItem, index) => (
+                    <MenuItem key={index}>
+                      {orderItem.title} - {orderItem.quantity}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Menu>
+            </Td>
+            <Td style={{ fontSize: isMobile ? '16px' : '30px', textAlign: 'center' }} isNumeric>
+              {formatTimeAgo(item.createdAt)}
+            </Td>
+          </Tr>
+        );
+      } else {
+        return null;
+      }
+    })
+  ) : (
+    <Box textAlign="center" w="full">
+      <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
+        Daha önce sipariş verilmedi
+      </Text>
+    </Box>
+  )}
+</Tbody>
+
       </Table>
     </div>
   );
