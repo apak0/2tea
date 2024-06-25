@@ -84,7 +84,7 @@ function Navbar() {
                     })}
                     to="/signin"
                   >
-                    Giriş
+                    Giriş Yap
                   </NavLink>
                 </ListItem>
                 <ListItem>
@@ -95,7 +95,7 @@ function Navbar() {
                     })}
                     to="/signup"
                   >
-                    Register
+                    Kayıt Ol
                   </NavLink>
                 </ListItem>
               </>
@@ -171,13 +171,13 @@ function Navbar() {
 
                     <NavLink to="/signin">
                   <MenuItem className="flex justify-center items-center">
-                      Giriş
+                      Giriş Yap
                   </MenuItem>
                       </NavLink>
 
                     <NavLink to="/signup">
                   <MenuItem className="flex justify-center items-center">
-                      Register
+                      Kayıt Ol
                   </MenuItem>
                       </NavLink>
                 </>

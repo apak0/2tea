@@ -50,7 +50,7 @@ function Signin() {
       <Flex aling="center" width="full" justifyContent="center">
         <Box pt={10}>
           <Box textAlign="center">
-            <Heading>Sign in</Heading>
+            <Heading>Giriş Yap</Heading>
           </Box>
           <Box my={5}>
             {formik.errors.general && (
@@ -71,7 +71,7 @@ function Signin() {
               </FormControl>
 
               <FormControl mt={4}>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Şifre</FormLabel>
                 <Input
                   type="password"
                   name="password"
@@ -82,7 +82,7 @@ function Signin() {
               </FormControl>
 
               <Button mt={4} width="full" type="submit">
-                Signin
+                Giriş Yap
               </Button>
             </form>
           </Box>

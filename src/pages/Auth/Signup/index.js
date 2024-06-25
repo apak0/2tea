@@ -56,7 +56,7 @@ console.log("formik errors:", formik.errors.general)
       <Flex aling="center" width="full" justifyContent="center">
         <Box pt={10}>
           <Box textAlign="center">
-            <Heading>Sign up</Heading>
+            <Heading>Kayıt Ol</Heading>
           </Box>
           <Box my={5}>
             {formik.errors.general && (
@@ -68,7 +68,7 @@ console.log("formik errors:", formik.errors.general)
             <form onSubmit={formik.handleSubmit}>
               
               <FormControl>
-                <FormLabel>Fullname</FormLabel>
+                <FormLabel>İsim</FormLabel>
                 <Input
                   name="fullname"
                   onChange={formik.handleChange}
@@ -91,7 +91,7 @@ console.log("formik errors:", formik.errors.general)
               </FormControl>
 
               <FormControl mt={4}>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Şifre</FormLabel>
                 <Input
                   type="password"
                   name="password"
@@ -102,7 +102,7 @@ console.log("formik errors:", formik.errors.general)
               </FormControl>
 
               <FormControl mt={4}>
-                <FormLabel>Password Confirm</FormLabel>
+                <FormLabel>Şifreyi Tekrar Girin</FormLabel>
                 <Input
                   type="password"
                   name="passwordConfirm"
@@ -113,7 +113,7 @@ console.log("formik errors:", formik.errors.general)
               </FormControl>
 
               <Button mt={4} width="full" type="submit">
-                Sign Up
+                Kayıt Ol
               </Button>
             </form>
           </Box>
