@@ -1,8 +1,8 @@
 import * as yup from "yup"
 
 const validationSchema = yup.object({
-    email: yup.string().email("Invalid email").required("Required"),
-    password: yup.string().min(5, "Password must be longer than 5 character.").required("Required"),
+    email: yup.string().email("Geçersiz email").required("Required"),
+    password: yup.string().min(5, "Şifre en az 5 karakterden oluşmalıdır.").required("Required"),
    
 
 })
