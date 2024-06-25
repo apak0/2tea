@@ -1,8 +1,8 @@
-import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import {
-  Badge,
+  
   Box,
   Icon,
   Image,
@@ -18,14 +18,16 @@ import {
 
 import { IoMdLogOut } from "react-icons/io";
 
-import { SlBasket, SlBasketLoaded } from "react-icons/sl";
+
 import { HiOutlineMenu } from "react-icons/hi";
 
 import { useAuth } from "../../contexts/AuthContext";
-import { useBasket } from "../../contexts/BasketContext";
+
 
 function Navbar() {
   const { user, logout } = useAuth();
+
+  const isLoggedIn = !!localStorage.getItem("access-token");
   
   const navigate = useNavigate();
 
@@ -60,7 +62,7 @@ function Navbar() {
         </Box>
 
         <Box
-           className="flex justify-center items-center ml-0 md:ml-80"
+           className={`flex justify-center items-center ml-0 ${isLoggedIn ? 'md:ml-52' : ''}`}  
           
         >
           <NavLink to="/">
