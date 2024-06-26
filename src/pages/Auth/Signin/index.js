@@ -42,6 +42,8 @@ function Signin() {
     },
   });
 
+  console.log("formik errors şurası:", formik.errors.general)
+
   return (
     <motion.div
     
