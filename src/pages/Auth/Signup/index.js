@@ -8,6 +8,9 @@ import {
   Input,
   Button,
   Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 
 import { useFormik } from "formik";
@@ -21,6 +24,7 @@ import { motion } from "framer-motion";
 function Signup() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const MotionBox = motion.div;
 
   const formik = useFormik({
     initialValues: {
@@ -50,18 +54,37 @@ function Signup() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Flex align="center" width="full" justifyContent="center">
-        <Box pt={10}>
+        <Box pt={10} width={"300px"}>
           <Box textAlign="center">
             <Heading>Kayıt Ol</Heading>
           </Box>
           <Box my={5}>
             {formik.errors.general && (
-              <Alert status="error">{formik.errors.general}</Alert>
+              <Alert
+                status="error"
+                mt={5}
+                variant="left-accent"
+                borderRadius="md"
+                boxShadow="lg"
+              >
+                <AlertIcon />
+                <MotionBox
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  flex="1"
+                >
+                  <AlertTitle>Hata</AlertTitle>
+                  <AlertDescription>{formik.errors.general}</AlertDescription>
+                </MotionBox>
+              </Alert>
             )}
           </Box>
           <Box my={5} textAlign="left">
             <form onSubmit={formik.handleSubmit}>
-              <FormControl isInvalid={formik.touched.fullname && formik.errors.fullname}>
+              <FormControl
+                isInvalid={formik.touched.fullname && formik.errors.fullname}
+              >
                 <FormLabel>İsim</FormLabel>
                 <Input
                   name="fullname"
@@ -70,11 +93,33 @@ function Signup() {
                   value={formik.values.fullname}
                 />
                 {formik.errors.fullname && formik.touched.fullname && (
-                  <Alert status="error">{formik.errors.fullname}</Alert>
+                  <Alert
+                    status="error"
+                    mt={5}
+                    variant="left-accent"
+                    borderRadius="md"
+                    boxShadow="lg"
+                  >
+                    <AlertIcon />
+                    <MotionBox
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      flex="1"
+                    >
+                      <AlertTitle>Hata</AlertTitle>
+                      <AlertDescription>
+                        {formik.errors.fullname}
+                      </AlertDescription>
+                    </MotionBox>
+                  </Alert>
                 )}
               </FormControl>
 
-              <FormControl mt={4} isInvalid={formik.touched.email && formik.errors.email}>
+              <FormControl
+                mt={4}
+                isInvalid={formik.touched.email && formik.errors.email}
+              >
                 <FormLabel>E-mail</FormLabel>
                 <Input
                   name="email"
@@ -83,11 +128,31 @@ function Signup() {
                   value={formik.values.email}
                 />
                 {formik.errors.email && formik.touched.email && (
-                  <Alert status="error">{formik.errors.email}</Alert>
+                  <Alert
+                    status="error"
+                    mt={5}
+                    variant="left-accent"
+                    borderRadius="md"
+                    boxShadow="lg"
+                  >
+                    <AlertIcon />
+                    <MotionBox
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      flex="1"
+                    >
+                      <AlertTitle>Hata</AlertTitle>
+                      <AlertDescription>{formik.errors.email}</AlertDescription>
+                    </MotionBox>
+                  </Alert>
                 )}
               </FormControl>
 
-              <FormControl mt={4} isInvalid={formik.touched.password && formik.errors.password}>
+              <FormControl
+                mt={4}
+                isInvalid={formik.touched.password && formik.errors.password}
+              >
                 <FormLabel>Şifre</FormLabel>
                 <Input
                   type="password"
@@ -97,11 +162,36 @@ function Signup() {
                   value={formik.values.password}
                 />
                 {formik.errors.password && formik.touched.password && (
-                  <Alert status="error">{formik.errors.password}</Alert>
+                  <Alert
+                    status="error"
+                    mt={5}
+                    variant="left-accent"
+                    borderRadius="md"
+                    boxShadow="lg"
+                  >
+                    <AlertIcon />
+                    <MotionBox
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      flex="1"
+                    >
+                      <AlertTitle>Hata</AlertTitle>
+                      <AlertDescription>
+                        {formik.errors.password}
+                      </AlertDescription>
+                    </MotionBox>
+                  </Alert>
                 )}
               </FormControl>
 
-              <FormControl mt={4} isInvalid={formik.touched.passwordConfirm && formik.errors.passwordConfirm}>
+              <FormControl
+                mt={4}
+                isInvalid={
+                  formik.touched.passwordConfirm &&
+                  formik.errors.passwordConfirm
+                }
+              >
                 <FormLabel>Şifreyi Tekrar Girin</FormLabel>
                 <Input
                   type="password"
@@ -110,12 +200,41 @@ function Signup() {
                   onBlur={formik.handleBlur}
                   value={formik.values.passwordConfirm}
                 />
-                {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
-                  <Alert status="error">{formik.errors.passwordConfirm}</Alert>
-                )}
+                {formik.errors.passwordConfirm &&
+                  formik.touched.passwordConfirm && (
+                    <Alert
+                      status="error"
+                      mt={5}
+                      variant="left-accent"
+                      borderRadius="md"
+                      boxShadow="lg"
+                    >
+                      <AlertIcon />
+                      <MotionBox
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                        flex="1"
+                      >
+                        <AlertTitle>Hata</AlertTitle>
+                        <AlertDescription>
+                          {formik.errors.passwordConfirm}
+                        </AlertDescription>
+                      </MotionBox>
+                    </Alert>
+                  )}
               </FormControl>
 
-              <Button mt={4} width="full" type="submit">
+              <Button
+                borderRadius={"50"}
+                fontFamily={"rocher"}
+                style={{ background: "#F59E0B" }}
+                fontSize={"xxx-large"}
+                mt={4}
+                height={"80px"}
+                width="full"
+                type="submit"
+              >
                 Kayıt Ol
               </Button>
             </form>
