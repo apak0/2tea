@@ -25,6 +25,7 @@ function Signin() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const MotionBox = motion.div;
+  const MotionButton = motion(Button);
 
   const formik = useFormik({
     initialValues: {
@@ -53,7 +54,13 @@ function Signin() {
       <Flex align="center" width="full" justifyContent="center">
         <Box pt={10} width={"300px"}>
           <Box textAlign="center">
-            <Heading>Giriş Yap</Heading>
+            <Heading
+              fontFamily={"lora"}
+              fontSize={"xxx-large"}
+              textColor={"#FE7A36"}
+            >
+              Giriş Yap
+            </Heading>
           </Box>
           <Box mt={5} my={5}>
             {formik.errors.general && (
@@ -93,7 +100,6 @@ function Signin() {
                   </Alert>
                 )}
               </FormControl>
-
               <FormControl
                 mt={4}
                 isInvalid={formik.touched.password && formik.errors.password}
@@ -130,8 +136,7 @@ function Signin() {
                   </Alert>
                 )}
               </FormControl>
-
-              <Button
+              <MotionButton
                 borderRadius={"50"}
                 fontFamily={"rocher"}
                 style={{ background: "#F59E0B" }}
@@ -140,9 +145,11 @@ function Signin() {
                 height={"80px"}
                 width="full"
                 type="submit"
+                whileHover={{ scale: 1.1, transition: { duration: 0.2, ease: "easeInOut" } }}
               >
-                Giriş Yap
-              </Button>
+                Devam Et
+              </MotionButton>
+              ;
             </form>
           </Box>
         </Box>

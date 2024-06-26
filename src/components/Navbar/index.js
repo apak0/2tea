@@ -80,11 +80,13 @@ function Navbar() {
               <>
                 <ListItem>
                   <NavLink
+                  
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#525CEB" : "white",
+                      color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
                     })}
                     to="/signin"
+                    
                   >
                     Giriş Yap
                   </NavLink>

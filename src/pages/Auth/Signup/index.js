@@ -25,6 +25,7 @@ function Signup() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const MotionBox = motion.div;
+  const MotionButton = motion(Button);
 
   const formik = useFormik({
     initialValues: {
@@ -115,7 +116,6 @@ function Signup() {
                   </Alert>
                 )}
               </FormControl>
-
               <FormControl
                 mt={4}
                 isInvalid={formik.touched.email && formik.errors.email}
@@ -148,7 +148,6 @@ function Signup() {
                   </Alert>
                 )}
               </FormControl>
-
               <FormControl
                 mt={4}
                 isInvalid={formik.touched.password && formik.errors.password}
@@ -184,7 +183,6 @@ function Signup() {
                   </Alert>
                 )}
               </FormControl>
-
               <FormControl
                 mt={4}
                 isInvalid={
@@ -224,8 +222,7 @@ function Signup() {
                     </Alert>
                   )}
               </FormControl>
-
-              <Button
+              <MotionButton
                 borderRadius={"50"}
                 fontFamily={"rocher"}
                 style={{ background: "#F59E0B" }}
@@ -234,9 +231,12 @@ function Signup() {
                 height={"80px"}
                 width="full"
                 type="submit"
+                whileHover={{ scale: 1.1, transition: { duration: 0.2, ease: "easeInOut" } }}
+                
               >
                 Kayıt Ol
-              </Button>
+              </MotionButton>
+              ;
             </form>
           </Box>
         </Box>
