@@ -111,4 +111,10 @@
 }
 
 
+.menu-text {
+  transition: transform 0.3s ease-in-out;
+}
 
+.mt-5:hover .menu-text {
+  transform: scale(1.1);
+}
