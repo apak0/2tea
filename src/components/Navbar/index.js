@@ -107,9 +107,10 @@ function Navbar() {
 
             {localStorage.getItem("access-token") && (
               <>
-                <ListItem>
+                <ListItem className="flex justify-center items-center">
                   {user?.role === "admin" && (
                     <NavLink
+                      
                       style={({ isActive, isPending }) => ({
                         color: isActive ? "#FE7A36" : "white",
                         borderBottom: isActive ? "solid" : "",
@@ -121,7 +122,7 @@ function Navbar() {
                   )}
                 </ListItem>
 
-                <ListItem>
+                <ListItem className="flex justify-center items-center">
                   <NavLink
                   
                     style={({ isActive, isPending }) => ({
@@ -134,7 +135,7 @@ function Navbar() {
                   </NavLink>
                 </ListItem>
 
-                <ListItem>
+                <ListItem className="flex justify-center items-center">
                   <NavLink
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#FE7A36" : "white",
@@ -151,7 +152,7 @@ function Navbar() {
                    
                     onClick={handleLogout}
                   >
-                    <IoMdLogOut style={{ color: "red", fontSize: "20px" }} />
+                    <IoMdLogOut style={{ color: "red", fontSize: "40px" }} />
                   </NavLink>
                 </ListItem>
               </>
