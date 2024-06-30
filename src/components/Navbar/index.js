@@ -53,7 +53,7 @@ function Navbar() {
           <NavLink to="/">
             <Image
               borderRadius="full"
-              height={"40px"}
+              height={"60px"}
               minW={"50px"}
               src="https://i.hizliresim.com/47cwcdu.ico"
               alt="mks-logo"
