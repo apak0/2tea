@@ -210,8 +210,8 @@ function Navbar() {
                       Geçmiş Siparişler
                   </MenuItem>
                     </NavLink>
-                  <MenuItem onClick={handleLogout} display={"flex"} justifyContent={"center"} >
-                    <IoMdLogOut style={{ color: "red", fontSize: "50px" }} />
+                  <MenuItem  display={"flex"} justifyContent={"center"}  >
+                    <IoMdLogOut style={{ color: "red", fontSize: "50px" }} onClick={handleLogout} />
                   </MenuItem>
                 </>
               )}
