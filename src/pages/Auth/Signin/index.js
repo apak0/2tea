@@ -47,7 +47,7 @@ function Signin() {
     },
   });
 
-  console.log("formik errors şurası:", formik.errors);
+ 
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

@@ -20,8 +20,9 @@ import SigninToOrder from "./pages/Auth/Signin/indexToOrder";
 import Footer from "./components/Footer";
 import "./App.css";
 
-import { Button } from "antd";
+
 import OrderHistory from "./pages/OrderHistory";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
       <div id="app">
         <Notifications />
         <Navbar />
-
+        <ScrollToTopButton />
         <div className=" content ">
           <Routes>
             <Route path="/" exact element={<Products />} />
@@ -55,6 +56,7 @@ function App() {
 
             <Route path="*" element={<Error404 />} />
           </Routes>
+         
           <Footer />
         </div>
       </div>
