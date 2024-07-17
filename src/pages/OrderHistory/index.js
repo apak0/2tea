@@ -15,6 +15,7 @@ import {
   MenuItem,
   useBreakpointValue,
   useColorMode,
+  Tooltip,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import React from "react";
@@ -49,8 +50,6 @@ function OrderHistory() {
       return `${seconds} sn.`;
     }
   };
-
-  console.log(data);
 
   const isMobile = useBreakpointValue({ base: true, md: false });
   const { colorMode } = useColorMode();
@@ -109,6 +108,14 @@ function OrderHistory() {
             >
               TARİH
             </Th>
+            <Th
+              fontSize="14px"
+              p={5}
+              color="black"
+              textAlign={isMobile ? "left" : "center"}
+            >
+              Not
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -121,6 +128,7 @@ function OrderHistory() {
                   localStorage.getItem("access-token") &&
                   (user.role === "admin" || item.user._id === user._id)
                 ) {
+                  console.log(item.orderNote);
                   return (
                     <Tr
                       key={item._id}
@@ -129,9 +137,12 @@ function OrderHistory() {
                       <Td
                         style={{ fontSize: isMobile ? "16px" : "30px" }}
                         textAlign={isMobile ? "left" : "center"}
+                        
                       >
+                        
                         {item.user.fullname}
                       </Td>
+
                       <Td
                         style={{
                           fontSize: isMobile ? "16px" : "30px",
@@ -172,6 +183,14 @@ function OrderHistory() {
                         isNumeric
                       >
                         {formatTimeAgo(item.createdAt)}
+                      </Td>
+                      <Td width={"300px"} top={0}>
+                        <Tooltip label={item.orderNote} fontSize="md">
+                          <Text noOfLines={ isMobile ? 5 : 2} >
+
+                      {item.orderNote}
+                          </Text>
+                        </Tooltip>
                       </Td>
                     </Tr>
                   );
