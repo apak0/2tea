@@ -91,7 +91,7 @@ function OrderHistory() {
               color="black"
               textAlign={isMobile ? "left" : "center"}
             >
-              İSİM
+              GÖNDEREN
             </Th>
             <Th
               fontSize="14px"
@@ -137,9 +137,7 @@ function OrderHistory() {
                       <Td
                         style={{ fontSize: isMobile ? "16px" : "30px" }}
                         textAlign={isMobile ? "left" : "center"}
-                        
                       >
-                        
                         {item.user.fullname}
                       </Td>
 
@@ -184,11 +182,10 @@ function OrderHistory() {
                       >
                         {formatTimeAgo(item.createdAt)}
                       </Td>
-                      <Td width={"300px"} top={0}>
+                      <Td width={"300px"} textAlign={"start"} >
                         <Tooltip label={item.orderNote} fontSize="md">
-                          <Text noOfLines={ isMobile ? 5 : 2} >
-
-                      {item.orderNote}
+                          <Text noOfLines={isMobile ? 5 : 2}>
+                            {item.orderNote}
                           </Text>
                         </Tooltip>
                       </Td>
