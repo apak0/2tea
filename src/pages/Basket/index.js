@@ -13,15 +13,16 @@ import {
   Th,
   Td,
   Textarea,
+  Image,
 } from "@chakra-ui/react";
 import { useBasket } from "../../contexts/BasketContext";
-import Card from "../../components/Card";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import io from "socket.io-client";
+import RadioCard from "../../components/RadioCard";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 
@@ -49,17 +50,15 @@ function Basket() {
 
   const [showTextarea, setShowTextarea] = useState(true);
   const [orderNote, setOrderNote] = useState("");
+  const [coffeeVariants, setCoffeeVariants] = useState({});
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
   const sendNotification = () => {
-    // Send notification to other connected users
     socket.emit("notification", { customer: fullName });
   };
 
-  // SOKET IO NOTIFICATION
   useEffect(() => {
-    // Listen for incoming notifications
     socket.on("notification", (data) => {
       notificationAction(data);
     });
@@ -69,7 +68,6 @@ function Basket() {
     };
   }, []);
 
-  // Product'daki data'ya gelen verileri basket'e gönderen fonksiyon
   useEffect(() => {
     if (status === "success") {
       const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
@@ -113,17 +111,17 @@ function Basket() {
   };
 
   const handleSubmitForm = async () => {
-    
     const selectedItems = items.filter((item) => item.quantity > 0);
-    
-   
 
     const input = {
       fullName,
       phoneNumber,
       address,
-      items: selectedItems,
-      
+      items: selectedItems.map((item) => ({
+        ...item,
+        variant: coffeeVariants[item._id] || null,
+      })),
+      orderNote
     };
 
     await postOrder(input);
@@ -133,11 +131,10 @@ function Basket() {
 
     sendNotification();
     refetch();
-    
-    setOrderNote("")
 
+    setOrderNote("");
   };
-  
+
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/signintoorder");
@@ -147,8 +144,12 @@ function Basket() {
     ? "SİPARİŞİ GÖNDER"
     : "ÜRÜN SEÇİN";
 
- 
-  
+  const handleVariantSelect = (itemId, variant) => {
+    setCoffeeVariants((prevVariants) => ({
+      ...prevVariants,
+      [itemId]: variant,
+    }));
+  };
 
   return (
     <Box className="basketTopDiv w-full ">
@@ -158,15 +159,110 @@ function Basket() {
       >
         <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 ">
           {items.map((item, i) => (
-            <Box key={i} className="flex flex-wrap  gap-4">
-              <div className="flex-initial w-full sm:w-auto md:w-1/3 lg:w-1/3">
-                <Card item={item} inBasket={true} />
-              </div>
+            <Box
+              key={i}
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"space-evenly"}
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              minW={"180px"}
+              maxW={"200px"}
+              p="2"
+              bg={"#B4D4FF"}
+              h="100%"
+            >
+              <Box className="relative flex cards">
+                <Image
+                  src={item.photos}
+                  alt="product"
+                  loading="lazy"
+                  objectFit={"cover"}
+                  w={"100%"}
+                  h={"200px"}
+                  className="cards"
+                />
+                {item.title === "Türk Kahvesi" && (
+                  <Box className="absolute bottom-0 text-xs left-1/2 transform -translate-x-1/2 text-blue-700 ">
+                    <RadioCard
+                      onSelect={(variant) =>
+                        handleVariantSelect(item._id, variant)
+                      }
+                    />
+                  </Box>
+                )}
+              </Box>
+
+              <Box
+                fontSize={"2xl"}
+                fontWeight="bold"
+                as="samp"
+                lineHeight="tight"
+                noOfLines={1}
+                color={"#FE7A36"}
+                display={"flex"}
+                justifyContent={"center"}
+              >
+                {item.title}
+              </Box>
+
+              <Box
+                minW={"100px"}
+                display="flex"
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                flexDirection="row"
+                borderRadius="8px"
+              >
+                <Box>
+                  <Button
+                    className="minusBtn"
+                    size={"md"}
+                    fontSize={"3xl"}
+                    m={2}
+                    onClick={() => decrement(item._id)}
+                    bg={"#ed8203"}
+                    color={"#fff"}
+                    _hover={{ bg: "teal.400", color: "black" }}
+                    _active={{ bg: "teal.300", color: "#fff" }}
+                  >
+                    -
+                  </Button>
+                </Box>
+
+                <Box className="min-w-10">
+                  <Text
+                    display="flex"
+                    justifyContent={"center"}
+                    alignItems="center"
+                    fontSize={"xl"}
+                  >
+                    {item.quantity}
+                  </Text>
+                </Box>
+
+                <Box>
+                  <Button
+                    className="plusBtn"
+                    bg={"#ed8203"}
+                    color={"#fff"}
+                    _hover={{ bg: "teal.400", color: "black" }}
+                    _active={{ bg: "teal.300", color: "#fff" }}
+                    justifySelf={"flex-end"}
+                    size={"md"}
+                    fontSize={"3xl"}
+                    m={2}
+                    onClick={() => increment(item._id)}
+                  >
+                    +
+                  </Button>
+                </Box>
+              </Box>
             </Box>
           ))}
         </Box>
 
-        {/* Order Price Information */}
         <Box
           className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0 mx-auto "
           width={"380px"}
@@ -212,6 +308,11 @@ function Basket() {
                           p={2}
                         >
                           {item.title}
+                          {coffeeVariants[item._id] && (
+                            <Text fontSize="sm" color="gray.500">
+                              Çeşit: {coffeeVariants[item._id]}
+                            </Text>
+                          )}
                         </Td>
                         <Td
                           display={"flex"}
@@ -256,16 +357,16 @@ function Basket() {
                 </Tbody>
               </Table>
               <Box mt={3} mb={3}>
-                  <Text fontSize="lg" mb={2}>
-                    Sipariş Notu:
-                  </Text>
-                  <Textarea
-                    placeholder="Siparişinizle ilgili eklemek istediğiniz bir not var mı?"
-                    value={orderNote}
-                    onChange={(e) => setOrderNote(e.target.value)}
-                    size="sm"
-                  />
-                </Box>  
+                <Text fontSize="lg" mb={2}>
+                  Sipariş Notu:
+                </Text>
+                <Textarea
+                  placeholder="Siparişinizle ilgili eklemek istediğiniz bir not var mı?"
+                  value={orderNote}
+                  onChange={(e) => setOrderNote(e.target.value)}
+                  size="sm"
+                />
+              </Box>
               <Box mt="3">
                 <Button
                   minW={"100px"}
@@ -283,11 +384,10 @@ function Basket() {
                 >
                   {buttonText}
                 </Button>
-               
               </Box>
             </Box>
           ) : (
-            <Box > 
+            <Box>
               <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
               <Table variant="striped" colorScheme="gray">
                 <Thead>

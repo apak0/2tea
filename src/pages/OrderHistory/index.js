@@ -183,8 +183,8 @@ function OrderHistory() {
                         {formatTimeAgo(item.createdAt)}
                       </Td>
                       <Td width={"300px"} textAlign={"start"} >
-                        <Tooltip label={item.orderNote} fontSize="md">
-                          <Text noOfLines={isMobile ? 5 : 2}>
+                        <Tooltip bg={"yellow.300"} textColor={"black"} label={item.orderNote} fontSize="md">
+                          <Text  noOfLines={isMobile ? 5 : 2}>
                             {item.orderNote}
                           </Text>
                         </Tooltip>
