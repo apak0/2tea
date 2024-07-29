@@ -48,7 +48,6 @@ function Basket() {
   const { items, setItems, increment, decrement } = useBasket();
 
   const [orderNote, setOrderNote] = useState("");
-  const [coffeeVariants, setCoffeeVariants] = useState({});
 
   const orderedItems = items.filter((item) => item.quantity > 0);
 
@@ -95,7 +94,7 @@ function Basket() {
     user?.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
-          message: `${notificationInfo?.customer} bir sipariş gönderdi: ${orderNote}`,
+          message: `${notificationInfo?.customer} bir sipariş gönderdi`,
           duration: 4000,
           native: window.innerWidth <= 768 ? false : true,
 
@@ -111,26 +110,43 @@ function Basket() {
   const handleSubmitForm = async () => {
     const selectedItems = items.filter((item) => item.quantity > 0);
 
+    // Create the base input object
     const input = {
       fullName,
       phoneNumber,
       address,
       items: selectedItems.map((item) => ({
         ...item,
-        variant: coffeeVariants[item._id] || null,
       })),
-      orderNote,
     };
 
-    await postOrder(input);
-    const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
-    setItems(updatedItems);
-    toastForOrder();
+    // Orde notu varsa input'a orderNote'u ekle
+    if (orderNote) {
+      input.orderNote = orderNote;
+    }
 
-    sendNotification();
-    refetch();
+    console.log("Request Payload:", input);
 
-    setOrderNote("");
+    try {
+      await postOrder(input);
+      const updatedItems = items.map((item) => ({ ...item, quantity: 0 }));
+      setItems(updatedItems);
+      toastForOrder();
+
+      sendNotification();
+      refetch();
+
+      setOrderNote("");
+    } catch (error) {
+      console.error("Error posting order:", error);
+      toast({
+        title: "Order Error",
+        description: "There was an error processing your order.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
   };
 
   const navigate = useNavigate();
@@ -141,13 +157,6 @@ function Basket() {
   const buttonText = items.some((item) => item.quantity > 0)
     ? "SİPARİŞİ GÖNDER"
     : "ÜRÜN SEÇİN";
-
-  const handleVariantSelect = (itemId, variant) => {
-    setCoffeeVariants((prevVariants) => ({
-      ...prevVariants,
-      [itemId]: variant,
-    }));
-  };
 
   return (
     <Box className="basketTopDiv w-full ">
@@ -297,11 +306,6 @@ function Basket() {
                           p={2}
                         >
                           {item.title}
-                          {coffeeVariants[item._id] && (
-                            <Text fontSize="sm" color="gray.500">
-                              Çeşit: {coffeeVariants[item._id]}
-                            </Text>
-                          )}
                         </Td>
                         <Td
                           display={"flex"}
@@ -351,7 +355,7 @@ function Basket() {
                 </Text>
                 <Textarea
                   placeholder="Siparişinizle ilgili eklemek istediğiniz bir not var mı?"
-                  value={orderNote ? orderNote : ""}
+                  value={orderNote}
                   onChange={(e) => setOrderNote(e.target.value)}
                   size="sm"
                 />
