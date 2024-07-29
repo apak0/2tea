@@ -20,9 +20,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery, useQuery } from "react-query";
 import "./styles.css";
-import ScrollToTopButton from "../../components/ScrollToTopButton";
+
 import io from "socket.io-client";
-import RadioCard from "../../components/RadioCard";
 
 const socket = io(process.env.REACT_APP_BASE_ENDPOINT);
 
@@ -48,7 +47,6 @@ function Basket() {
   const [address, setAddress] = useState("test3");
   const { items, setItems, increment, decrement } = useBasket();
 
-  const [showTextarea, setShowTextarea] = useState(true);
   const [orderNote, setOrderNote] = useState("");
   const [coffeeVariants, setCoffeeVariants] = useState({});
 
@@ -97,7 +95,7 @@ function Basket() {
     user?.role === "admin"
       ? addNotification({
           title: "Yeni sipariş var",
-          message: `${notificationInfo?.customer} bir sipariş gönderdi`,
+          message: `${notificationInfo?.customer} bir sipariş gönderdi: ${orderNote}`,
           duration: 4000,
           native: window.innerWidth <= 768 ? false : true,
 
@@ -121,7 +119,7 @@ function Basket() {
         ...item,
         variant: coffeeVariants[item._id] || null,
       })),
-      orderNote
+      orderNote,
     };
 
     await postOrder(input);
@@ -183,15 +181,6 @@ function Basket() {
                   h={"200px"}
                   className="cards"
                 />
-                {item.title === "Türk Kahvesi" && (
-                  <Box className="absolute bottom-0 text-xs left-1/2 transform -translate-x-1/2 text-blue-700 ">
-                    <RadioCard
-                      onSelect={(variant) =>
-                        handleVariantSelect(item._id, variant)
-                      }
-                    />
-                  </Box>
-                )}
               </Box>
 
               <Box
@@ -362,7 +351,7 @@ function Basket() {
                 </Text>
                 <Textarea
                   placeholder="Siparişinizle ilgili eklemek istediğiniz bir not var mı?"
-                  value={orderNote}
+                  value={orderNote ? orderNote : ""}
                   onChange={(e) => setOrderNote(e.target.value)}
                   size="sm"
                 />
