@@ -22,7 +22,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { fetchOrders } from "../../api";
 import { useAuth } from "../../contexts/AuthContext";
-import axios from 'axios';
+import axios from "axios";
 
 function OrderHistory() {
   const { user } = useAuth();
@@ -51,53 +51,56 @@ function OrderHistory() {
       return `${seconds} sn.`;
     }
   };
-  const isAdmin = user.role === "admin";
+
+  const isAdmin = user && user.role === "admin";
+
   const OrderStatusButtons = ({ orderId, initialStatus, isAdmin }) => {
     const [status, setStatus] = useState(initialStatus);
-  
+
     const updateStatus = async (newStatus) => {
       try {
-        const response = await axios.post('http://localhost:4000/order/update-status', {
-          orderId,
-          status: newStatus
-        });
+        const response = await axios.post(
+          "http://localhost:4000/order/update-status",
+          {
+            orderId,
+            status: newStatus,
+          }
+        );
         setStatus(newStatus);
       } catch (error) {
         console.error("Failed to update status:", error);
       }
     };
-  
+
     if (!isAdmin) {
       return <Box>{status}</Box>;
     }
 
-    
-  
     return (
       <Box>
         <Button
-          colorScheme={status === 'Pending' ? "yellow" : "gray"}
+          colorScheme={status === "Pending" ? "yellow" : "gray"}
           size="sm"
           m={1}
-          onClick={() => updateStatus('Pending')}
+          onClick={() => updateStatus("Pending")}
         >
-          Pending
+          Beklemede
         </Button>
         <Button
-          colorScheme={status === 'Processing' ? "blue" : "gray"}
+          colorScheme={status === "Processing" ? "blue" : "gray"}
           size="sm"
           m={1}
-          onClick={() => updateStatus('Processing')}
+          onClick={() => updateStatus("Processing")}
         >
-          Processing
+          Hazırlanıyor
         </Button>
         <Button
-          colorScheme={status === 'Completed' ? "green" : "gray"}
+          colorScheme={status === "Completed" ? "green" : "gray"}
           size="sm"
           m={1}
-          onClick={() => updateStatus('Completed')}
+          onClick={() => updateStatus("Completed")}
         >
-          Completed
+          Tamamlandı
         </Button>
       </Box>
     );
@@ -135,56 +138,150 @@ function OrderHistory() {
       </Flex>
 
       <Table variant="simple" size={isMobile ? "sm" : "md"}>
-      <Thead bg="blue.200">
-        <Tr>
-          <Th fontSize="14px" p={5} color="black" textAlign={isMobile ? "left" : "center"}>GÖNDEREN</Th>
-          <Th fontSize="14px" color="black" textAlign={isMobile ? "left" : "center"}>SİPARİŞ</Th>
-          <Th fontSize="14px" p={5} color="black" textAlign={isMobile ? "left" : "center"}>TARİH</Th>
-          <Th fontSize="14px" p={5} color="black" textAlign={isMobile ? "left" : "center"}>Not</Th>
-          <Th fontSize="14px" p={5} color="black" textAlign={isMobile ? "left" : "center"}>Order Status</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {data && data.length > 0 ? (
-          data.slice().reverse().map((item) => {
-            if (localStorage.getItem("access-token") && (isAdmin || item.user._id === user._id)) {
-              return (
-                <Tr key={item._id} className="hover:bg-gray-100 transition duration-300 ease-in-out">
-                  <Td style={{ fontSize: isMobile ? "16px" : "30px" }} textAlign={isMobile ? "left" : "center"}>{item.user.fullname}</Td>
-                  <Td style={{ fontSize: isMobile ? "16px" : "30px", textAlign: "center" }} isNumeric>
-                    <Menu>
-                      <MenuButton as={Button} rightIcon={<ChevronDownIcon />} bg={isDark ? "blue.300" : "blue.500"} color={isDark ? "gray.900" : "white"} _hover={{ bg: isDark ? "blue.400" : "blue.600" }} _active={{ bg: isDark ? "blue.500" : "blue.700" }} className="transition duration-300 ease-in-out transform hover:-translate-x-0.5">
-                        {item.items.length} Ürün
-                      </MenuButton>
-                      <MenuList bg={isDark ? "gray.800" : "yellow.300"} borderColor={isDark ? "gray.700" : "gray.200"} className="shadow-lg rounded-lg">
-                        {item.items.map((orderItem, index) => (
-                          <MenuItem key={index} bg={"yellow.300"}>{orderItem.title} - {orderItem.quantity}</MenuItem>
-                        ))}
-                      </MenuList>
-                    </Menu>
-                  </Td>
-                  <Td style={{ fontSize: isMobile ? "16px" : "30px", textAlign: "center" }} isNumeric>{formatTimeAgo(item.createdAt)}</Td>
-                  <Td width={"300px"} textAlign={"start"}>
-                    <Tooltip bg={"yellow.300"} textColor={"black"} label={item.orderNote} fontSize="md">
-                      <Text noOfLines={isMobile ? 5 : 2}>{item.orderNote}</Text>
-                    </Tooltip>
-                  </Td>
-                  <Td style={{ fontSize: isMobile ? "16px" : "30px", textAlign: "center" }}>
-                    <OrderStatusButtons orderId={item._id} initialStatus={item.status} isAdmin={isAdmin} />
-                  </Td>
-                </Tr>
-              );
-            } else {
-              return null;
-            }
-          })
-        ) : (
-          <Box textAlign="center" w="full">
-            <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">Daha önce sipariş verilmedi</Text>
-          </Box>
-        )}
-      </Tbody>
-    </Table>
+        <Thead bg="blue.200">
+          <Tr>
+            <Th
+              fontSize="14px"
+              p={5}
+              color="black"
+              textAlign={isMobile ? "left" : "center"}
+            >
+              GÖNDEREN
+            </Th>
+            <Th
+              fontSize="14px"
+              color="black"
+              textAlign={isMobile ? "left" : "center"}
+            >
+              SİPARİŞ
+            </Th>
+            <Th
+              fontSize="14px"
+              p={5}
+              color="black"
+              textAlign={isMobile ? "left" : "center"}
+            >
+              TARİH
+            </Th>
+            <Th
+              fontSize="14px"
+              p={5}
+              color="black"
+              textAlign={isMobile ? "left" : "center"}
+            >
+              Not
+            </Th>
+            <Th
+              fontSize="14px"
+              p={5}
+              color="black"
+              textAlign={isMobile ? "left" : "center"}
+            >
+              Order Status
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {data && data.length > 0 ? (
+            data
+              .slice()
+              .reverse()
+              .map((item) => {
+                if (
+                  localStorage.getItem("access-token") &&
+                  (isAdmin || item.user._id === user._id)
+                ) {
+                  return (
+                    <Tr
+                      key={item._id}
+                      className="hover:bg-gray-100 transition duration-300 ease-in-out"
+                    >
+                      <Td
+                        style={{ fontSize: isMobile ? "16px" : "30px" }}
+                        textAlign={isMobile ? "left" : "center"}
+                      >
+                        {item.user.fullname}
+                      </Td>
+                      <Td
+                        style={{
+                          fontSize: isMobile ? "16px" : "30px",
+                          textAlign: "center",
+                        }}
+                        isNumeric
+                      >
+                        <Menu>
+                          <MenuButton
+                            as={Button}
+                            rightIcon={<ChevronDownIcon />}
+                            bg={isDark ? "blue.300" : "blue.500"}
+                            color={isDark ? "gray.900" : "white"}
+                            _hover={{ bg: isDark ? "blue.400" : "blue.600" }}
+                            _active={{ bg: isDark ? "blue.500" : "blue.700" }}
+                            className="transition duration-300 ease-in-out transform hover:-translate-x-0.5"
+                          >
+                            {item.items.length} Ürün
+                          </MenuButton>
+                          <MenuList
+                            bg={isDark ? "gray.800" : "yellow.300"}
+                            borderColor={isDark ? "gray.700" : "gray.200"}
+                            className="shadow-lg rounded-lg"
+                          >
+                            {item.items.map((orderItem, index) => (
+                              <MenuItem key={index} bg={"yellow.300"}>
+                                {orderItem.title} - {orderItem.quantity}
+                              </MenuItem>
+                            ))}
+                          </MenuList>
+                        </Menu>
+                      </Td>
+                      <Td
+                        style={{
+                          fontSize: isMobile ? "16px" : "30px",
+                          textAlign: "center",
+                        }}
+                        isNumeric
+                      >
+                        {formatTimeAgo(item.createdAt)}
+                      </Td>
+                      <Td width={"300px"} textAlign={"start"}>
+                        <Tooltip
+                          bg={"yellow.300"}
+                          textColor={"black"}
+                          label={item.orderNote}
+                          fontSize="md"
+                        >
+                          <Text noOfLines={isMobile ? 5 : 2}>
+                            {item.orderNote}
+                          </Text>
+                        </Tooltip>
+                      </Td>
+                      <Td
+                        style={{
+                          fontSize: isMobile ? "16px" : "30px",
+                          textAlign: "center",
+                        }}
+                      >
+                        <OrderStatusButtons
+                          orderId={item._id}
+                          initialStatus={item.status}
+                          isAdmin={isAdmin}
+                        />
+                      </Td>
+                    </Tr>
+                  );
+                } else {
+                  return null;
+                }
+              })
+          ) : (
+            <Box textAlign="center" w="full">
+              <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
+                Daha önce sipariş verilmedi
+              </Text>
+            </Box>
+          )}
+        </Tbody>
+      </Table>
     </div>
   );
 }
