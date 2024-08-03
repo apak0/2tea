@@ -58,41 +58,35 @@ function OrderHistory() {
     const [status, setStatus] = useState(initialStatus);
 
     const updateStatus = async (newStatus) => {
-  try {
-    const token = localStorage.getItem("access-token"); // Retrieve the token from localStorage
-    if (!token) {
-      throw new Error("No access token found");
-    }
-
-    console.log("Token:", token);  // Debugging: Log the token to ensure it's being retrieved
-
-    const response = await axios.post(
-      'https://twotea.onrender.com//order/update-status',
-      {
-        orderId,
-        status: newStatus,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-        },
+      try {
+        const token = localStorage.getItem("access-token"); // Retrieve the token from localStorage
+        if (!token) {
+          throw new Error("No access token found");
+        }
+    
+        console.log("Token:", token);  // Debugging: Log the token to ensure it's being retrieved
+    
+        await axios.post(
+          "http://localhost:4000/order/update-status",
+          {
+            orderId,
+            status: newStatus,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            },
+          }
+        );
+    
+        setStatus(newStatus);
+      } catch (error) {
+        console.error("Failed to update status:", error);
+        if (error.response) {
+          console.error("Error Response:", error.response.data); // Log the specific error response
+        }
       }
-    );
-    setStatus(newStatus);
-  } catch (error) {
-    console.error("Failed to update status:", error);
-
-    // Debugging: Log the specific error response
-    if (error.response) {
-      console.error("Error Response:", error.response.data);
-    }
-
-    if (error.response && error.response.status === 401) {
-      alert("Unauthorized. Please log in again.");
-      // Redirect to login page or handle re-authentication
-    }
-  }
-};
+    };
 
     if (!isAdmin) {
       return <Box>{status}</Box>;
