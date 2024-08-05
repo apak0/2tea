@@ -67,7 +67,7 @@ function OrderHistory() {
         console.log("Token:", token);  // Debugging: Log the token to ensure it's being retrieved
     
         await axios.post(
-          "http://localhost:4000/order/update-status",
+          `${process.env.REACT_APP_BASE_ENDPOINT}/order/update-status`,
           {
             orderId,
             status: newStatus,
