@@ -95,26 +95,26 @@ function OrderHistory() {
     return (
       <Box>
         <Button
-          colorScheme={status === "Pending" ? "yellow" : "gray"}
+          colorScheme={status === "Beklemede" ? "yellow" : "gray"}
           size="sm"
           m={1}
-          onClick={() => updateStatus("Pending")}
+          onClick={() => updateStatus("Beklemede")}
         >
           Beklemede
         </Button>
         <Button
-          colorScheme={status === "Processing" ? "blue" : "gray"}
+          colorScheme={status === "Hazırlanıyor" ? "blue" : "gray"}
           size="sm"
           m={1}
-          onClick={() => updateStatus("Processing")}
+          onClick={() => updateStatus("Hazırlanıyor")}
         >
           Hazırlanıyor
         </Button>
         <Button
-          colorScheme={status === "Completed" ? "green" : "gray"}
+          colorScheme={status === "Tamamlandı" ? "green" : "gray"}
           size="sm"
           m={1}
-          onClick={() => updateStatus("Completed")}
+          onClick={() => updateStatus("Tamamlandı")}
         >
           Tamamlandı
         </Button>
