@@ -63,9 +63,9 @@ function OrderHistory() {
         if (!token) {
           throw new Error("No access token found");
         }
-    
-        console.log("Token:", token);  // Debugging: Log the token to ensure it's being retrieved
-    
+
+        
+
         await axios.post(
           `${process.env.REACT_APP_BASE_ENDPOINT}/order/update-status`,
           {
@@ -74,16 +74,16 @@ function OrderHistory() {
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+              Authorization: `Bearer ${token}`,
             },
           }
         );
-    
+
         setStatus(newStatus);
       } catch (error) {
         console.error("Failed to update status:", error);
         if (error.response) {
-          console.error("Error Response:", error.response.data); // Log the specific error response
+          console.error("Error Response:", error.response.data); 
         }
       }
     };
@@ -96,6 +96,7 @@ function OrderHistory() {
       <Box>
         <Button
           colorScheme={status === "Beklemede" ? "yellow" : "gray"}
+          opacity={status === "Beklemede" ? "1" : "0.6"}
           size="sm"
           m={1}
           onClick={() => updateStatus("Beklemede")}
@@ -104,6 +105,7 @@ function OrderHistory() {
         </Button>
         <Button
           colorScheme={status === "Hazırlanıyor" ? "blue" : "gray"}
+          opacity={status === "Hazırlanıyor" ? "1" : "0.6"}
           size="sm"
           m={1}
           onClick={() => updateStatus("Hazırlanıyor")}
@@ -112,6 +114,7 @@ function OrderHistory() {
         </Button>
         <Button
           colorScheme={status === "Tamamlandı" ? "green" : "gray"}
+          opacity={status === "Tamamlandı" ? "1" : "0.6"}
           size="sm"
           m={1}
           onClick={() => updateStatus("Tamamlandı")}
