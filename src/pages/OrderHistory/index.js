@@ -262,7 +262,7 @@ function OrderHistory() {
                       >
                         {formatTimeAgo(item.createdAt)}
                       </Td>
-                      <Td width={"300px"} textAlign={"start"}>
+                      <Td width={"300px"} textAlign={"start"} verticalAlign={"baseline"}>
                         <Tooltip
                           bg={"yellow.300"}
                           textColor={"black"}
