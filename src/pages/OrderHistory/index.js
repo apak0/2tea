@@ -64,8 +64,6 @@ function OrderHistory() {
           throw new Error("No access token found");
         }
 
-        
-
         await axios.post(
           `${process.env.REACT_APP_BASE_ENDPOINT}/order/update-status`,
           {
@@ -83,7 +81,7 @@ function OrderHistory() {
       } catch (error) {
         console.error("Failed to update status:", error);
         if (error.response) {
-          console.error("Error Response:", error.response.data); 
+          console.error("Error Response:", error.response.data);
         }
       }
     };
@@ -159,14 +157,19 @@ function OrderHistory() {
       <Table variant="simple" size={isMobile ? "sm" : "md"}>
         <Thead bg="blue.200">
           <Tr>
-            <Th
-              fontSize="14px"
-              p={5}
-              color="black"
-              textAlign={isMobile ? "left" : "center"}
-            >
-              GÖNDEREN
-            </Th>
+            {isAdmin ? (
+              <Th
+                fontSize="14px"
+                p={5}
+                color="black"
+                textAlign={isMobile ? "left" : "center"}
+              >
+                GÖNDEREN
+              </Th>
+            ) : (
+              ""
+            )}
+
             <Th
               fontSize="14px"
               color="black"
@@ -215,12 +218,17 @@ function OrderHistory() {
                       key={item._id}
                       className="hover:bg-gray-100 transition duration-300 ease-in-out"
                     >
-                      <Td
-                        style={{ fontSize: isMobile ? "16px" : "30px" }}
-                        textAlign={isMobile ? "left" : "center"}
-                      >
-                        {item.user.fullname}
-                      </Td>
+                      {isAdmin ? (
+                        <Td
+                          style={{ fontSize: isMobile ? "16px" : "30px" }}
+                          textAlign={isMobile ? "left" : "center"}
+                        >
+                          {item.user.fullname}
+                        </Td>
+                      ) : (
+                        ""
+                      )}
+
                       <Td
                         style={{
                           fontSize: isMobile ? "16px" : "30px",
@@ -262,7 +270,11 @@ function OrderHistory() {
                       >
                         {formatTimeAgo(item.createdAt)}
                       </Td>
-                      <Td width={"300px"} textAlign={"start"} verticalAlign={"baseline"}>
+                      <Td
+                        width={"300px"}
+                        textAlign={"start"}
+                        verticalAlign={"baseline"}
+                      >
                         <Tooltip
                           bg={"yellow.300"}
                           textColor={"black"}
