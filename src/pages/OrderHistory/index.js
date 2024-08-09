@@ -241,7 +241,7 @@ function OrderHistory() {
                             color={isDark ? "gray.900" : "white"}
                             _hover={{ bg: isDark ? "blue.400" : "blue.600" }}
                             _active={{ bg: isDark ? "blue.500" : "blue.700" }}
-                            className="transition duration-300 ease-in-out transform hover:-translate-x-0.5"
+                            className="transition duration-300 ease-in-out transform hover:-translate-x-0.5 hover:text-amber-300"
                           >
                             {item.items.length}
                           </MenuButton>
