@@ -213,7 +213,7 @@ function OrderHistory() {
                   return (
                     <Tr
                       key={item._id}
-                      className="hover:bg-gray-100 transition duration-300 ease-in-out"
+                      className="hover:bg-blue-400 hover:text-amber-300 transition duration-300 ease-in-out"
                     >
                       {isAdmin ? (
                         <Td
@@ -246,12 +246,12 @@ function OrderHistory() {
                             {item.items.length}
                           </MenuButton>
                           <MenuList
-                            bg={isDark ? "gray.800" : "yellow.300"}
-                            borderColor={isDark ? "gray.700" : "gray.200"}
+                            bg={isDark ? "gray.800" : "blue.300"}
+                            borderColor={isDark ? "gray.700" : "blue.200"}
                             className="shadow-lg rounded-lg"
                           >
                             {item.items.map((orderItem, index) => (
-                              <MenuItem key={index} bg={"yellow.300"}>
+                              <MenuItem key={index} bg={"blue.300"} as={"b"} >
                                 {orderItem.title} - {orderItem.quantity}
                               </MenuItem>
                             ))}
