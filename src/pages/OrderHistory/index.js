@@ -151,7 +151,7 @@ function OrderHistory() {
         </Box>
       </Flex>
 
-      <Table variant="simple" size={isMobile ? "sm" : "md"}>
+      <Table variant="simple" size={isMobile ? "sm" : "md"} as={"b"}>
         <Thead bg="blue.200">
           <Tr>
             {isAdmin ? (
