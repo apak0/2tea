@@ -96,7 +96,6 @@ function OrderHistory() {
           colorScheme={status === "Beklemede" ? "yellow" : "gray"}
           opacity={status === "Beklemede" ? "1" : "0.6"}
           size="sm"
-          m={1}
           onClick={() => updateStatus("Beklemede")}
         >
           Beklemede
@@ -105,7 +104,6 @@ function OrderHistory() {
           colorScheme={status === "Hazırlanıyor" ? "blue" : "gray"}
           opacity={status === "Hazırlanıyor" ? "1" : "0.6"}
           size="sm"
-          m={1}
           onClick={() => updateStatus("Hazırlanıyor")}
         >
           Hazırlanıyor
@@ -114,7 +112,6 @@ function OrderHistory() {
           colorScheme={status === "Tamamlandı" ? "green" : "gray"}
           opacity={status === "Tamamlandı" ? "1" : "0.6"}
           size="sm"
-          m={1}
           onClick={() => updateStatus("Tamamlandı")}
         >
           Tamamlandı
@@ -160,7 +157,7 @@ function OrderHistory() {
             {isAdmin ? (
               <Th
                 fontSize="14px"
-                p={5}
+                p={1}
                 color="black"
                 textAlign={isMobile ? "left" : "center"}
               >
@@ -179,7 +176,7 @@ function OrderHistory() {
             </Th>
             <Th
               fontSize="14px"
-              p={5}
+              p={1}
               color="black"
               textAlign={isMobile ? "left" : "center"}
             >
@@ -187,7 +184,7 @@ function OrderHistory() {
             </Th>
             <Th
               fontSize="14px"
-              p={5}
+              p={1}
               color="black"
               textAlign={isMobile ? "left" : "center"}
             >
@@ -195,11 +192,11 @@ function OrderHistory() {
             </Th>
             <Th
               fontSize="14px"
-              p={5}
+              p={1}
               color="black"
               textAlign={isMobile ? "left" : "center"}
             >
-              Order Status
+              sİPARİŞ DURUMU
             </Th>
           </Tr>
         </Thead>
@@ -246,7 +243,7 @@ function OrderHistory() {
                             _active={{ bg: isDark ? "blue.500" : "blue.700" }}
                             className="transition duration-300 ease-in-out transform hover:-translate-x-0.5"
                           >
-                            {item.items.length} Ürün
+                            {item.items.length}
                           </MenuButton>
                           <MenuList
                             bg={isDark ? "gray.800" : "yellow.300"}
