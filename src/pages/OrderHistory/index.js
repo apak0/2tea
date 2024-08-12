@@ -192,12 +192,7 @@ function OrderHistory() {
               NOT
             </Th>
             {!isAdmin ? (
-              <Th
-                fontSize="14px"
-                p={1}
-                color="black"
-                textAlign={isMobile ? "left" : "center"}
-              >
+              <Th fontSize="14px" p={1} color="black" textAlign="center">
                 SİPARİŞ DURUMU
               </Th>
             ) : (
