@@ -91,36 +91,36 @@ function OrderHistory() {
     }
 
     return (
-      <Box className="flex justify-center items-center">
+      <Box className="  md:flex justify-center items-center">
         <Button
-          colorScheme={status === "b" ? "blue" : "gray"}
-          border={status === "b" ? "1px" : "1px"}
-          opacity={status === "b" ? "1" : "0.6"}
+          colorScheme={status === "Beklemede" ? "blue" : "gray"}
+          border={status === "Beklemede" ? "1px" : "1px"}
+          opacity={status === "Beklemede" ? "1" : "0.6"}
           size="sm"
           margin={1}
-          onClick={() => updateStatus("b")}
+          onClick={() => updateStatus("Beklemede")}
         >
-          b
+          Beklemede
         </Button>
         <Button
-          colorScheme={status === "h" ? "yellow" : "gray"}
-          border={status === "b" ? "1px" : "1px"}
-          opacity={status === "h" ? "1" : "0.6"}
+          colorScheme={status === "Hazırlanıyor" ? "yellow" : "gray"}
+          border={status === "Hazırlanıyor" ? "1px" : "1px"}
+          opacity={status === "Hazırlanıyor" ? "1" : "0.6"}
           size="sm"
           margin={1}
-          onClick={() => updateStatus("h")}
+          onClick={() => updateStatus("Hazırlanıyor")}
         >
-          h
+          Hazırlanıyor
         </Button>
         <Button
-          colorScheme={status === "t" ? "green" : "gray"}
-          border={status === "b" ? "1px" : "1px"}
-          opacity={status === "t" ? "1" : "0.6"}
+          colorScheme={status === "Tamamlandı" ? "green" : "gray"}
+          border={status === "Tamamlandı" ? "1px" : "1px"}
+          opacity={status === "Tamamlandı" ? "1" : "0.6"}
           size="sm"
           margin={1}
-          onClick={() => updateStatus("t")}
+          onClick={() => updateStatus("Tamamlandı")}
         >
-          t
+          Tamamlandı
         </Button>
       </Box>
     );
@@ -283,9 +283,8 @@ function OrderHistory() {
                           textColor={"black"}
                           label={item.orderNote}
                           fontSize="md"
-                        
                         >
-                          <Text noOfLines={isMobile ? 5 : 2} >
+                          <Text noOfLines={isMobile ? 5 : 2}>
                             {item.orderNote}
                           </Text>
                         </Tooltip>
