@@ -87,7 +87,21 @@ function OrderHistory() {
     };
 
     if (!isAdmin) {
-      return <Box>{status}</Box>;
+      return (
+        <Box
+          color={
+            status === "Beklemede"
+              ? "blue"
+              : status === "Hazırlanıyor"
+              ? "yellow.500"
+              : status === "Tamamlandı"
+              ? "green"
+              : "gray.500" //
+          }
+        >
+          {status}
+        </Box>
+      );
     }
 
     return (
