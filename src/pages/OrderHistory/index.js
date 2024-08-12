@@ -91,30 +91,36 @@ function OrderHistory() {
     }
 
     return (
-      <Box>
+      <Box className="flex justify-center items-center">
         <Button
-          colorScheme={status === "Beklemede" ? "yellow" : "gray"}
-          opacity={status === "Beklemede" ? "1" : "0.6"}
+          colorScheme={status === "b" ? "blue" : "gray"}
+          border={status === "b" ? "1px" : "1px"}
+          opacity={status === "b" ? "1" : "0.6"}
           size="sm"
-          onClick={() => updateStatus("Beklemede")}
+          margin={1}
+          onClick={() => updateStatus("b")}
         >
-          Beklemede
+          b
         </Button>
         <Button
-          colorScheme={status === "Hazırlanıyor" ? "blue" : "gray"}
-          opacity={status === "Hazırlanıyor" ? "1" : "0.6"}
+          colorScheme={status === "h" ? "yellow" : "gray"}
+          border={status === "b" ? "1px" : "1px"}
+          opacity={status === "h" ? "1" : "0.6"}
           size="sm"
-          onClick={() => updateStatus("Hazırlanıyor")}
+          margin={1}
+          onClick={() => updateStatus("h")}
         >
-          Hazırlanıyor
+          h
         </Button>
         <Button
-          colorScheme={status === "Tamamlandı" ? "green" : "gray"}
-          opacity={status === "Tamamlandı" ? "1" : "0.6"}
+          colorScheme={status === "t" ? "green" : "gray"}
+          border={status === "b" ? "1px" : "1px"}
+          opacity={status === "t" ? "1" : "0.6"}
           size="sm"
-          onClick={() => updateStatus("Tamamlandı")}
+          margin={1}
+          onClick={() => updateStatus("t")}
         >
-          Tamamlandı
+          t
         </Button>
       </Box>
     );
@@ -155,49 +161,34 @@ function OrderHistory() {
         <Thead bg="blue.200">
           <Tr>
             {isAdmin ? (
-              <Th
-                fontSize="14px"
-                p={1}
-                color="black"
-                textAlign={isMobile ? "left" : "center"}
-              >
+              <Th fontSize="14px" color="black" textAlign="center">
                 GÖNDEREN
               </Th>
             ) : (
               ""
             )}
 
-            <Th
-              fontSize="14px"
-              color="black"
-              textAlign={isMobile ? "left" : "center"}
-            >
+            <Th fontSize="14px" color="black" textAlign="center">
               SİPARİŞ
             </Th>
-            <Th
-              fontSize="14px"
-              p={1}
-              color="black"
-              textAlign={isMobile ? "left" : "center"}
-            >
+            <Th fontSize="14px" color="black" textAlign="center">
               TARİH
             </Th>
-            <Th
-              fontSize="14px"
-              p={1}
-              color="black"
-              textAlign={isMobile ? "left" : "center"}
-            >
-              Not
+            <Th fontSize="14px" color="black" textAlign="center" p={0}>
+              NOT
             </Th>
-            <Th
-              fontSize="14px"
-              p={1}
-              color="black"
-              textAlign={isMobile ? "left" : "center"}
-            >
-              sİPARİŞ DURUMU
-            </Th>
+            {!isAdmin ? (
+              <Th
+                fontSize="14px"
+                p={1}
+                color="black"
+                textAlign={isMobile ? "left" : "center"}
+              >
+                SİPARİŞ DURUMU
+              </Th>
+            ) : (
+              ""
+            )}
           </Tr>
         </Thead>
         <Tbody>
@@ -213,7 +204,7 @@ function OrderHistory() {
                   return (
                     <Tr
                       key={item._id}
-                      className="hover:bg-blue-400 hover:text-amber-300 transition duration-300 ease-in-out"
+                      className="hover:bg-blue-400 hover:text-amber-300 transition duration-300 ease-in-out border-b-2 border-black"
                     >
                       {isAdmin ? (
                         <Td
@@ -230,6 +221,9 @@ function OrderHistory() {
                         style={{
                           fontSize: isMobile ? "16px" : "30px",
                           textAlign: "center",
+                          paddingTop: 5,
+                          paddingLeft: 0,
+                          paddingRight: 0,
                         }}
                         isNumeric
                       >
@@ -251,17 +245,27 @@ function OrderHistory() {
                             className="shadow-lg rounded-lg"
                           >
                             {item.items.map((orderItem, index) => (
-                              <MenuItem key={index} bg={"blue.300"} as={"b"} >
+                              <MenuItem key={index} bg={"blue.300"} as={"b"}>
                                 {orderItem.title} - {orderItem.quantity}
                               </MenuItem>
                             ))}
                           </MenuList>
                         </Menu>
+                        {isAdmin ? (
+                          <OrderStatusButtons
+                            orderId={item._id}
+                            initialStatus={item.status}
+                            isAdmin={isAdmin}
+                          />
+                        ) : (
+                          ""
+                        )}
                       </Td>
                       <Td
                         style={{
                           fontSize: isMobile ? "16px" : "30px",
                           textAlign: "center",
+                          padding: 0,
                         }}
                         isNumeric
                       >
@@ -271,30 +275,37 @@ function OrderHistory() {
                         width={"300px"}
                         textAlign={"start"}
                         verticalAlign={"baseline"}
+                        padding={0}
+                        textColor={"gray"}
                       >
                         <Tooltip
                           bg={"yellow.300"}
                           textColor={"black"}
                           label={item.orderNote}
                           fontSize="md"
+                        
                         >
-                          <Text noOfLines={isMobile ? 5 : 2}>
+                          <Text noOfLines={isMobile ? 5 : 2} >
                             {item.orderNote}
                           </Text>
                         </Tooltip>
                       </Td>
-                      <Td
-                        style={{
-                          fontSize: isMobile ? "16px" : "30px",
-                          textAlign: "center",
-                        }}
-                      >
-                        <OrderStatusButtons
-                          orderId={item._id}
-                          initialStatus={item.status}
-                          isAdmin={isAdmin}
-                        />
-                      </Td>
+                      {!isAdmin ? (
+                        <Td
+                          style={{
+                            fontSize: isMobile ? "16px" : "30px",
+                            textAlign: "center",
+                          }}
+                        >
+                          <OrderStatusButtons
+                            orderId={item._id}
+                            initialStatus={item.status}
+                            isAdmin={isAdmin}
+                          />
+                        </Td>
+                      ) : (
+                        ""
+                      )}
                     </Tr>
                   );
                 } else {
