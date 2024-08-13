@@ -200,7 +200,7 @@ function OrderHistory() {
             )}
           </Tr>
         </Thead>
-        <Tbody>
+        <Tbody bg={"gray.200"}>
           {data && data.length > 0 ? (
             data
               .slice()
@@ -213,7 +213,8 @@ function OrderHistory() {
                   return (
                     <Tr
                       key={item._id}
-                      className="hover:bg-blue-400 hover:text-amber-300 transition duration-300 ease-in-out border-b-2 border-black"
+                      className="hover:bg-gray-400 transition duration-300 ease-in-out"
+                      borderBottom={"2px"}
                     >
                       {isAdmin ? (
                         <Td
@@ -249,12 +250,12 @@ function OrderHistory() {
                             {item.items.length}
                           </MenuButton>
                           <MenuList
-                            bg={isDark ? "gray.800" : "blue.300"}
-                            borderColor={isDark ? "gray.700" : "blue.200"}
-                            className="shadow-lg rounded-lg"
+                            bg={isDark ? "gray.800" : "gray.300"}
+                            borderColor={isDark ? "gray.700" : "gray.200"}
+                            className="shadow-lg rounded-lg hover:text-amber-600  "
                           >
                             {item.items.map((orderItem, index) => (
-                              <MenuItem key={index} bg={"blue.300"} as={"b"}>
+                              <MenuItem key={index} bg={"gray.300"} as={"b"}>
                                 {orderItem.title} - {orderItem.quantity}
                               </MenuItem>
                             ))}
@@ -285,7 +286,7 @@ function OrderHistory() {
                         textAlign={"start"}
                         verticalAlign={"baseline"}
                         padding={0}
-                        textColor={"gray"}
+                        textColor={"orange.300"}
                       >
                         <Tooltip
                           bg={"yellow.300"}
