@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import {
-  
   Box,
   Icon,
   Image,
@@ -15,20 +14,17 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 
-
 import { IoMdLogOut } from "react-icons/io";
-
 
 import { HiOutlineMenu } from "react-icons/hi";
 
 import { useAuth } from "../../contexts/AuthContext";
 
-
 function Navbar() {
   const { user, logout } = useAuth();
 
   const isLoggedIn = !!localStorage.getItem("access-token");
-  
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -62,13 +58,12 @@ function Navbar() {
         </Box>
 
         <Box
-           className={`flex justify-center items-center ml-0 ${isLoggedIn ? 'md:ml-52' : ''}`}  
-          
+          className={`flex justify-center items-center ml-0 ${
+            isLoggedIn ? "md:ml-52" : ""
+          }`}
         >
           <NavLink to="/">
-            <Text
-              fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}
-            >
+            <Text fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}>
               ÇAY OCAĞI
             </Text>
           </NavLink>
@@ -80,13 +75,11 @@ function Navbar() {
               <>
                 <ListItem>
                   <NavLink
-                  
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
                     })}
                     to="/signin"
-                    
                   >
                     Giriş Yap
                   </NavLink>
@@ -110,7 +103,6 @@ function Navbar() {
                 <ListItem className="flex justify-center items-center">
                   {user?.role === "admin" && (
                     <NavLink
-                      
                       style={({ isActive, isPending }) => ({
                         color: isActive ? "#FE7A36" : "white",
                         borderBottom: isActive ? "solid" : "",
@@ -124,7 +116,6 @@ function Navbar() {
 
                 <ListItem className="flex justify-center items-center">
                   <NavLink
-                  
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#FE7A36" : "white",
                       borderBottom: isActive ? "solid" : "",
@@ -148,10 +139,7 @@ function Navbar() {
                 </ListItem>
 
                 <ListItem className="flex justify-center items-center">
-                  <NavLink
-                   
-                    onClick={handleLogout}
-                  >
+                  <NavLink onClick={handleLogout}>
                     <IoMdLogOut style={{ color: "red", fontSize: "40px" }} />
                   </NavLink>
                 </ListItem>
@@ -173,45 +161,44 @@ function Navbar() {
             <MenuList>
               {!localStorage.getItem("access-token") ? (
                 <>
-
-                    <NavLink to="/signin">
-                  <MenuItem className="flex justify-center items-center">
+                  <NavLink to="/signin">
+                    <MenuItem className="flex justify-center items-center">
                       Giriş Yap
-                  </MenuItem>
-                      </NavLink>
+                    </MenuItem>
+                  </NavLink>
 
-                    <NavLink to="/signup">
-                  <MenuItem className="flex justify-center items-center">
+                  <NavLink to="/signup">
+                    <MenuItem className="flex justify-center items-center">
                       Kayıt Ol
-                  </MenuItem>
-                      </NavLink>
+                    </MenuItem>
+                  </NavLink>
                 </>
               ) : (
                 <>
                   {user?.role === "admin" && (
-
                     <NavLink to="/admin/home">
-                        <MenuItem className="flex justify-center items-center">
+                      <MenuItem className="flex justify-center items-center">
                         Admin
-                    </MenuItem>
-                        </NavLink>
+                      </MenuItem>
+                    </NavLink>
                   )}
 
-
-                    <NavLink to="/profile">
-                  <MenuItem className="flex justify-center items-center">
+                  <NavLink to="/profile">
+                    <MenuItem className="flex justify-center items-center">
                       Profil
-                  </MenuItem>
-                    </NavLink>
+                    </MenuItem>
+                  </NavLink>
 
-
-                    <NavLink to="/orderhistory">
-                  <MenuItem className="flex justify-center items-center">
+                  <NavLink to="/orderhistory">
+                    <MenuItem className="flex justify-center items-center">
                       Geçmiş Siparişler
-                  </MenuItem>
-                    </NavLink>
-                  <MenuItem  display={"flex"} justifyContent={"center"}  >
-                    <IoMdLogOut style={{ color: "red", fontSize: "50px" }} onClick={handleLogout} />
+                    </MenuItem>
+                  </NavLink>
+                  <MenuItem display={"flex"} justifyContent={"center"}>
+                    <IoMdLogOut
+                      style={{ color: "red", fontSize: "50px" }}
+                      onClick={ ()=>navigate("/")}
+                    />
                   </MenuItem>
                 </>
               )}
@@ -219,7 +206,6 @@ function Navbar() {
           </Menu>
         </Box>
       </Box>
-     
     </Box>
   );
 }

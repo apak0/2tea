@@ -3,6 +3,7 @@ import { Box, Text, Flex, VStack, Link } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList } from "../../api";
 import { useAuth } from "../../contexts/AuthContext";
+import { motion } from "framer-motion";
 
 import { useBasket } from "../../contexts/BasketContext";
 import "../../tailwind.css";
@@ -36,7 +37,9 @@ function Products() {
 
   if (status === "loading")
     return (
-      <Box
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         display="flex"
         justifyContent="center"
         alignItems="center"
@@ -44,7 +47,7 @@ function Products() {
         color="cyan.400"
       >
         Loading...
-      </Box>
+      </motion.div>
     );
 
   if (status === "error")
@@ -54,7 +57,7 @@ function Products() {
   // console.log("item:", items);
 
   return (
-    <Box>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Flex
         direction="column"
         align="center"
@@ -102,7 +105,7 @@ function Products() {
           </Box>
         </Link>
       </Flex>
-    </Box>
+    </motion.div>
   );
 }
 

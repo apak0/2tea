@@ -144,8 +144,8 @@ function Signin() {
                 width="full"
                 type="submit"
                 _hover={{
-                  transform: "scale(1.1)", // Use transform to scale
-                  transition: "transform 0.2s ease-in-out", // Define transition for transform
+                  transform: "scale(1.1)",
+                  transition: "transform 0.2s ease-in-out",
                 }}
               >
                 Devam Et

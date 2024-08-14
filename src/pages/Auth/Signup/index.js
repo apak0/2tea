@@ -57,7 +57,9 @@ function Signup() {
       <Flex align="center" width="full" justifyContent="center">
         <Box pt={10} width={"300px"}>
           <Box textAlign="center">
-            <Heading>Kayıt Ol</Heading>
+            <Heading fontFamily={"lora"}
+              fontSize={"xxx-large"}
+              textColor={"#FE7A36"}>Kayıt Ol</Heading>
           </Box>
           <Box my={5}>
             {formik.errors.general && (
