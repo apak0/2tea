@@ -59,7 +59,7 @@ function OrderHistory() {
 
     const updateStatus = async (newStatus) => {
       try {
-        const token = localStorage.getItem("access-token"); // Retrieve the token from localStorage
+        const token = localStorage.getItem("access-token");
         if (!token) {
           throw new Error("No access token found");
         }
@@ -96,7 +96,7 @@ function OrderHistory() {
               ? "yellow.500"
               : status === "Tamamlandı"
               ? "green"
-              : "gray.500" //
+              : "gray.500"
           }
         >
           {status}

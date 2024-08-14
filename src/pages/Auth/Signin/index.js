@@ -47,8 +47,6 @@ function Signin() {
     },
   });
 
- 
-
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Flex align="center" width="full" justifyContent="center">
@@ -136,20 +134,22 @@ function Signin() {
                   </Alert>
                 )}
               </FormControl>
-              <MotionButton
-                borderRadius={"50"}
-                fontFamily={"rocher"}
+              <Button
+                borderRadius="50"
+                fontFamily="rocher"
                 style={{ background: "#F59E0B" }}
-                fontSize={"xxx-large"}
+                fontSize="xxx-large"
                 mt={4}
-                height={"80px"}
+                height="80px"
                 width="full"
                 type="submit"
-                whileHover={{ scale: 1.1, transition: { duration: 0.2, ease: "easeInOut" } }}
+                _hover={{
+                  transform: "scale(1.1)", // Use transform to scale
+                  transition: "transform 0.2s ease-in-out", // Define transition for transform
+                }}
               >
                 Devam Et
-              </MotionButton>
-              ;
+              </Button>
             </form>
           </Box>
         </Box>

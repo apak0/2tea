@@ -10,7 +10,7 @@ import "./style.css";
 
 function Products() {
   const { items, setItems } = useBasket();
-  const { user, loggedIn } = useAuth();
+  const { user } = useAuth();
 
   const { data, error, status } = useInfiniteQuery(
     "products",
@@ -50,8 +50,8 @@ function Products() {
   if (status === "error")
     return <Box>An error has occurred: {error.message}</Box>;
 
-  console.log("data:", data.pages[0]);
-  console.log("item:", items);
+  // console.log("data:", data.pages[0]);
+  // console.log("item:", items);
 
   return (
     <Box>
@@ -88,16 +88,18 @@ function Products() {
           className="linkToMenu"
           href="/basket"
         >
-         <Box className="mt-5" cursor="pointer">
-      <div className="square blob">
-        <Box className="menüBtn">
-          <h1 className="menu-text text-6xl font-bold text-yellow-300">Menü</h1>
-        </Box>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </Box>
+          <Box className="mt-5" cursor="pointer">
+            <div className="square blob">
+              <Box className="menüBtn">
+                <h1 className="menu-text text-6xl font-bold text-yellow-300">
+                  Menü
+                </h1>
+              </Box>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </Box>
         </Link>
       </Flex>
     </Box>
