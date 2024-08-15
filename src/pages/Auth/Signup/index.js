@@ -43,7 +43,7 @@ function Signup() {
           password: values.password,
         });
         login(registerResponse);
-        navigate("/profile");
+        navigate("/basket");
       } catch (e) {
         bag.setErrors({ general: e.response.data.message });
       }
@@ -57,9 +57,13 @@ function Signup() {
       <Flex align="center" width="full" justifyContent="center">
         <Box pt={10} width={"300px"}>
           <Box textAlign="center">
-            <Heading fontFamily={"lora"}
+            <Heading
+              fontFamily={"lora"}
               fontSize={"xxx-large"}
-              textColor={"#FE7A36"}>Kayıt Ol</Heading>
+              textColor={"#FE7A36"}
+            >
+              Kayıt Ol
+            </Heading>
           </Box>
           <Box my={5}>
             {formik.errors.general && (
@@ -224,7 +228,7 @@ function Signup() {
                     </Alert>
                   )}
               </FormControl>
-              <MotionButton
+              <Button
                 borderRadius={"50"}
                 fontFamily={"rocher"}
                 style={{ background: "#F59E0B" }}
@@ -233,11 +237,13 @@ function Signup() {
                 height={"80px"}
                 width="full"
                 type="submit"
-                whileHover={{ scale: 1.1, transition: { duration: 0.2, ease: "easeInOut" } }}
-                
+                _hover={{
+                  transform: "scale(1.1)",
+                  transition: "transform 0.2s ease-in-out",
+                }}
               >
                 Kayıt Ol
-              </MotionButton>
+              </Button>
               ;
             </form>
           </Box>
