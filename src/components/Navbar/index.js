@@ -29,11 +29,9 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("basket");
-    logout()
-      .then((res) => {
-        navigate("/");
-      })
-      .catch((err) => console.log(err));
+    logout(() => {
+      navigate("/signin"); // Redirect to login or home page
+    });
   };
 
   return (
@@ -139,9 +137,11 @@ function Navbar() {
                 </ListItem>
 
                 <ListItem className="flex justify-center items-center">
-                  <NavLink onClick={handleLogout}>
-                    <IoMdLogOut style={{ color: "red", fontSize: "40px" }} />
-                  </NavLink>
+                  <IoMdLogOut
+                    cursor={"pointer"}
+                    style={{ color: "red", fontSize: "40px" }}
+                    onClick={handleLogout}
+                  />
                 </ListItem>
               </>
             )}
@@ -197,7 +197,7 @@ function Navbar() {
                   <MenuItem display={"flex"} justifyContent={"center"}>
                     <IoMdLogOut
                       style={{ color: "red", fontSize: "50px" }}
-                      onClick={ ()=>navigate("/")}
+                      onClick={handleLogout}
                     />
                   </MenuItem>
                 </>
