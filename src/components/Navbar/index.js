@@ -162,13 +162,21 @@ function Navbar() {
               {!localStorage.getItem("access-token") ? (
                 <>
                   <NavLink to="/signin">
-                    <MenuItem className="flex justify-center items-center">
+                    <MenuItem
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
                       Giriş Yap
                     </MenuItem>
                   </NavLink>
 
                   <NavLink to="/signup">
-                    <MenuItem className="flex justify-center items-center">
+                    <MenuItem
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
                       Kayıt Ol
                     </MenuItem>
                   </NavLink>
@@ -177,24 +185,36 @@ function Navbar() {
                 <>
                   {user?.role === "admin" && (
                     <NavLink to="/admin/home">
-                      <MenuItem className="flex justify-center items-center">
+                      <MenuItem
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                      >
                         Admin
                       </MenuItem>
                     </NavLink>
                   )}
 
                   <NavLink to="/profile">
-                    <MenuItem className="flex justify-center items-center">
+                    <MenuItem
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
                       Profil
                     </MenuItem>
                   </NavLink>
 
                   <NavLink to="/orderhistory">
-                    <MenuItem className="flex justify-center items-center">
+                    <MenuItem
+                      display="flex"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
                       Geçmiş Siparişler
                     </MenuItem>
                   </NavLink>
-                  <MenuItem display={"flex"} justifyContent={"center"}>
+                  <MenuItem display="flex" justifyContent="center">
                     <IoMdLogOut
                       style={{ color: "red", fontSize: "50px" }}
                       onClick={handleLogout}
