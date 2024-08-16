@@ -120,7 +120,7 @@ function Basket() {
       })),
     };
 
-    // Orde notu varsa input'a orderNote'u ekle
+    // if there is an order note, add it
     if (orderNote) {
       input.orderNote = orderNote;
     }
