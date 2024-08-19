@@ -96,7 +96,7 @@ function OrderHistory() {
               ? "yellow.500"
               : status === "Tamamlandı"
               ? "green"
-              : "gray.500"
+              : "gray"
           }
         >
           {status}
@@ -120,6 +120,7 @@ function OrderHistory() {
           colorScheme={status === "Hazırlanıyor" ? "yellow" : "gray"}
           border={status === "Hazırlanıyor" ? "1px" : "1px"}
           opacity={status === "Hazırlanıyor" ? "1" : "0.6"}
+          textColor={status === "Hazırlanıyor" ? "white" : "gray"}
           size="sm"
           margin={1}
           onClick={() => updateStatus("Hazırlanıyor")}

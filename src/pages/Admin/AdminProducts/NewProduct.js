@@ -18,7 +18,6 @@ import newProductScheme from "./validations";
 import { message } from "antd";
 import { BiLogOut } from "react-icons/bi";
 
-
 function NewProduct() {
   const queryClient = useQueryClient();
   const newProductMutation = useMutation(postProduct, {
@@ -50,35 +49,31 @@ function NewProduct() {
 
   return (
     <div>
-      
+      <NavLink
+        to="/admin/products"
+        style={({ isActive, isPending }) => {
+          return {
+            color: isActive ? "MediumAquamarine" : "black",
+            borderBottom: isActive ? "solid" : "",
+            fontWeight: isActive ? "bold" : "bold",
+            fontSize: isActive ? "small" : "small",
+          };
+        }}
+      >
+        <Box
+          position={["static", "absolute", "absolute", "absolute"]}
+          display={"flex"}
+          alignItems={"center"}
+          color={"cyan.400"}
+        >
+          <Box mr={1}>
+            <BiLogOut color="purple" />
+          </Box>
+          <Text>Products</Text>
+        </Box>
+      </NavLink>
 
-      
-          <NavLink
-            to="/admin/products"
-            style={({ isActive, isPending }) => {
-              return {
-                color: isActive ? "MediumAquamarine" : "black",
-                borderBottom: isActive ? "solid" : "",
-                fontWeight: isActive ? "bold" : "bold",
-                fontSize: isActive ? "small" : "small",
-              };
-            }}
-          >
-            <Box
-              position={["static", "absolute", "absolute", "absolute"]}
-              display={"flex"}
-             alignItems={"center"}
-              color={"cyan.400"}
-            >
-              <Box mr={1} >
-                <BiLogOut  color="purple"/>
-                
-              </Box>
-              <Text>Products</Text>
-            </Box>
-          </NavLink>
-         
-          <Flex
+      <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
         p={2}
@@ -223,6 +218,9 @@ function NewProduct() {
                     mt={4}
                     width="full"
                     type="submit"
+                    color={"white"}
+                    backgroundColor={"orange.300"}
+                    _hover={{ bg: "teal.400", color: "black" }}
                     isLoading={isSubmitting}
                     onClick={() => {
                       <Navigate to="products/new" />;

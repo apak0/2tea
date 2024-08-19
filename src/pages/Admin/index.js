@@ -11,14 +11,15 @@ import { BiLogOut } from "react-icons/bi";
 function Admin() {
   const { user } = useAuth();
   return (
-    <Box
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="topBox"
-    >
+    <Box initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="topBox">
       {user?.role !== "admin" && <Navigate to={"/"} replace={true} />}
-      <Box mx={[0, 10, 10, 10]} >
-        <Box borderBottom={"2px"} borderColor={"#8d8d8d"} width={"90vw"} className="">
+      <Box mx={[0, 10, 10, 10]}>
+        <Box
+          borderBottom={"2px"}
+          borderColor={"#8d8d8d"}
+          width={"90vw"}
+          className=""
+        >
           <NavLink
             to="/"
             style={({ isActive, isPending }) => {
@@ -33,19 +34,17 @@ function Admin() {
             <Box
               position={["static", "absolute", "absolute", "absolute"]}
               display={"flex"}
-             
               alignItems={"center"}
               color={"cyan.400"}
             >
               <Box color={"red"}>
-                <BiLogOut  color="crimson"/>
-                
+                <BiLogOut color="crimson" />
               </Box>
-              <Text>Back to Home</Text>
+
+              <Text paddingLeft="4px">Ana Sayfa</Text>
             </Box>
           </NavLink>
           <UnorderedList
-          
             mt={5}
             mb={2}
             styleType="none"
