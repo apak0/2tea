@@ -8,7 +8,6 @@ import { Table, Popconfirm } from "antd";
 
 import { Text, Button, Flex, Box } from "@chakra-ui/react";
 
-
 import "./styles.css";
 
 function AdminProducts() {
@@ -27,44 +26,61 @@ function AdminProducts() {
 
   const columns = useMemo(() => {
     return [
-      { title: "TITLE", dataIndex: "title", key: "title" },
+      { title: "ÜRÜN ADI", dataIndex: "title", key: "title" },
       {
-        title: "PRICE",
+        title: "FİYAT",
         dataIndex: "price",
         key: "price",
       },
       {
-        title: "CREATED AT",
+        title: "OLUŞTURULMA TARİHİ",
         dataIndex: "createdAt",
         key: "createdAt",
       },
       {
-        title: "ACTION",
+        title: "AKSİYONLAR",
         key: "action",
         render: (text, record) => (
           <>
-            <Link to={`/admin/products/${record._id}`}>Edit</Link>
+            <Box className="flex justify-center items-center">
+              <Link to={`/admin/products/${record._id}`}>
+                <Button
+                  bg="blue.500"
+                  color="white"
+                  _hover={{ bg: "blue.600" }}
+                  _active={{ bg: "blue.700" }}
+                  mr={2} // Adds some space to the right
+                >
+                  Düzenle
+                </Button>
+              </Link>
 
-            <Popconfirm
-              title="Are you sure?"
-              onConfirm={() => {
-                deleteMutation.mutate(record._id, {
-                  onSuccess: () => {
-                    console.log("success");
-                  },
-                });
-              }}
-              onCancel={() => {
-                console.log("iptal edildi");
-              }}
-              okText="Yes"
-              cancelText="No"
-              placement="left"
-            >
-              <button href="/#" style={{ marginLeft: 10 }}>
-                Delete
-              </button>
-            </Popconfirm>
+              <Popconfirm
+                title="Are you sure?"
+                onConfirm={() => {
+                  deleteMutation.mutate(record._id, {
+                    onSuccess: () => {
+                      console.log("success");
+                    },
+                  });
+                }}
+                onCancel={() => {
+                  console.log("iptal edildi");
+                }}
+                okText="Yes"
+                cancelText="No"
+                placement="left"
+              >
+                <Button
+                  bg="red.500"
+                  color="white"
+                  _hover={{ bg: "red.600" }}
+                  _active={{ bg: "red.700" }}
+                >
+                  Sil
+                </Button>
+              </Popconfirm>
+            </Box>
           </>
         ),
       },
@@ -72,7 +88,18 @@ function AdminProducts() {
   }, []);
 
   if (isLoading) {
-    return <Box display={"flex"} justifyContent={"center"} alignItems={"center"} fontSize={"3xl"} color={"cyan.400"} > Loading...</Box>;
+    return (
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        fontSize={"3xl"}
+        color={"cyan.400"}
+      >
+        {" "}
+        Yükleniyor...
+      </Box>
+    );
   }
 
   if (isError) {
@@ -96,7 +123,7 @@ function AdminProducts() {
           as="b"
           color={"orange.300"}
         >
-          <Text>Products</Text>
+          <Text>Ürünler</Text>
         </Box>
         <Box>
           <Link to="/admin/products/new">
@@ -108,7 +135,7 @@ function AdminProducts() {
               }}
             >
               {" "}
-              New
+              Yeni Ürün
             </Button>
           </Link>
         </Box>
