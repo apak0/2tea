@@ -105,7 +105,7 @@ function Navbar() {
                         color: isActive ? "#FE7A36" : "white",
                         borderBottom: isActive ? "solid" : "",
                       })}
-                      to="/admin/home"
+                      to="/admin/orders"
                     >
                       Admin
                     </NavLink>

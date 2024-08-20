@@ -35,11 +35,7 @@ function AdminProductDetail() {
     <div>Error {error.message}</div>;
   }
 
- 
-
   const handleSubmit = async (values, bag) => {
-    
-
     message.loading({ content: "Loading...", key: "product_update" });
 
     try {
@@ -56,15 +52,26 @@ function AdminProductDetail() {
   };
 
   return (
-    <Box px={5} > 
-      <Text fontSize="2xl">Edit</Text>
+    <Box px={5}>
+      <Text
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        fontSize={"3xl"}
+        as="b"
+        color={"orange.300"}
+        width={"full"}
+        bg={"#8d8d8d"}
+        p={2}
+      >
+        Düzenle
+      </Text>
       <Formik
         initialValues={{
           title: data.title,
           description: data.description,
           price: data.price,
           photos: data.photos,
-          
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -78,12 +85,12 @@ function AdminProductDetail() {
           values,
           isSubmitting,
         }) => (
-          <Box >
-            <Box  mx={15}>
+          <Box>
+            <Box mx={15}>
               <Box m="5" textAlign="left">
                 <form onSubmit={handleSubmit}>
                   <FormControl>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Ürün Adı</FormLabel>
                     <Input
                       name="title"
                       onChange={handleChange}
@@ -99,7 +106,7 @@ function AdminProductDetail() {
                   </FormControl>
 
                   <FormControl mt="4">
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Ürün Açıklaması</FormLabel>
                     <Textarea
                       name="description"
                       onChange={handleChange}
@@ -114,7 +121,7 @@ function AdminProductDetail() {
                   </FormControl>
 
                   <FormControl mt="4">
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>Fiyat</FormLabel>
                     <Input
                       name="price"
                       onChange={handleChange}
@@ -129,7 +136,7 @@ function AdminProductDetail() {
                   </FormControl>
 
                   <FormControl my={4}>
-                    <FormLabel >Photos</FormLabel>
+                    <FormLabel>Fotoğraf</FormLabel>
                     <FieldArray
                       name="photos"
                       render={(arrayHelpers) => (
@@ -152,13 +159,20 @@ function AdminProductDetail() {
                                   colorScheme="red"
                                   onClick={() => arrayHelpers.remove(index)}
                                 >
-                                  Remove
+                                  Sil
                                 </Button>
                               </div>
                             ))}
 
-                          <Button mt="5" onClick={() => arrayHelpers.push("")}>
-                            Add More Photo
+                          <Button
+                            mt="5"
+                            bg="teal.500"
+                            color="white"
+                            _hover={{ bg: "teal.600" }}
+                            _active={{ bg: "teal.700" }}
+                            onClick={() => arrayHelpers.push("")}
+                          >
+                            Daha Fazla Fotoğraf Ekle
                           </Button>
                         </Box>
                       )}
@@ -169,11 +183,12 @@ function AdminProductDetail() {
                     mt={4}
                     width="full"
                     type="submit"
+                    _hover={{ bg: "teal.300", color: "white" }}
                     isLoading={isSubmitting}
                     bg={"Chartreuse"}
                     mb={5}
                   >
-                    Update
+                    Ürünü Güncelle
                   </Button>
                 </form>
               </Box>

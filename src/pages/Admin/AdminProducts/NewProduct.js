@@ -69,7 +69,7 @@ function NewProduct() {
           <Box mr={1}>
             <BiLogOut color="purple" />
           </Box>
-          <Text>Products</Text>
+          <Text>Ürünler</Text>
         </Box>
       </NavLink>
 
@@ -88,7 +88,7 @@ function NewProduct() {
           as="b"
           color={"orange.300"}
         >
-          <Text>Orders</Text>
+          <Text>Yeni Ürün Ekleme</Text>
         </Box>
 
         <Box>
@@ -104,7 +104,7 @@ function NewProduct() {
             }}
           >
             {" "}
-            New
+            Yeni
           </Button>
         </Box>
       </Flex>
@@ -133,7 +133,7 @@ function NewProduct() {
               <Box m="5" textAlign="left">
                 <form onSubmit={handleSubmit}>
                   <FormControl>
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel>Ürün Adı</FormLabel>
                     <Input
                       name="title"
                       onChange={handleChange}
@@ -149,7 +149,7 @@ function NewProduct() {
                   </FormControl>
 
                   <FormControl mt="4">
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Ürün Açıklaması</FormLabel>
                     <Textarea
                       name="description"
                       onChange={handleChange}
@@ -164,7 +164,7 @@ function NewProduct() {
                   </FormControl>
 
                   <FormControl mt="4">
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel>Fiyat</FormLabel>
                     <Input
                       name="price"
                       onChange={handleChange}
@@ -179,7 +179,7 @@ function NewProduct() {
                   </FormControl>
 
                   <FormControl mt="4">
-                    <FormLabel>Photos</FormLabel>
+                    <FormLabel>Ürün Fotoğrafı</FormLabel>
                     <FieldArray
                       name="photos"
                       render={(arrayHelpers) => (
@@ -206,7 +206,14 @@ function NewProduct() {
                               </div>
                             ))}
 
-                          <Button mt="5" onClick={() => arrayHelpers.push("")}>
+                          <Button
+                            mt="5"
+                            onClick={() => arrayHelpers.push("")}
+                            bg="teal.500"
+                            color="white"
+                            _hover={{ bg: "teal.600" }}
+                            _active={{ bg: "teal.700" }}
+                          >
                             Add a photo
                           </Button>
                         </div>
@@ -220,13 +227,13 @@ function NewProduct() {
                     type="submit"
                     color={"white"}
                     backgroundColor={"orange.300"}
-                    _hover={{ bg: "teal.400", color: "black" }}
+                    _hover={{ bg: "teal.400", color: "white" }}
                     isLoading={isSubmitting}
                     onClick={() => {
                       <Navigate to="products/new" />;
                     }}
                   >
-                    Save
+                    ÜRÜNÜ EKLE
                   </Button>
                 </form>
               </Box>

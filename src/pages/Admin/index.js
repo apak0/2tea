@@ -64,7 +64,7 @@ function Admin() {
                   };
                 }}
               >
-                Orders
+                SİPARİŞLER
               </NavLink>
             </ListItem>
 
@@ -80,7 +80,7 @@ function Admin() {
                   };
                 }}
               >
-                Products
+                ÜRÜNLER
               </NavLink>
             </ListItem>
           </UnorderedList>
