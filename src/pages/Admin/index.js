@@ -52,23 +52,7 @@ function Admin() {
             justifyContent={"center"}
             gap={[8, 12, 12, 12]}
           >
-            <ListItem>
-              <NavLink
-                isActive
-                to="/admin/home"
-                style={({ isActive, isPending }) => {
-                  return {
-                    color: isActive ? "MediumAquamarine" : "black",
-                    borderBottom: isActive ? "solid" : "",
-                    fontWeight: isActive ? "bold" : "bold",
-                    fontSize: isActive ? "large" : "large",
-                  };
-                }}
-              >
-                Admin Page
-              </NavLink>
-            </ListItem>
-            <ListItem>
+            <ListItem pr={10} >
               <NavLink
                 to="/admin/orders"
                 style={({ isActive, isPending }) => {

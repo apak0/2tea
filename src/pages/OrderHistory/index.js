@@ -148,7 +148,7 @@ function OrderHistory() {
   return (
     <div
       style={{
-        width: isMobile ? "100%" : "70%",
+        width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
       }}
@@ -168,7 +168,7 @@ function OrderHistory() {
           color={"orange.300"}
           width={"full"}
         >
-          <Text>SİPARİŞLER</Text>
+          <Text> SİPARİŞLER</Text>
         </Box>
       </Flex>
 
