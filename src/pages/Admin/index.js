@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.css";
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import { GrCaretPrevious } from "react-icons/gr";
 
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -52,7 +51,7 @@ function Admin() {
             justifyContent={"center"}
             gap={[8, 12, 12, 12]}
           >
-            <ListItem pr={10} >
+            <ListItem pr={10}>
               <NavLink
                 to="/admin/orders"
                 style={({ isActive, isPending }) => {

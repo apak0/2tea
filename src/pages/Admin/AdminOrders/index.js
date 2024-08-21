@@ -43,7 +43,7 @@ function AdminOrders() {
         color={"cyan.400"}
       >
         {" "}
-        Loading...
+        Yükleniyor...
       </Box>
     );
   }

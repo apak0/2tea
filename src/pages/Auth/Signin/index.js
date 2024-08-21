@@ -76,6 +76,7 @@ function Signin() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
+                  
                 />
                 {formik.errors.email && formik.touched.email && (
                   <Alert

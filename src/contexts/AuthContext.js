@@ -54,10 +54,10 @@ const AuthProvider = ({ children }) => {
       <Flex justifyContent="center" alignItems="center" height="100vh">
         <Spinner
           thickness="4px"
-          speed="0.75"
+          speed="0.50s"
           emptyColor="gray.200"
+          color="orange.300"
           size="xl"
-          color="red.500"
         />
       </Flex>
     );

@@ -27,7 +27,7 @@ function NewProduct() {
   });
 
   const handleSubmit = async (values, bag) => {
-    message.loading({ content: "Loading...", key: "product_update" });
+    message.loading({ content: "Yükleniyor...", key: "product_update" });
 
     // values.photos = JSON.stringify(values.photos);
 
