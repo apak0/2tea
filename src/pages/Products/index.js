@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, VStack, Link } from "@chakra-ui/react";
+import { Box, Text, Flex, VStack, Link, Spinner } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
 import { fetchProductList } from "../../api";
 import { useAuth } from "../../contexts/AuthContext";
@@ -37,21 +37,34 @@ function Products() {
 
   if (status === "loading")
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        fontSize="3xl"
-        color="cyan.400"
-      >
-        Loading...
-      </motion.div>
+      <Box className="flex justify-center items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          fontSize="3xl"
+          color="cyan.400"
+          margin="200px"
+        >
+          <Spinner
+            thickness="4px"
+            speed="0.50s"
+            emptyColor="gray.200"
+            color="orange.300"
+            size="xl"
+          />
+        </motion.div>
+      </Box>
     );
 
   if (status === "error")
-    return <Box>An error has occurred: {error.message}</Box>;
+    return (
+      <Box className="flex justify-center items-center text-2xl text-red-600 ">
+        Bir hata oluştu: {error.message}
+      </Box>
+    );
 
   // console.log("data:", data.pages[0]);
   // console.log("item:", items);
