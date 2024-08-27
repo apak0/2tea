@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useClearOrders } from "./useClearOrders ";
-import OrderHistory from "../../OrderHistory"
+
+import OrderHistory from "../../OrderHistory";
 
 import { useQuery } from "react-query";
 import { fetchOrders } from "../../../api";
@@ -15,6 +15,7 @@ import {
   Box,
   Flex,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 
 import "./styles.css";
@@ -26,25 +27,18 @@ function AdminOrders() {
     fetchOrders
   );
   const { user } = useAuth();
-  
-  const clearOrders = useClearOrders();
-
-  const handleClearOrders = () => {
-    clearOrders(); // Bu fonksiyon çağrıldığında fetchOrders'dan gelen veriler temizlenecek
-  };
 
   if (isLoading) {
     return (
-      <Box
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        fontSize={"3xl"}
-        color={"cyan.400"}
-      >
-        {" "}
-        Yükleniyor...
-      </Box>
+      <Flex justifyContent="center" alignItems="center" height="100vh">
+        <Spinner
+          thickness="4px"
+          speed="0.50s"
+          emptyColor="gray.200"
+          color="orange.300"
+          size="xl"
+        />
+      </Flex>
     );
   }
 
@@ -52,10 +46,6 @@ function AdminOrders() {
     <div>Error {error.message}</div>;
   }
 
- 
-
-  return (
-    <OrderHistory/>
-  );
+  return <OrderHistory />;
 }
 export default AdminOrders;
