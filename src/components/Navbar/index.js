@@ -62,7 +62,7 @@ function Navbar() {
         >
           <NavLink to="/">
             <Text fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}>
-              ÇAY OCAĞI
+              Two Tea
             </Text>
           </NavLink>
         </Box>
