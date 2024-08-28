@@ -1,2 +1,2 @@
-# [Çay Ocağı](https://twotea.onrender.com/)
+# [TwoTea](https://twotea.onrender.com/)
 
