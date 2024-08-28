@@ -284,7 +284,7 @@ function OrderHistory() {
                       </Td>
                       <Td
                         width={"300px"}
-                        textAlign={"start"}
+                        textAlign={"center"}
                         verticalAlign={"baseline"}
                         padding={0}
                         textColor={"orange.300"}
