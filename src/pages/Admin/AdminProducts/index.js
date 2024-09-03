@@ -6,9 +6,10 @@ import { fetchProductList, deleteProduct } from "../../../api";
 
 import { Table, Popconfirm } from "antd";
 
-import { Text, Button, Flex, Box } from "@chakra-ui/react";
+import { Text, Button, Flex, Box,Spinner } from "@chakra-ui/react";
 
 import "./styles.css";
+
 
 function AdminProducts() {
   const queryClient = useQueryClient();
@@ -89,21 +90,20 @@ function AdminProducts() {
 
   if (isLoading) {
     return (
-      <Box
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        fontSize={"3xl"}
-        color={"cyan.400"}
-      >
-        {" "}
-        Yükleniyor...
-      </Box>
+      <Flex justifyContent="center" alignItems="center" height="100vh" width="100wh">
+        <Spinner
+          thickness="4px"
+          speed="0.50s"
+          emptyColor="gray.200"
+          color="orange.300"
+          size="xl"
+        />
+      </Flex>
     );
   }
 
   if (isError) {
-    return <div>Error {error.message}</div>;
+    return <div>Bir hata oluştu: {error.message}</div>;
   }
 
   return (
