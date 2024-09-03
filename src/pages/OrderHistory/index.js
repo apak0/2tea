@@ -251,12 +251,17 @@ function OrderHistory() {
                             {item.items.length}
                           </MenuButton>
                           <MenuList
-                            bg={isDark ? "gray.800" : "gray.300"}
+                            bg={isDark ? "gray.800" : "red.300"}
                             borderColor={isDark ? "gray.700" : "gray.200"}
-                            className="shadow-lg rounded-lg hover:text-amber-600  "
+                            className="shadow-lg rounded-lg hover:text-amber-600   "
                           >
                             {item.items.map((orderItem, index) => (
-                              <MenuItem key={index} bg={"gray.300"} as={"b"}>
+                              <MenuItem
+                                key={index}
+                                bg={"red.300"}
+                                as={"b"}
+                                textColor={""}
+                              >
                                 {orderItem.title} - {orderItem.quantity}
                               </MenuItem>
                             ))}
