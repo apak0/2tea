@@ -201,7 +201,7 @@ function OrderHistory() {
             )}
           </Tr>
         </Thead>
-        <Tbody bg={"gray.200"}>
+        <Tbody bg={"gray.300"} width={"full"}>
           {data && data.length > 0 ? (
             data
               .slice()
@@ -323,11 +323,11 @@ function OrderHistory() {
                 }
               })
           ) : (
-            <Box textAlign="center" w="full">
+            <Td className="secondTd" colSpan={4}>
               <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
                 Daha önce sipariş verilmedi
               </Text>
-            </Box>
+            </Td>
           )}
         </Tbody>
       </Table>
