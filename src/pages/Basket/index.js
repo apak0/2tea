@@ -164,7 +164,7 @@ function Basket() {
         py={5}
         className="totalDiv flex flex-col sm:flex-row justify-around "
       >
-        <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 ">
+        <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-20 ">
           {items.map((item, i) => (
             <Box
               key={i}

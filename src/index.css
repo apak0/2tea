@@ -5,9 +5,6 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-
-
-  
 }
 
 @import "~react-image-gallery/styles/css/image-gallery.css";

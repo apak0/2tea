@@ -6,6 +6,7 @@
   background-color: #dcf2f1;
   display: flex;
   justify-content: center;
+  ;
   
 }
 @media (min-width: 1024px) {
@@ -16,7 +17,7 @@
 
 #app {
   text-align: center;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #dcf2f1;
