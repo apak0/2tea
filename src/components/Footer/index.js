@@ -11,9 +11,9 @@ function Footer() {
       py={4}
       px={10}
       textAlign={{ base: "center" }}
-      position={"fixed"}
       bottom={0}
       w={"100%"}
+      position={"absolute"}
     >
       <Text
         fontSize="sm"
@@ -38,11 +38,7 @@ function Footer() {
         bgGradient={"linear(to right,  #7303c0, #ec38bc, #fdeff9);"}
       >
         Source code available on{" "}
-        <Link
-          href="https://github.com/apak0/2tea"
-          color="blue.300"
-          isExternal
-        >
+        <Link href="https://github.com/apak0/2tea" color="blue.300" isExternal>
           GitHub
         </Link>
       </Text>

@@ -262,7 +262,7 @@ function Basket() {
         </Box>
 
         <Box
-          className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-40 sm:mb-0 mx-auto "
+          className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-60  m:mb-0 mx-auto "
           width={"380px"}
           border={"2px"}
           borderColor={"gray.400"}

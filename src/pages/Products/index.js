@@ -74,14 +74,11 @@ function Products() {
       <Flex
         direction="column"
         align="center"
-       
         p={4}
         className="mt-2 sm:mt-36"
         width="full"
-       
-        height="100vh" // Burada height özelliğini ekledik
+        height="90vh" // Burada height özelliğini ekledik
       >
-        
         {user && (
           <VStack
             spacing={4}
