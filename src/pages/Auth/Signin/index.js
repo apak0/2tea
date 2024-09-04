@@ -49,7 +49,11 @@ function Signin() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Flex align="center" width="full" justifyContent="center">
+      <Flex
+        width="full"
+        justifyContent="center"
+        height="100vh" // Burada height özelliğini ekledik
+      >
         <Box pt={10} width={"300px"}>
           <Box textAlign="center">
             <Heading
@@ -76,7 +80,6 @@ function Signin() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
-                  
                 />
                 {formik.errors.email && formik.touched.email && (
                   <Alert
