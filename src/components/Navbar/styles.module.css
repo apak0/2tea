@@ -1,11 +1,11 @@
 
 @font-face {
-  font-family: 'Rocher';
-  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+  font-family: 'LuckieFont';
+  src: url("../../fonts/LuckiestGuy-Regular.ttf");
 }
 .nav{
-  background-color: #7fc7d9;
-  color: white;
+  background-color: #FF9933;
+  color: #f33c62;
   padding: 0.7rem;
 
   display: flex;
@@ -15,7 +15,7 @@
   top: 0;
   z-index: 2;
 
-  font-family: "rocher";
+  font-family: "LuckieFont";
 
   font-palette: --Grays;
 

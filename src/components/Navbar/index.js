@@ -49,7 +49,7 @@ function Navbar() {
               borderRadius="full"
               height={"60px"}
               minW={"50px"}
-              src="https://i.hizliresim.com/47cwcdu.ico"
+              src="logo.png"
               alt="mks-logo"
             />
           </NavLink>
