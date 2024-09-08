@@ -74,7 +74,7 @@ function Navbar() {
                 <ListItem>
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#FE7A36" : "white",
+                      color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
                     })}
                     to="/signin"
@@ -82,10 +82,10 @@ function Navbar() {
                     Giriş Yap
                   </NavLink>
                 </ListItem>
-                <ListItem>
+                <ListItem borderLeft={"1px solid gray"} paddingLeft={"1rem"}>
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#FE7A36" : "white",
+                      color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
                     })}
                     to="/signup"
@@ -102,7 +102,7 @@ function Navbar() {
                   {user?.role === "admin" && (
                     <NavLink
                       style={({ isActive, isPending }) => ({
-                        color: isActive ? "#FE7A36" : "white",
+                        color: isActive ? "#43bdb8" : "white",
                         borderBottom: isActive ? "solid" : "",
                       })}
                       to="/admin/orders"
@@ -115,7 +115,7 @@ function Navbar() {
                 <ListItem className="flex justify-center items-center">
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#FE7A36" : "white",
+                      color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
                     })}
                     to="/profile"
@@ -124,11 +124,13 @@ function Navbar() {
                   </NavLink>
                 </ListItem>
 
-                <ListItem className="flex justify-center items-center">
+                <ListItem className="flex justify-center items-center ">
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#FE7A36" : "white",
+                      color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
+                      borderLeft: "1px solid gray",
+                      paddingLeft: "1rem",
                     })}
                     to="/orderhistory"
                   >
@@ -171,11 +173,16 @@ function Navbar() {
                     </MenuItem>
                   </NavLink>
 
-                  <NavLink to="/signup">
+                  <NavLink
+                    to="/signup"
+                    borderLeft={"1px solid gray"}
+                    paddingLeft={"1rem"}
+                  >
                     <MenuItem
                       display="flex"
                       justifyContent="center"
                       alignItems="center"
+                      color={"red"}
                     >
                       Kayıt Ol
                     </MenuItem>
@@ -195,7 +202,11 @@ function Navbar() {
                     </NavLink>
                   )}
 
-                  <NavLink to="/profile">
+                  <NavLink
+                    to="/profile"
+                    borderLeft={"1px solid gray"}
+                    paddingLeft={"1rem"}
+                  >
                     <MenuItem
                       display="flex"
                       justifyContent="center"

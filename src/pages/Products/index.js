@@ -93,7 +93,8 @@ function Products() {
             >
               Hoşgeldin,{" "}
               <Text as="span" className="animate-rgb font-extralight">
-                {user.fullname}
+                {user.fullname.charAt(0).toUpperCase() +
+                  user.fullname.slice(1).toLowerCase()}
               </Text>
             </Text>
             <Text fontSize="lg" color="gray.500"></Text>
