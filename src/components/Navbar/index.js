@@ -47,10 +47,11 @@ function Navbar() {
           <NavLink to="/">
             <Image
               borderRadius="full"
-              height={"60px"}
+              height={"72px"}
               minW={"50px"}
               src="logo.png"
               alt="mks-logo"
+              
             />
           </NavLink>
         </Box>
@@ -62,7 +63,7 @@ function Navbar() {
         >
           <NavLink to="/">
             <Text fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}>
-              Two Tea
+              TWO TEA
             </Text>
           </NavLink>
         </Box>

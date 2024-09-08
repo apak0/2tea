@@ -53,10 +53,8 @@ function Card({ item }) {
       >
         {item.title}
       </Box>
-     
 
       <Box
-        
         minW={"100px"}
         display="flex"
         justifyContent={"space-between"}
@@ -80,7 +78,7 @@ function Card({ item }) {
           </Button>
         </Box>
 
-        <Box className="min-w-10" >
+        <Box className="min-w-10">
           <Text
             display="flex"
             justifyContent={"center"}
