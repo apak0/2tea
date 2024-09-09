@@ -77,7 +77,7 @@ function Products() {
         p={4}
         className="mt-2 sm:mt-36"
         width="full"
-        height="90vh" // Burada height özelliğini ekledik
+        height="90vh" 
       >
         {user && (
           <VStack

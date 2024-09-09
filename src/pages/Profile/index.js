@@ -50,6 +50,7 @@ function Profile() {
       justifyContent={"center"}
       alignItems={"center"}
       mt={5}
+      height={"100vh"}
     >
       <div
         initial={{ opacity: 0 }}

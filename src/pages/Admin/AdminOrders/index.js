@@ -30,6 +30,8 @@ function AdminOrders() {
 
   if (isLoading) {
     return (
+    
+
       <Flex justifyContent="center" alignItems="center" height="100vh">
         <Spinner
           thickness="4px"
@@ -37,8 +39,9 @@ function AdminOrders() {
           emptyColor="gray.200"
           color="orange.300"
           size="xl"
-        />
+          />
       </Flex>
+         
     );
   }
 

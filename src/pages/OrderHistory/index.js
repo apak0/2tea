@@ -151,6 +151,7 @@ function OrderHistory() {
         width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
+        height: "90vh",
       }}
     >
       <Flex

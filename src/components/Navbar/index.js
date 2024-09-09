@@ -51,7 +51,6 @@ function Navbar() {
               minW={"50px"}
               src="logo.png"
               alt="mks-logo"
-              
             />
           </NavLink>
         </Box>
@@ -125,13 +124,15 @@ function Navbar() {
                   </NavLink>
                 </ListItem>
 
-                <ListItem className="flex justify-center items-center ">
+                <ListItem
+                  className="flex justify-center items-center "
+                  borderLeft={"1px solid gray"}
+                  paddingLeft={"1rem"}
+                >
                   <NavLink
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
-                      borderLeft: "1px solid gray",
-                      paddingLeft: "1rem",
                     })}
                     to="/orderhistory"
                   >

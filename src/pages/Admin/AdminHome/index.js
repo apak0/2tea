@@ -18,12 +18,13 @@ function AdminHome() {
       .catch((err) => console.log(err));
   };
   return (
-    <div>
+    <div className="h-screen" >
       <Flex
         justifyContent={"center"}
         alignItems={"center"}
         p={2}
         bg={"#8d8d8d"}
+        
       >
         <Box
           display={"flex"}

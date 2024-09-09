@@ -84,7 +84,7 @@ function Admin() {
             </ListItem>
           </UnorderedList>
         </Box>
-        <Box>
+        <Box className="h-screen">
           <Outlet />
         </Box>
       </Box>
