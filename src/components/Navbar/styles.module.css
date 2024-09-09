@@ -1,11 +1,10 @@
-
 @font-face {
-  font-family: 'LuckieFont';
+  font-family: "LuckieFont";
   src: url("../../fonts/LuckiestGuy-Regular.ttf");
 }
-.nav{
-  background-color: #FF9933;
-  color: #f1f1f1;
+.nav {
+  background-color: #ff9933;
+  color: #ebdb42;
   padding: 0.7rem;
 
   display: flex;
@@ -16,17 +15,8 @@
   z-index: 2;
 
   font-family: "LuckieFont";
-
-  font-palette: --Grays;
-
-  
 }
 
-@media screen and (max-width: 480px) {
-  .nav {
-  
-  }
-}
 
 .navButtons:hover {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
@@ -61,10 +51,3 @@
   border-radius: 50%;
   transition: 0.3s;
 }
-
-
-@font-palette-values --Grays {
-  font-family: Rocher;
-  base-palette: 9;
-}
-
