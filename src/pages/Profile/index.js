@@ -16,8 +16,6 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-import "./styles.css";
-
 function Profile() {
   const { user, logout } = useAuth();
   const [selectedImage, setSelectedImage] = useState();
@@ -45,19 +43,9 @@ function Profile() {
   };
 
   return (
-    <Box
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      mt={5}
-      height={"100vh"}
-    >
-      <div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="profileTopDiv"
-      >
-        <Card bg={"rgb(154, 198, 199, 0.4)"}>
+    <Box display={"flex"} justifyContent={"center"} mt={48} height={"100vh"}>
+      <div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <Card bg={"#FFDA76"}>
           <CardBody>
             <Flex
               width={"150px"}
@@ -148,7 +136,7 @@ function Profile() {
                 borderColor={"rgba(50, 150, 80, 0.6)"}
                 size="sm"
               >
-                Rol : {user.role &&" Kullanıcı"}
+                Rol : {user.role && " Kullanıcı"}
               </Heading>
             </Stack>
           </CardBody>
