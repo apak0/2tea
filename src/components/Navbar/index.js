@@ -36,8 +36,14 @@ function Navbar() {
 
   return (
     <Box className={styles.nav}>
-      <Box display={"flex"} width={"100%"} alignItems={"center"} px={4}>
-        <Box className="logo flex-1 ml-16 ">
+      <Box
+        display={"flex"}
+        width={"100%"}
+        alignItems={"center"}
+        px={4}
+        justifyContent={{ base: "space-around", md: "initial" }}
+      >
+        <Box className="logo md:flex-1 md:ml-16">
           <NavLink to="/">
             <Image
               borderRadius="full"
@@ -49,7 +55,7 @@ function Navbar() {
           </NavLink>
         </Box>
 
-        <Box className={`flex justify-center items-center ml-0 `}>
+        <Box className={`flex justify-center items-center ml-0`}>
           <NavLink to="/">
             <Text fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}>
               TWO TEA
@@ -58,7 +64,7 @@ function Navbar() {
         </Box>
 
         <Box
-          className=" flex-1 justify-end mr-16"
+          className="md:flex-1 md:justify-end md:mr-16"
           display={{ base: "none", md: "block" }}
         >
           <UnorderedList
