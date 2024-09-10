@@ -8,7 +8,7 @@
   padding: 0.7rem;
 
   display: flex;
-  justify-content: space-around;
+  
   align-items: center;
   position: sticky;
   top: 0;
@@ -16,7 +16,6 @@
 
   font-family: "LuckieFont";
 }
-
 
 .navButtons:hover {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);

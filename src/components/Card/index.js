@@ -44,6 +44,7 @@ function Card({ item }) {
       <Box
         fontSize={"2xl"}
         fontWeight="bold"
+        
         as="samp"
         lineHeight="tight"
         noOfLines={1}

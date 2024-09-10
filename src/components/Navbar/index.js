@@ -36,14 +36,8 @@ function Navbar() {
 
   return (
     <Box className={styles.nav}>
-      <Box
-        display={"flex"}
-        justifyContent={"space-around"}
-        width={"100%"}
-        alignItems={"center"}
-        px={4}
-      >
-        <Box className="logo">
+      <Box display={"flex"} width={"100%"} alignItems={"center"} px={4}>
+        <Box className="logo flex-1 ml-16 ">
           <NavLink to="/">
             <Image
               borderRadius="full"
@@ -55,11 +49,7 @@ function Navbar() {
           </NavLink>
         </Box>
 
-        <Box
-          className={`flex justify-center items-center ml-0 ${
-            isLoggedIn ? "md:ml-52" : ""
-          }`}
-        >
+        <Box className={`flex justify-center items-center ml-0 `}>
           <NavLink to="/">
             <Text fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}>
               TWO TEA
@@ -67,8 +57,17 @@ function Navbar() {
           </NavLink>
         </Box>
 
-        <Box display={{ base: "none", md: "block" }}>
-          <UnorderedList display={"flex"} gap={5} styleType="none">
+        <Box
+          className=" flex-1 justify-end mr-16"
+          display={{ base: "none", md: "block" }}
+        >
+          <UnorderedList
+            display={"flex"}
+            justifyContent={"flex-end"}
+            mr={"10rem"}
+            gap={5}
+            styleType="none"
+          >
             {!localStorage.getItem("access-token") && (
               <>
                 <ListItem>

@@ -265,20 +265,21 @@ function Basket() {
           className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-60  m:mb-0 mx-auto "
           width={"380px"}
           border={"2px"}
-          borderColor={"gray.400"}
+          
+          borderColor={"#96CEB4"}
         >
           {orderedItems.length > 0 ? (
             <Box className="w-96 mx-4">
               <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
-              <Table variant="striped" colorScheme="gray">
+              <Table variant="striped" colorScheme="gray" >
                 <Thead>
                   <Tr>
-                    <Th color={"orange.400"} fontSize={"lg"}>
+                    <Th color={"orange.400"} fontSize={"l"}>
                       ÜRÜN ADI
                     </Th>
                     <Th
                       color={"orange.400"}
-                      fontSize={"lg"}
+                      fontSize={"l"}
                       className="flex justify-center items-center"
                     >
                       MİKTARI
@@ -288,7 +289,7 @@ function Basket() {
                 <Tbody>
                   {orderedItems
                     .slice()
-                    .reverse()
+                    .reverse()  
                     .map((item, index) => (
                       <Tr
                         key={index}
@@ -421,8 +422,7 @@ function Basket() {
                   size="sm"
                   bg={"gray.400"}
                   color={"#fff"}
-                  _hover={{ bg: "teal.400", color: "black" }}
-                  _active={{ bg: "teal.300", color: "#fff" }}
+                  _active={{ bg: "#A02334", color: "#fff" }}
                 >
                   ÜRÜN YOK
                 </Button>
