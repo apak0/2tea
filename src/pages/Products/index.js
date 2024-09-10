@@ -19,22 +19,6 @@ function Products() {
     {}
   );
 
-  const [isPageChange, setIsPageChange] = useState(false);
-
-  useEffect(() => {
-    if (status === "success") {
-      const allItems = data.pages.reduce((acc, page) => [...acc, ...page], []);
-      setItems(allItems);
-      setItems((prevItems) =>
-        prevItems.map((item) => {
-          const newItem = allItems.find((newItem) => newItem._id === item._id);
-          return newItem ? { ...item, quantity: newItem.quantity } : item;
-        })
-      );
-      setIsPageChange(false);
-    }
-  }, [data, status, setItems, isPageChange]);
-
   if (status === "loading")
     return (
       <Box className="flex justify-center items-center">

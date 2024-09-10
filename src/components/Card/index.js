@@ -26,7 +26,7 @@ function Card({ item }) {
       minW={"180px"}
       maxW={"200px"}
       p="2"
-      bg={"#B4D4FF"}
+      bg={"#FFEEAD"}
       h="100%"
     >
       <Box className="flex justify-around items-center cards">

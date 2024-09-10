@@ -177,7 +177,7 @@ function Basket() {
               minW={"180px"}
               maxW={"200px"}
               p="2"
-              bg={"#B4D4FF"}
+              bg={"#96CEB4"}
               h="100%"
             >
               <Box className="relative flex cards">

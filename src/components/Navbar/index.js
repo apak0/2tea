@@ -162,7 +162,7 @@ function Navbar() {
             >
               <Icon as={HiOutlineMenu} fontSize="1.5rem" />
             </MenuButton>
-            <MenuList>
+            <MenuList className="bg-red-600">
               {!localStorage.getItem("access-token") ? (
                 <>
                   <NavLink to="/signin">
@@ -184,7 +184,7 @@ function Navbar() {
                       display="flex"
                       justifyContent="center"
                       alignItems="center"
-                      color={"red"}
+                      color={"#ebdb42"}
                     >
                       Kayıt Ol
                     </MenuItem>
