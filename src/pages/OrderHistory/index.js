@@ -152,6 +152,7 @@ function OrderHistory() {
         width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
+        marginBottom:"5rem",
         height: "90vh",
       }}
     >
@@ -173,7 +174,7 @@ function OrderHistory() {
           <Text> SİPARİŞLER</Text>
         </Box>
       </Flex>
-      <TableContainer maxH="calc(100vh - 100px)" mx='auto' overflowY={"auto"} pb={20} >
+      <TableContainer maxH="calc(100vh - 100px)" mx='auto' overflowY={"auto"}  >
       <Table variant="simple" size={isMobile ? "sm" : "md"} as={"b"}>
         <Thead bg="blue.200">
           <Tr>
@@ -237,6 +238,7 @@ function OrderHistory() {
                           paddingTop: 5,
                           paddingLeft: 0,
                           paddingRight: 0,
+                         
                         }}
                         isNumeric
                       >
@@ -270,11 +272,15 @@ function OrderHistory() {
                           </MenuList>
                         </Menu>
                         {isAdmin ? (
+                          <Box className="none">
+
                           <OrderStatusButtons
                             orderId={item._id}
                             initialStatus={item.status}
                             isAdmin={isAdmin}
-                          />
+                            
+                            />
+                            </Box>
                         ) : (
                           ""
                         )}
