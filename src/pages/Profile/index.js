@@ -120,7 +120,17 @@ function Profile() {
                 borderColor={"rgba(50, 150, 80, 0.6)"}
                 size="sm"
               >
-                İsim : {user.fullname}{" "}
+                İsim :{" "}
+                {user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1)}{" "}
+              </Heading>
+
+              <Heading
+                border={"1px"}
+                padding={"7px"}
+                borderColor={"rgba(50, 150, 80, 0.6)"}
+                size="sm"
+              >
+                E-mail : {user.email}{" "}
               </Heading>
               <Heading
                 border={"1px"}
@@ -128,15 +138,7 @@ function Profile() {
                 borderColor={"rgba(50, 150, 80, 0.6)"}
                 size="sm"
               >
-                e-mail : {user.email}{" "}
-              </Heading>
-              <Heading
-                border={"1px"}
-                padding={"7px"}
-                borderColor={"rgba(50, 150, 80, 0.6)"}
-                size="sm"
-              >
-                Rol : {user.role && " Kullanıcı"}
+                Rol : {user.role && "Kullanıcı"}
               </Heading>
             </Stack>
           </CardBody>
