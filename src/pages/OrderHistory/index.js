@@ -16,6 +16,7 @@ import {
   useBreakpointValue,
   useColorMode,
   Tooltip,
+  TableContainer,
 } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
@@ -172,7 +173,7 @@ function OrderHistory() {
           <Text> SİPARİŞLER</Text>
         </Box>
       </Flex>
-
+      <TableContainer maxH="calc(100vh - 100px)" mx='auto' overflowY={"auto"} pb={20} >
       <Table variant="simple" size={isMobile ? "sm" : "md"} as={"b"}>
         <Thead bg="blue.200">
           <Tr>
@@ -337,6 +338,7 @@ function OrderHistory() {
           )}
         </Tbody>
       </Table>
+      </TableContainer>
     </div>
   );
 }
