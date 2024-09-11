@@ -106,7 +106,10 @@ function OrderHistory() {
     }
 
     return (
-      <Box className="  md:flex justify-center items-center">
+      <Box
+        className="flex justify-center items-center"
+        flexDirection={{ base: "column", md: "row" }}
+      >
         <Button
           colorScheme={status === "Beklemede" ? "blue" : "gray"}
           border={status === "Beklemede" ? "1px" : "1px"}
@@ -152,7 +155,7 @@ function OrderHistory() {
         width: "100%",
         marginLeft: "auto",
         marginRight: "auto",
-        marginBottom:"5rem",
+        marginBottom: "5rem",
         height: "90vh",
       }}
     >
@@ -174,176 +177,175 @@ function OrderHistory() {
           <Text> SİPARİŞLER</Text>
         </Box>
       </Flex>
-      <TableContainer maxH="calc(100vh - 100px)" mx='auto' overflowY={"auto"}  >
-      <Table variant="simple" size={isMobile ? "sm" : "md"} as={"b"}>
-        <Thead bg="blue.200">
-          <Tr>
-            {isAdmin ? (
+      <TableContainer maxH="calc(100vh - 100px)" mx="auto" overflowY={"auto"}>
+        <Table variant="simple" size={isMobile ? "sm" : "md"} as={"b"}>
+          <Thead bg="blue.200">
+            <Tr>
+              {isAdmin ? (
+                <Th fontSize="14px" color="black" textAlign="center">
+                  GÖNDEREN
+                </Th>
+              ) : (
+                ""
+              )}
+
               <Th fontSize="14px" color="black" textAlign="center">
-                GÖNDEREN
+                SİPARİŞ
               </Th>
-            ) : (
-              ""
-            )}
-
-            <Th fontSize="14px" color="black" textAlign="center">
-              SİPARİŞ
-            </Th>
-            <Th fontSize="14px" color="black" textAlign="center">
-              TARİH
-            </Th>
-            <Th fontSize="14px" color="black" textAlign="center" p={0}>
-              NOT
-            </Th>
-            {!isAdmin ? (
-              <Th fontSize="14px" p={1} color="black" textAlign="center">
-                SİPARİŞ DURUMU
+              <Th fontSize="14px" color="black" textAlign="center">
+                TARİH
               </Th>
-            ) : (
-              ""
-            )}
-          </Tr>
-        </Thead>
-        <Tbody bg={"gray.300"} width={"full"}>
-          {data && data.length > 0 ? (
-            data
-              .slice()
-              .reverse()
-              .map((item) => {
-                if (
-                  localStorage.getItem("access-token") &&
-                  (isAdmin || item.user._id === user._id)
-                ) {
-                  return (
-                    <Tr
-                      key={item._id}
-                      className="hover:bg-gray-400 transition duration-300 ease-in-out"
-                      borderBottom={"2px"}
-                    >
-                      {isAdmin ? (
-                        <Td
-                          style={{ fontSize: isMobile ? "16px" : "30px" }}
-                          textAlign={isMobile ? "left" : "center"}
-                        >
-                          {item.user.fullname}
-                        </Td>
-                      ) : (
-                        ""
-                      )}
-
-                      <Td
-                        style={{
-                          fontSize: isMobile ? "16px" : "30px",
-                          textAlign: "center",
-                          paddingTop: 5,
-                          paddingLeft: 0,
-                          paddingRight: 0,
-                         
-                        }}
-                        isNumeric
+              <Th fontSize="14px" color="black" textAlign="center" p={0}>
+                NOT
+              </Th>
+              {!isAdmin ? (
+                <Th fontSize="14px" p={1} color="black" textAlign="center">
+                  SİPARİŞ DURUMU
+                </Th>
+              ) : (
+                ""
+              )}
+            </Tr>
+          </Thead>
+          <Tbody bg={"gray.300"} width={"full"}>
+            {data && data.length > 0 ? (
+              data
+                .slice()
+                .reverse()
+                .map((item) => {
+                  if (
+                    localStorage.getItem("access-token") &&
+                    (isAdmin || item.user._id === user._id)
+                  ) {
+                    return (
+                      <Tr
+                        key={item._id}
+                        className="hover:bg-gray-400 transition duration-300 ease-in-out"
+                        borderBottom={"2px"}
                       >
-                        <Menu>
-                          <MenuButton
-                            as={Button}
-                            rightIcon={<ChevronDownIcon />}
-                            bg={isDark ? "blue.300" : "blue.500"}
-                            color={isDark ? "gray.900" : "white"}
-                            _hover={{ bg: isDark ? "blue.400" : "blue.600" }}
-                            _active={{ bg: isDark ? "blue.500" : "blue.700" }}
-                            className="transition duration-300 ease-in-out transform hover:-translate-x-0.5 hover:text-amber-300"
-                          >
-                            {item.items.length}
-                          </MenuButton>
-                          <MenuList
-                            bg={isDark ? "gray.800" : "red.300"}
-                            borderColor={isDark ? "gray.700" : "gray.200"}
-                            className="shadow-lg rounded-lg hover:text-amber-600   "
-                          >
-                            {item.items.map((orderItem, index) => (
-                              <MenuItem
-                                key={index}
-                                bg={"red.300"}
-                                as={"b"}
-                                textColor={""}
-                              >
-                                {orderItem.title} - {orderItem.quantity}
-                              </MenuItem>
-                            ))}
-                          </MenuList>
-                        </Menu>
                         {isAdmin ? (
-                          <Box className="none">
-
-                          <OrderStatusButtons
-                            orderId={item._id}
-                            initialStatus={item.status}
-                            isAdmin={isAdmin}
+                          <Td
+                            style={{ fontSize: isMobile ? "16px" : "30px" }}
+                            textAlign="center"
                             
-                            />
-                            </Box>
+                          >
+                            {item.user.fullname.charAt(0).toUpperCase() +
+                              item.user.fullname.slice(1)}{" "}
+                          </Td>
                         ) : (
                           ""
                         )}
-                      </Td>
-                      <Td
-                        style={{
-                          fontSize: isMobile ? "16px" : "30px",
-                          textAlign: "center",
-                          padding: 0,
-                        }}
-                        isNumeric
-                      >
-                        {formatTimeAgo(item.createdAt)}
-                      </Td>
-                      <Td
-                        width={"300px"}
-                        textAlign={"center"}
-                        verticalAlign={"baseline"}
-                        padding={0}
-                        textColor={"orange.300"}
-                      >
-                        <Tooltip
-                          bg={"yellow.300"}
-                          textColor={"black"}
-                          label={item.orderNote}
-                          fontSize="md"
-                        >
-                          <Text noOfLines={isMobile ? 5 : 2}>
-                            {item.orderNote}
-                          </Text>
-                        </Tooltip>
-                      </Td>
-                      {!isAdmin ? (
+
                         <Td
                           style={{
                             fontSize: isMobile ? "16px" : "30px",
                             textAlign: "center",
+                            paddingTop: 5,
+                            paddingLeft: 0,
+                            paddingRight: 0,
                           }}
+                          isNumeric
                         >
-                          <OrderStatusButtons
-                            orderId={item._id}
-                            initialStatus={item.status}
-                            isAdmin={isAdmin}
-                          />
+                          <Menu>
+                            <MenuButton
+                              as={Button}
+                              rightIcon={<ChevronDownIcon />}
+                              bg={isDark ? "blue.300" : "blue.500"}
+                              color={isDark ? "gray.900" : "white"}
+                              _hover={{ bg: isDark ? "blue.400" : "blue.600" }}
+                              _active={{ bg: isDark ? "blue.500" : "blue.700" }}
+                              className="transition duration-300 ease-in-out transform hover:-translate-x-0.5 hover:text-amber-300"
+                            >
+                              {item.items.length}
+                            </MenuButton>
+                            <MenuList
+                              bg={isDark ? "gray.800" : "red.300"}
+                              borderColor={isDark ? "gray.700" : "gray.200"}
+                              className="shadow-lg rounded-lg hover:text-amber-600   "
+                            >
+                              {item.items.map((orderItem, index) => (
+                                <MenuItem
+                                  key={index}
+                                  bg={"red.300"}
+                                  as={"b"}
+                                  textColor={""}
+                                >
+                                  {orderItem.title} - {orderItem.quantity}
+                                </MenuItem>
+                              ))}
+                            </MenuList>
+                          </Menu>
+                          {isAdmin ? (
+                            <Box className="none">
+                              <OrderStatusButtons
+                                orderId={item._id}
+                                initialStatus={item.status}
+                                isAdmin={isAdmin}
+                              />
+                            </Box>
+                          ) : (
+                            ""
+                          )}
                         </Td>
-                      ) : (
-                        ""
-                      )}
-                    </Tr>
-                  );
-                } else {
-                  return null;
-                }
-              })
-          ) : (
-            <Td className="secondTd" colSpan={4}>
-              <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
-                Daha önce sipariş verilmedi
-              </Text>
-            </Td>
-          )}
-        </Tbody>
-      </Table>
+                        <Td
+                          style={{
+                            fontSize: isMobile ? "16px" : "30px",
+                            textAlign: "center",
+                            padding: 0,
+                          }}
+                          isNumeric
+                        >
+                          {formatTimeAgo(item.createdAt)}
+                        </Td>
+                        <Td
+                          width={"300px"}
+                          textAlign={"center"}
+                          verticalAlign={"baseline"}
+                          padding={0}
+                          textColor={"orange.300"}
+                        >
+                          <Tooltip
+                            bg={"yellow.300"}
+                            textColor={"black"}
+                            label={item.orderNote}
+                            fontSize="md"
+                          >
+                            <Text noOfLines={isMobile ? 5 : 2}>
+                              {item.orderNote}
+                            </Text>
+                          </Tooltip>
+                        </Td>
+                        {!isAdmin ? (
+                          <Td
+                            style={{
+                              fontSize: isMobile ? "16px" : "30px",
+                              textAlign: "center",
+                            }}
+                          >
+                            <OrderStatusButtons
+                              orderId={item._id}
+                              initialStatus={item.status}
+                              isAdmin={isAdmin}
+                            />
+                          </Td>
+                        ) : (
+                          ""
+                        )}
+                      </Tr>
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+            ) : (
+              <Td className="secondTd" colSpan={4}>
+                <Text fontSize={isMobile ? "lg" : "30px"} textColor="tomato">
+                  Daha önce sipariş verilmedi
+                </Text>
+              </Td>
+            )}
+          </Tbody>
+        </Table>
       </TableContainer>
     </div>
   );
