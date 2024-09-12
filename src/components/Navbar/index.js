@@ -167,7 +167,7 @@ function Navbar() {
 
                 <ListItem
                   className="flex justify-center items-center cursor-pointer select-none"
-                  backgroundColor={"#EEEEEE"}
+                 
                   fontSize={"2xl"}
                   color={"#5e3812"}
                 >
