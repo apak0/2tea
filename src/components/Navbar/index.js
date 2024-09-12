@@ -78,13 +78,14 @@ function Navbar() {
           >
             {!localStorage.getItem("access-token") && (
               <>
-                <ListItem className="cursor-pointer select-none text-2xl" color={"#5e3812"}>
+                <ListItem
+                  className="cursor-pointer select-none text-2xl"
+                  color={"#5e3812"}
+                >
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#43bdb8" : "white",
+                      color: isActive ? "#5e3812" : "white",
                       borderBottom: isActive ? "solid" : "",
-                      backgroundColor: "#EEEEEE",
-                      
                     })}
                     to="/signin"
                   >
@@ -95,15 +96,13 @@ function Navbar() {
                   className="cursor-pointer select-none"
                   borderLeft={"1px solid gray"}
                   paddingLeft={"1rem"}
-                  style={{ backgroundColor: "#EEEEEE" }}
                   fontSize={"2xl"}
                   color={"#5e3812"}
                 >
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#43bdb8" : "white",
+                      color: isActive ? "#5e3812" : "white",
                       borderBottom: isActive ? "solid" : "",
-                      backgroundColor: "#EEEEEE",
                     })}
                     to="/signup"
                   >
@@ -115,14 +114,15 @@ function Navbar() {
 
             {localStorage.getItem("access-token") && (
               <>
-                <ListItem className="flex justify-center items-center cursor-pointer select-none text-2xl" color={"#5e3812"}>
+                <ListItem
+                  className="flex justify-center items-center cursor-pointer select-none text-2xl"
+                  color={"#5e3812"}
+                >
                   {user?.role === "admin" && (
                     <NavLink
                       style={({ isActive, isPending }) => ({
                         color: isActive ? "#5e3812" : "white",
                         borderBottom: isActive ? "solid" : "",
-                        backgroundColor: "#EEEEEE",
-                        
                       })}
                       to="/admin/orders"
                     >
@@ -131,12 +131,14 @@ function Navbar() {
                   )}
                 </ListItem>
 
-                <ListItem className="flex justify-center items-center cursor-pointer select-none text-2xl" color={"#5e3812"}>
+                <ListItem
+                  className="flex justify-center items-center cursor-pointer select-none text-2xl"
+                  color={"#5e3812"}
+                >
                   <NavLink
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#43bdb8" : "white",
+                      color: isActive ? "#5e3812" : "white",
                       borderBottom: isActive ? "solid" : "",
-                      backgroundColor: "#EEEEEE",
                     })}
                     to="/profile"
                   >
@@ -154,9 +156,8 @@ function Navbar() {
                   <NavLink
                     className={"cursor-pointer select-none"}
                     style={({ isActive, isPending }) => ({
-                      color: isActive ? "#43bdb8" : "white",
+                      color: isActive ? "#5e3812" : "white",
                       borderBottom: isActive ? "solid" : "",
-                      backgroundColor: "#EEEEEE",
                     })}
                     to="/orderhistory"
                   >
