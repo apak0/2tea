@@ -164,7 +164,7 @@ function Basket() {
         py={5}
         className="totalDiv flex flex-col sm:flex-row justify-around "
       >
-        <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-20 ">
+        <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-20 mx-2 ">
           {items.map((item, i) => (
             <Box
               key={i}
@@ -265,13 +265,12 @@ function Basket() {
           className=" flex justify-center sm:mx-0 mt-10 sm:mt-0 mb-60  m:mb-0 mx-auto "
           width={"380px"}
           border={"2px"}
-          
           borderColor={"#96CEB4"}
         >
           {orderedItems.length > 0 ? (
             <Box className="w-96 mx-4">
               <Text fontSize="xl">SİPARİŞ LİSTESİ</Text>
-              <Table variant="striped" colorScheme="gray" >
+              <Table variant="striped" colorScheme="gray">
                 <Thead>
                   <Tr>
                     <Th color={"orange.400"} fontSize={"l"}>
@@ -289,7 +288,7 @@ function Basket() {
                 <Tbody>
                   {orderedItems
                     .slice()
-                    .reverse()  
+                    .reverse()
                     .map((item, index) => (
                       <Tr
                         key={index}

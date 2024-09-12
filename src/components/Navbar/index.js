@@ -43,7 +43,7 @@ function Navbar() {
         px={4}
         justifyContent={{ base: "space-around", md: "initial" }}
       >
-        <Box className="logo md:flex-1 md:ml-16">
+        <Box className="logo md:flex-1 md:ml-16 cursor-pointer select-none">
           <NavLink to="/">
             <Image
               borderRadius="full"
@@ -55,7 +55,9 @@ function Navbar() {
           </NavLink>
         </Box>
 
-        <Box className={`flex justify-center items-center ml-0`}>
+        <Box
+          className={`flex justify-center items-center ml-0 cursor-pointer select-none`}
+        >
           <NavLink to="/">
             <Text fontSize={{ base: "25px", md: "40px", lg: "xxx-large" }}>
               TWO TEA
@@ -76,22 +78,32 @@ function Navbar() {
           >
             {!localStorage.getItem("access-token") && (
               <>
-                <ListItem>
+                <ListItem className="cursor-pointer select-none text-2xl" color={"#5e3812"}>
                   <NavLink
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
+                      backgroundColor: "#EEEEEE",
+                      
                     })}
                     to="/signin"
                   >
-                    Giriş Yap
+                    GİRİŞ YAP
                   </NavLink>
                 </ListItem>
-                <ListItem borderLeft={"1px solid gray"} paddingLeft={"1rem"}>
+                <ListItem
+                  className="cursor-pointer select-none"
+                  borderLeft={"1px solid gray"}
+                  paddingLeft={"1rem"}
+                  style={{ backgroundColor: "#EEEEEE" }}
+                  fontSize={"2xl"}
+                  color={"#5e3812"}
+                >
                   <NavLink
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
+                      backgroundColor: "#EEEEEE",
                     })}
                     to="/signup"
                   >
@@ -103,49 +115,61 @@ function Navbar() {
 
             {localStorage.getItem("access-token") && (
               <>
-                <ListItem className="flex justify-center items-center">
+                <ListItem className="flex justify-center items-center cursor-pointer select-none text-2xl" color={"#5e3812"}>
                   {user?.role === "admin" && (
                     <NavLink
                       style={({ isActive, isPending }) => ({
-                        color: isActive ? "#43bdb8" : "white",
+                        color: isActive ? "#5e3812" : "white",
                         borderBottom: isActive ? "solid" : "",
+                        backgroundColor: "#EEEEEE",
+                        
                       })}
                       to="/admin/orders"
                     >
-                      Admin
+                      ADMİN
                     </NavLink>
                   )}
                 </ListItem>
 
-                <ListItem className="flex justify-center items-center">
+                <ListItem className="flex justify-center items-center cursor-pointer select-none text-2xl" color={"#5e3812"}>
                   <NavLink
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
+                      backgroundColor: "#EEEEEE",
                     })}
                     to="/profile"
                   >
-                    Profil
+                    PROFİL
                   </NavLink>
                 </ListItem>
 
                 <ListItem
-                  className="flex justify-center items-center "
+                  className="flex justify-center items-center cursor-pointer select-none "
                   borderLeft={"1px solid gray"}
                   paddingLeft={"1rem"}
+                  fontSize={"2xl"}
+                  color={"#5e3812"}
                 >
                   <NavLink
+                    className={"cursor-pointer select-none"}
                     style={({ isActive, isPending }) => ({
                       color: isActive ? "#43bdb8" : "white",
                       borderBottom: isActive ? "solid" : "",
+                      backgroundColor: "#EEEEEE",
                     })}
                     to="/orderhistory"
                   >
-                    Geçmiş Siparişler
+                    GEÇMİŞ SİPARİŞLER
                   </NavLink>
                 </ListItem>
 
-                <ListItem className="flex justify-center items-center">
+                <ListItem
+                  className="flex justify-center items-center cursor-pointer select-none"
+                  backgroundColor={"#EEEEEE"}
+                  fontSize={"2xl"}
+                  color={"#5e3812"}
+                >
                   <IoMdLogOut
                     cursor={"pointer"}
                     style={{ color: "red", fontSize: "40px" }}
@@ -158,7 +182,7 @@ function Navbar() {
         </Box>
 
         <Box display={{ base: "block", md: "none" }}>
-          <Menu>
+          <Menu className="">
             <MenuButton
               as={Box}
               p={2}
@@ -167,7 +191,12 @@ function Navbar() {
             >
               <Icon as={HiOutlineMenu} fontSize="1.5rem" />
             </MenuButton>
-            <MenuList className="bg-red-600">
+            <MenuList
+              className="bg-red-600 cursor-pointer select-none "
+              style={{ backgroundColor: "#EEEEEE" }}
+              fontSize={"2xl"}
+              color={"#5e3812"}
+            >
               {!localStorage.getItem("access-token") ? (
                 <>
                   <NavLink to="/signin">
@@ -175,8 +204,11 @@ function Navbar() {
                       display="flex"
                       justifyContent="center"
                       alignItems="center"
+                      style={{ backgroundColor: "#EEEEEE" }}
+                      color={"#5e3812"}
+                      fontSize={"2xl"}
                     >
-                      Giriş Yap
+                      GİRİŞ YAP
                     </MenuItem>
                   </NavLink>
 
@@ -184,12 +216,15 @@ function Navbar() {
                     to="/signup"
                     borderLeft={"1px solid gray"}
                     paddingLeft={"1rem"}
+                    className={"cursor-pointer select-none"}
                   >
                     <MenuItem
                       display="flex"
                       justifyContent="center"
                       alignItems="center"
-                      color={"#ebdb42"}
+                      color={"#5e3812"}
+                      style={{ backgroundColor: "#EEEEEE" }}
+                      fontSize={"2xl"}
                     >
                       Kayıt Ol
                     </MenuItem>
@@ -198,11 +233,17 @@ function Navbar() {
               ) : (
                 <>
                   {user?.role === "admin" && (
-                    <NavLink to="/admin/home">
+                    <NavLink
+                      className={"cursor-pointer select-none"}
+                      to="/admin/home"
+                    >
                       <MenuItem
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
+                        backgroundColor={"#EEEEEE"}
+                        color={"#5e3812"}
+                        fontSize={"2xl"}
                       >
                         Admin
                       </MenuItem>
@@ -210,6 +251,7 @@ function Navbar() {
                   )}
 
                   <NavLink
+                    className={"cursor-pointer select-none"}
                     to="/profile"
                     borderLeft={"1px solid gray"}
                     paddingLeft={"1rem"}
@@ -218,21 +260,34 @@ function Navbar() {
                       display="flex"
                       justifyContent="center"
                       alignItems="center"
+                      backgroundColor={"#EEEEEE"}
+                      color={"#5e3812"}
+                      fontSize={"2xl"}
                     >
-                      Profil
+                      PROFİL
                     </MenuItem>
                   </NavLink>
 
-                  <NavLink to="/orderhistory">
+                  <NavLink
+                    className={"cursor-pointer select-none"}
+                    to="/orderhistory"
+                  >
                     <MenuItem
                       display="flex"
                       justifyContent="center"
                       alignItems="center"
+                      backgroundColor={"#EEEEEE"}
+                      color={"#5e3812"}
+                      fontSize={"2xl"}
                     >
-                      Geçmiş Siparişler
+                      GEÇMİŞ SİPARİŞLER
                     </MenuItem>
                   </NavLink>
-                  <MenuItem display="flex" justifyContent="center">
+                  <MenuItem
+                    display="flex"
+                    justifyContent="center"
+                    backgroundColor={"#EEEEEE"}
+                  >
                     <IoMdLogOut
                       style={{ color: "red", fontSize: "50px" }}
                       onClick={handleLogout}

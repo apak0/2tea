@@ -45,7 +45,7 @@ function Profile() {
   return (
     <Box display={"flex"} justifyContent={"center"} mt={48} height={"100vh"}>
       <div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <Card bg={"#FFDA76"}>
+        <Card bg={"#ff9933"}>
           <CardBody>
             <Flex
               width={"150px"}

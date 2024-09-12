@@ -1,11 +1,10 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 .content {
-  padding-left: 5px;
-  padding-right: 5px;
-
-  background-color: #FFEEAD;
+ 
+  background-color: #ffeead;
   display: column;
   justify-content: center;
+  height: 50%;
 }
 @media (min-width: 1024px) {
   .content {
@@ -14,11 +13,8 @@
 }
 
 #app {
-  text-align: center;
-  height: 100vh;
-
   display: flex;
+  text-align: center;
   flex-direction: column;
   background-color: #dcf2f1;
 }
-  
