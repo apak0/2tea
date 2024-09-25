@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
 import { Box, Image, Button, Text, Select } from "@chakra-ui/react";
 import { useBasket } from "../../contexts/BasketContext";
 import "./styles.css";
 
 function Card({ item }) {
   const { increment, decrement } = useBasket();
-  const [sugarOption, setSugarOption] = useState("");
-
-  const handleSugarChange = (value) => {
-    setSugarOption(value);
-  };
-
-  useEffect(() => {
-    setSugarOption("");
-  }, []);
 
   return (
     <Box
@@ -31,21 +21,20 @@ function Card({ item }) {
     >
       <Box className="flex justify-around items-center cards">
         <Image
+          className="cards"
           src={item.photos}
           alt="product"
           loading="lazy"
           objectFit={"cover"}
           w={"100%"}
           h={"200px"}
-          className="cards"
         />
       </Box>
 
       <Box
+        as="samp"
         fontSize={"2xl"}
         fontWeight="bold"
-        
-        as="samp"
         lineHeight="tight"
         noOfLines={1}
         color={"#FE7A36"}
@@ -69,9 +58,9 @@ function Card({ item }) {
             size={"md"}
             fontSize={"3xl"}
             m={2}
-            onClick={() => decrement(item._id)}
             bg={"#ed8203"}
             color={"#fff"}
+            onClick={() => decrement(item._id)}
             _hover={{ bg: "teal.400", color: "black" }}
             _active={{ bg: "teal.300", color: "#fff" }}
           >
