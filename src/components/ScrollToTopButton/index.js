@@ -6,7 +6,7 @@ const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Listener ekleyerek sayfanın aşağısına inildiğinde düğmeyi göster
+    // added listener screen on bottom of page
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
         setIsVisible(true);
@@ -17,7 +17,7 @@ const ScrollToTopButton = () => {
 
     window.addEventListener("scroll", toggleVisibility);
 
-    // Listener temizleme
+    // remove listener
     return () => {
       window.removeEventListener("scroll", toggleVisibility);
     };

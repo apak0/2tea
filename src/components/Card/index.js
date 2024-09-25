@@ -1,4 +1,4 @@
-import { Box, Image, Button, Text, Select } from "@chakra-ui/react";
+import { Box, Image, Button, Text } from "@chakra-ui/react";
 import { useBasket } from "../../contexts/BasketContext";
 import "./styles.css";
 

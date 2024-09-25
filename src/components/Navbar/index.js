@@ -23,14 +23,12 @@ import { useAuth } from "../../contexts/AuthContext";
 function Navbar() {
   const { user, logout } = useAuth();
 
-  const isLoggedIn = !!localStorage.getItem("access-token");
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("basket");
     logout(() => {
-      navigate("/signin"); // Redirect to login or home page
+      navigate("/signin"); // Redirect to login page
     });
   };
 
@@ -167,7 +165,6 @@ function Navbar() {
 
                 <ListItem
                   className="flex justify-center items-center cursor-pointer select-none"
-                 
                   fontSize={"2xl"}
                   color={"#5e3812"}
                 >

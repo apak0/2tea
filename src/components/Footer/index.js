@@ -13,9 +13,6 @@ function Footer() {
       textAlign={{ base: "center" }}
       width="100%"
       position="relative"
-   
-      
-     
     >
       <Text
         fontSize="sm"
