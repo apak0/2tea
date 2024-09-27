@@ -74,7 +74,7 @@ function Signin() {
               <FormControl
                 isInvalid={formik.touched.email && formik.errors.email}
               >
-                <FormLabel>E-mail</FormLabel>
+                <FormLabel fontWeight={"bold"}>E-mail</FormLabel>
                 <Input
                   name="email"
                   onChange={formik.handleChange}
@@ -106,7 +106,7 @@ function Signin() {
                 mt={4}
                 isInvalid={formik.touched.password && formik.errors.password}
               >
-                <FormLabel>Şifre</FormLabel>
+                <FormLabel fontWeight={"bold"}>Şifre</FormLabel>
                 <Input
                   type="password"
                   name="password"

@@ -96,7 +96,7 @@ function Signup() {
               <FormControl
                 isInvalid={formik.touched.fullname && formik.errors.fullname}
               >
-                <FormLabel>İsim</FormLabel>
+                <FormLabel fontWeight={"bold"}>İsim</FormLabel>
                 <Input
                   name="fullname"
                   onChange={formik.handleChange}
@@ -130,7 +130,7 @@ function Signup() {
                 mt={4}
                 isInvalid={formik.touched.email && formik.errors.email}
               >
-                <FormLabel>E-mail</FormLabel>
+                <FormLabel fontWeight={"bold"} >E-mail</FormLabel>
                 <Input
                   name="email"
                   onChange={formik.handleChange}
@@ -162,7 +162,7 @@ function Signup() {
                 mt={4}
                 isInvalid={formik.touched.password && formik.errors.password}
               >
-                <FormLabel>Şifre</FormLabel>
+                <FormLabel fontWeight={"bold"}>Şifre</FormLabel>
                 <Input
                   type="password"
                   name="password"
@@ -200,7 +200,7 @@ function Signup() {
                   formik.errors.passwordConfirm
                 }
               >
-                <FormLabel>Şifreyi Tekrar Girin</FormLabel>
+                <FormLabel fontWeight={"bold"}>Şifreyi Tekrar Girin</FormLabel>
                 <Input
                   type="password"
                   name="passwordConfirm"

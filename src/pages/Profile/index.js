@@ -119,6 +119,7 @@ function Profile() {
                 padding={"7px"}
                 borderColor={"rgba(50, 150, 80, 0.6)"}
                 size="sm"
+                fontWeight={"bold"}
               >
                 İsim :{" "}
                 {user.fullname.charAt(0).toUpperCase() + user.fullname.slice(1)}{" "}
