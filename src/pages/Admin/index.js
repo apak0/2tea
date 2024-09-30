@@ -13,12 +13,7 @@ function Admin() {
     <Box initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="topBox">
       {user?.role !== "admin" && <Navigate to={"/"} replace={true} />}
       <Box mx={[0, 10, 10, 10]}>
-        <Box
-          borderBottom={"2px"}
-          borderColor={"#8d8d8d"}
-          width={"90vw"}
-          className=""
-        >
+        <Box width={"90vw"} className="">
           <NavLink
             to="/"
             style={({ isActive, isPending }) => {
@@ -29,20 +24,7 @@ function Admin() {
                 fontSize: isActive ? "large" : "large",
               };
             }}
-          >
-            <Box
-              position={["static", "absolute", "absolute", "absolute"]}
-              display={"flex"}
-              alignItems={"center"}
-              color={"cyan.400"}
-            >
-              <Box color={"red"}>
-                <BiLogOut color="crimson" />
-              </Box>
-
-              <Text paddingLeft="4px">Ana Sayfa</Text>
-            </Box>
-          </NavLink>
+          ></NavLink>
           <UnorderedList
             mt={5}
             mb={2}
