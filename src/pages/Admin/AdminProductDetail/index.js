@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { fetchProduct, updateProduct } from "../../../api";
 import { useQuery } from "react-query";
 import {
@@ -12,15 +12,19 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-
+import { useNavigate } from "react-router-dom";
 import { FieldArray, Formik } from "formik";
 
 import validationSchema from "./validations";
+import { motion } from "framer-motion";
 
 import { message } from "antd";
 
 function AdminProductDetail() {
   const { product_id } = useParams();
+  const navigate = useNavigate();
+
+  const MotionBox = motion.div;
 
   const { isLoading, isError, data, error } = useQuery(
     ["admin:product", product_id],
@@ -46,13 +50,17 @@ function AdminProductDetail() {
         key: "product_update",
         duration: 2,
       });
+
+      setTimeout(() => {
+        navigate("/admin/products");
+      }, 3000);
     } catch (e) {
       message.error("The product does not updated");
     }
   };
 
   return (
-    <Box px={5}>
+    <MotionBox px={5}  initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Text
         display={"flex"}
         justifyContent={"center"}
@@ -196,7 +204,7 @@ function AdminProductDetail() {
           </Box>
         )}
       </Formik>
-    </Box>
+    </MotionBox>
   );
 }
 

@@ -9,10 +9,12 @@ import { Table, Popconfirm } from "antd";
 import { Text, Button, Flex, Box,Spinner } from "@chakra-ui/react";
 
 import "./styles.css";
+import { motion } from "framer-motion";
 
 
 function AdminProducts() {
   const queryClient = useQueryClient();
+  const MotionBox = motion.div;
 
   const { isLoading, isError, data, error } = useQuery(
     "admin:products",
@@ -107,7 +109,7 @@ function AdminProducts() {
   }
 
   return (
-    <div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -148,7 +150,7 @@ function AdminProducts() {
         rowKey="_id"
         _hover
       ></Table>
-    </div>
+    </motion.div>
   );
 }
 

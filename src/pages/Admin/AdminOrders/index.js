@@ -1,22 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import OrderHistory from "../../OrderHistory";
 
 import { useQuery } from "react-query";
 import { fetchOrders } from "../../../api";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Text,
-  Box,
-  Flex,
-  Button,
-  Spinner,
-} from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 
 import "./styles.css";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -26,12 +14,9 @@ function AdminOrders() {
     "admin:orders",
     fetchOrders
   );
-  const { user } = useAuth();
 
   if (isLoading) {
     return (
-    
-
       <Flex justifyContent="center" alignItems="center" height="100vh">
         <Spinner
           thickness="4px"
@@ -39,9 +24,8 @@ function AdminOrders() {
           emptyColor="gray.200"
           color="orange.300"
           size="xl"
-          />
+        />
       </Flex>
-         
     );
   }
 
