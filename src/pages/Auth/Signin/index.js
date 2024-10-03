@@ -25,7 +25,6 @@ function Signin() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const MotionBox = motion.div;
-  const MotionButton = motion(Button);
 
   const formik = useFormik({
     initialValues: {

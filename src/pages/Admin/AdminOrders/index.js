@@ -7,7 +7,6 @@ import { fetchOrders } from "../../../api";
 import { Flex, Spinner } from "@chakra-ui/react";
 
 import "./styles.css";
-import { useAuth } from "../../../contexts/AuthContext";
 
 function AdminOrders() {
   const { isLoading, isError, data, error } = useQuery(

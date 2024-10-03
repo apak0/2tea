@@ -48,7 +48,7 @@ function Navbar() {
               height={"72px"}
               minW={"50px"}
               src="logo.png"
-              alt="mks-logo"
+              alt="two tea"
             />
           </NavLink>
         </Box>
